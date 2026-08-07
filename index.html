@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheyAssist | Sovereign Talent Stewardship Infrastructure &amp; Labor Intelligence</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Space Grotesk, Plus Jakarta Sans, JetBrains Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            600: '#1d4ed8',
+                            900: '#1e3a8a',
+                            950: '#0b1329',
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfdfe;
+            color: #0f172a;
+        }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Bloomberg Ticker Keyframes */
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-ticker {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* Ambient Glow & Glass Styles */
+        .editorial-border {
+            border-left: 3px solid #2563eb;
+        }
+        .ambient-glow-1 {
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(255,255,255,0) 70%);
+        }
+        .ambient-glow-2 {
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(255,255,255,0) 70%);
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.06);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+
+        .toggle-bg {
+            transition: background-color 0.2s ease;
+        }
+        .toggle-dot {
+            transition: transform 0.2s ease;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <!-- BLOOMBERG-STYLE LIVE LABOR TICKER -->
+    <div class="bg-slate-950 text-slate-300 py-2.5 px-4 text-xs relative z-50 overflow-hidden font-mono border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex items-center">
+            <div class="flex items-center space-x-2 shrink-0 bg-slate-950 pr-4 z-10 border-r border-slate-800">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span class="font-bold text-emerald-400 text-[11px] uppercase tracking-wider">LIVE LABOR TICKER</span>
+            </div>
+            <div class="overflow-hidden w-full relative">
+                <div class="animate-ticker text-[11px] font-medium tracking-tight space-x-8">
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Cyber Defense MD Corridor:</span><span class="text-emerald-400 font-bold">+8.1% ▲</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">FedTech AI Roles:</span><span class="text-emerald-400 font-bold">+14.2% ▲</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Strategy Consulting DMV:</span><span class="text-rose-400 font-bold">-2.4% ▼</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">DoD 8140/8570 Directive:</span><span class="text-blue-400 font-bold">MANDATORY Q4</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">OPT STEM Extensions:</span><span class="text-amber-400 font-bold">24-MO ACTIVE</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Average Starting Tech (DMV):</span><span class="text-slate-100 font-bold">$102,500</span></span>
+                    <span class="text-slate-700">|</span>
+                    <!-- Duplicate for infinite scroll -->
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Cyber Defense MD Corridor:</span><span class="text-emerald-400 font-bold">+8.1% ▲</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">FedTech AI Roles:</span><span class="text-emerald-400 font-bold">+14.2% ▲</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Strategy Consulting DMV:</span><span class="text-rose-400 font-bold">-2.4% ▼</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">DoD 8140/8570 Directive:</span><span class="text-blue-400 font-bold">MANDATORY Q4</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 py-4 px-6 z-40">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateToPage('home')">
+                <div class="relative flex items-center justify-center">
+                    <div class="absolute inset-0 bg-blue-600/10 rounded-full blur-md"></div>
+                    <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-9 h-9 rounded-full shadow-md relative z-10 border border-slate-100" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                </div>
+                <span class="text-xl font-bold heading-font tracking-tight text-slate-950">TheyAssist</span>
+            </div>
+            
+            <!-- Mid Menu (Desktop) -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <button onclick="navigateAndScroll('home', 'intelligence')" class="hover:text-slate-950 transition nav-link">Labor Intelligence</button>
+                <button onclick="navigateAndScroll('home', 'ecosystem')" class="hover:text-slate-950 transition nav-link text-slate-950 font-bold" id="nav-ecosystem">Interactive Portal</button>
+                <button onclick="navigateAndScroll('home', 'moat')" class="hover:text-slate-950 transition nav-link" id="nav-moat">The Moat</button>
+                <button onclick="navigateAndScroll('home', 'pricing')" class="hover:text-slate-950 transition nav-link" id="nav-pricing">Pricing</button>
+                <a href="about_us.html" class="hover:text-slate-950 transition nav-link" id="nav-about">About Us</a>
+                <button onclick="openRedeemModal()" class="text-blue-600 hover:text-blue-700 transition font-bold">
+                    Redeem Code
+                </button>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openInquiryModal()" class="text-xs font-bold text-slate-600 hover:text-slate-950 transition hidden sm:inline-block">Connect with Program Development</button>
+                <a href="https://theyassist.io" class="bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 inline-block">
+                    Login
+                </a>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-slate-950 focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg" id="mobileMenuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-slate-200/60 flex flex-col space-y-3.5 text-sm font-semibold text-slate-500">
+            <button onclick="navigateAndScrollMobile('home', 'intelligence')" class="text-left py-2 hover:text-slate-950 transition">Labor Intelligence</button>
+            <button onclick="navigateAndScrollMobile('home', 'ecosystem')" class="text-left py-2 hover:text-slate-950 transition">Interactive Portal</button>
+            <button onclick="navigateAndScrollMobile('home', 'moat')" class="text-left py-2 hover:text-slate-950 transition">The Moat</button>
+            <button onclick="navigateAndScrollMobile('home', 'pricing')" class="text-left py-2 hover:text-slate-950 transition">Pricing</button>
+            <a href="about_us.html" class="text-left py-2 hover:text-slate-950 transition">About Us</a>
+            <button onclick="openRedeemModal(); toggleMobileMenu();" class="text-left py-2 text-blue-600 font-bold">
+                Redeem Code
+            </button>
+            <button onclick="openInquiryModal(); toggleMobileMenu();" class="text-left py-2 text-slate-950 font-bold border-t border-slate-100 pt-2">Connect with Development</button>
+        </div>
+    </nav>
+
+    <!-- MAIN HOME VIEW -->
+    <div id="view-home" class="block">
+
+        <header id="hero" class="relative pt-16 pb-24 px-6 border-b border-slate-200/80 bg-white">
+            <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-1 pointer-events-none"></div>
+            <div class="absolute top-[200px] right-0 w-full h-[600px] ambient-glow-2 pointer-events-none"></div>
+            
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <!-- Hero Text Block -->
+                <div class="lg:col-span-7 space-y-8 text-left">
+                    <div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200/80 px-4 py-1.5 rounded-full text-xs text-slate-800 font-mono font-semibold shadow-xs">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                        <span>Sovereign Talent Stewardship Infrastructure</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight">
+                        Secure, structured, professional pathways. <span class="text-blue-600">Bypass the noise.</span>
+                    </h1>
+                    
+                    <p class="text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
+                        TheyAssist connects growth-minded professionals with highly vetted advisory networks. Our standalone software ensures complete data sovereignty and IP protection for your institution, entirely free from third-party platform dependencies.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 max-w-lg">
+                        <button onclick="scrollToSection('pricing')" class="w-full sm:w-auto px-8 py-4 bg-slate-950 hover:bg-slate-900 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 text-center font-mono text-xs">
+                            Explore Plans
+                        </button>
+                        <button onclick="openInquiryModal()" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-800 font-semibold rounded-xl hover:bg-slate-50 transition-all text-center font-mono text-xs">
+                            Request Enterprise Demo
+                        </button>
+                    </div>
+
+                    <!-- Trusted Fields Indicators -->
+                    <div class="pt-8 border-t border-slate-200/80 max-w-2xl">
+                        <p class="text-[10px] font-mono text-slate-400 uppercase font-bold tracking-widest mb-4">ENGINEERED FOR EXTREME PRIVACY DOMAINS</p>
+                        <div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-slate-500 font-bold text-xs font-mono">
+                            <span class="flex items-center"><i class="fa-solid fa-university mr-2 text-blue-500"></i> UNIVERSITY FOUNDATIONS</span>
+                            <span class="flex items-center"><i class="fa-solid fa-briefcase mr-2 text-sky-500"></i> GOVCON PARTNERS</span>
+                            <span class="flex items-center"><i class="fa-solid fa-microchip mr-2 text-indigo-500"></i> TECH RESEARCH CORRIDORS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Schema -->
+                <div class="lg:col-span-5 relative">
+                    <div class="absolute inset-0 bg-blue-100/30 rounded-[40px] blur-2xl transform rotate-3"></div>
+                    
+                    <div class="relative bg-white border border-slate-200 rounded-[32px] p-6 shadow-xl relative z-10">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                            </div>
+                            <span class="text-[10px] font-mono font-bold bg-blue-50 text-blue-600 px-2.5 py-1 rounded-md uppercase">KNOWLEDGE NEXUS</span>
+                        </div>
+                        
+                        <div id="heroImageContainer" class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md group bg-slate-100">
+                            <img src="knowledge_share_05.png" alt="Sovereign Knowledge Sharing Network" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="intelligence" class="py-20 px-6 border-b border-slate-200/80 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-mono text-blue-600 font-bold uppercase tracking-widest block">INTELLIGENCE VECTORS</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold heading-font text-slate-950 mt-1">Real-Time Labor &amp; Career Metrics</h2>
+                    </div>
+                    <p class="text-xs font-mono text-slate-500 max-w-md">
+                        Automated data feeds aggregated via SEC filings, federal contract awards, and regional labor statistics.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- VECTOR A -->
+                    <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase bg-blue-50 px-2 py-0.5 rounded border border-blue-100">VECTOR A • MACRO</span>
+                                <i class="fa-solid fa-chart-pie text-slate-400"></i>
+                            </div>
+                            <h3 class="text-lg font-bold heading-font text-slate-950">Labor Market Metrics</h3>
+                            
+                            <ul class="space-y-3 text-xs text-slate-700 font-mono">
+                                <li class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <span class="text-slate-500 block text-[10px]">Strategy Consulting DMV</span>
+                                    <span class="text-rose-600 font-bold text-sm">-2.4% Hiring Velocity</span>
+                                </li>
+                                <li class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <span class="text-slate-500 block text-[10px]">Cyber Defense MD Corridor</span>
+                                    <span class="text-emerald-600 font-bold text-sm">+8.1% Hiring Velocity</span>
+                                </li>
+                                <li class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <span class="text-slate-500 block text-[10px]">FedTech AI Roles</span>
+                                    <span class="text-emerald-600 font-bold text-sm">+14.2% Expansion</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button onclick="triggerPaywallModal('Macro Labor Intelligence Briefing')" class="w-full py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-mono text-blue-600 font-bold rounded-xl transition text-center">
+                            Read Deep Market Analysis →
+                        </button>
+                    </div>
+
+                    <!-- VECTOR B -->
+                    <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-mono text-amber-600 font-bold uppercase bg-amber-50 px-2 py-0.5 rounded border border-amber-100">VECTOR B • BLUEPRINTS</span>
+                                <i class="fa-solid fa-certificate text-slate-400"></i>
+                            </div>
+                            <h3 class="text-lg font-bold heading-font text-slate-950">Certification Trajectories</h3>
+                            
+                            <div class="space-y-3 text-xs text-slate-700">
+                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <span class="text-amber-600 font-bold text-xs block">DoD 8140/8570 Directive</span>
+                                    <p class="text-[11px] text-slate-500 mt-1">Cybersecurity compliance updates mandate baseline Security+ or CISSP for all defense contractors by Q4.</p>
+                                </div>
+                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <span class="text-slate-900 font-bold text-xs block">Skill Demand Matrix</span>
+                                    <p class="text-[11px] text-slate-500 mt-1">AWS Defense Cloud and Zero-Trust architecture micro-project competencies trending +22%.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="triggerPaywallModal('Certification Blueprint Roadmap')" class="w-full py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-mono text-amber-600 font-bold rounded-xl transition text-center">
+                            View Compliance Syllabus →
+                        </button>
+                    </div>
+
+                    <!-- VECTOR C -->
+                    <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-mono text-emerald-600 font-bold uppercase bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">VECTOR C • CORPORATE</span>
+                                <i class="fa-solid fa-building text-slate-400"></i>
+                            </div>
+                            <h3 class="text-lg font-bold heading-font text-slate-950">Company Moves &amp; Capital</h3>
+                            
+                            <div class="space-y-3 text-xs text-slate-700">
+                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <span class="text-emerald-600 font-bold text-xs block">reAlpha &amp; Lockheed Expansion</span>
+                                    <p class="text-[11px] text-slate-500 mt-1">New federal contract awards driving junior technical analyst hiring in Northern Virginia.</p>
+                                </div>
+                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <span class="text-slate-900 font-bold text-xs block">C-Suite Transitions</span>
+                                    <p class="text-[11px] text-slate-500 mt-1">Executive leadership shifts across target firms signaling new strategic restructuring.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="triggerPaywallModal('Company Hiring & Contract Feed')" class="w-full py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-mono text-emerald-600 font-bold rounded-xl transition text-center">
+                            Access Employer Intelligence →
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="ecosystem" class="py-24 px-6 border-t border-slate-200/60 bg-slate-50 relative">
+            <div class="max-w-7xl mx-auto">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">INTERACTIVE PLATFORM EXPERIENCE</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">A Three-Portal Secure Universe</h2>
+                    <p class="text-slate-600 text-sm sm:text-base font-medium">
+                        Explore the live interactive simulation of TheyAssist. Switch dashboards below to see exactly how we optimize organization metrics, prepare learners, and protect advisors.
+                    </p>
+                </div>
+
+                <!-- Premium Simulator Tab Selector -->
+                <div class="flex flex-wrap justify-center p-1.5 bg-slate-200/60 border border-slate-200/80 rounded-2xl max-w-2xl mx-auto mb-12 gap-1 sm:gap-0">
+                    <button onclick="switchSimTab('admin')" id="simTabBtn-admin" class="flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all text-slate-950 bg-white shadow-sm flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-server"></i>
+                        <span>Organization Workspace</span>
+                    </button>
+                    <button onclick="switchSimTab('learner')" id="simTabBtn-learner" class="flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-slate-900 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Learner Workspace</span>
+                    </button>
+                    <button onclick="switchSimTab('expert')" id="simTabBtn-expert" class="flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-slate-900 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span>Expert Advisor</span>
+                    </button>
+                </div>
+
+                <!-- Highly Detailed Live Simulator Component -->
+                <div class="bg-white border border-slate-200 rounded-[32px] p-8 shadow-xl relative min-h-[550px] overflow-hidden flex flex-col justify-between">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-50/10 via-transparent to-slate-50/10 pointer-events-none z-10"></div>
+                    
+                    <!-- TAB PANE 1: Organization Admin Setup -->
+                    <div id="simPane-admin" class="sim-pane block space-y-8 relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 gap-4">
+                            <div>
+                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider font-mono">Administrative Control Console</span>
+                                <h3 class="text-xl font-bold text-slate-950 mt-1">Configure &amp; Audit Career Journeys</h3>
+                            </div>
+                            <div class="flex items-center space-x-2 self-start sm:self-auto">
+                                <span class="bg-blue-50 border border-blue-100 text-[10px] font-mono text-blue-600 px-3 py-1 rounded-full flex items-center">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5 animate-pulse"></span>
+                                    PORTAL: MARYLAND-TECH
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Organization Health Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="p-4 bg-slate-50 border border-slate-200/60 rounded-xl">
+                                <span class="text-[10px] text-slate-400 uppercase font-semibold block">Cohort Active Learning Members</span>
+                                <p class="text-2xl font-bold text-slate-950 mt-1">142 Members</p>
+                                <span class="text-[9px] text-emerald-600 font-semibold block mt-1"><i class="fa-solid fa-caret-up"></i> 100% verified</span>
+                            </div>
+                            <div class="p-4 bg-slate-50 border border-slate-200/60 rounded-xl">
+                                <span class="text-[10px] text-slate-400 uppercase font-semibold block">Total Advisor Board Members</span>
+                                <p class="text-2xl font-bold text-slate-950 mt-1">48 Experts</p>
+                                <span class="text-[9px] text-slate-500 block mt-1">Tenured Industry Professionals &amp; Role-Specific Practitioners</span>
+                            </div>
+                            <div class="p-4 bg-slate-50 border border-slate-200/60 rounded-xl">
+                                <span class="text-[10px] text-slate-400 uppercase font-semibold block">Average Match Accuracy</span>
+                                <p class="text-2xl font-bold text-slate-950 mt-1">94.8% Score</p>
+                                <span class="text-[9px] text-blue-600 block mt-1 font-semibold">STSI Sentiment Algorithm</span>
+                            </div>
+                            <div class="p-4 bg-slate-50 border border-slate-200/60 rounded-xl">
+                                <span class="text-[10px] text-slate-400 uppercase font-semibold block">Compliance Checkpoints</span>
+                                <p class="text-2xl font-bold text-slate-950 mt-1">All Passing</p>
+                                <span class="text-[9px] text-indigo-600 block mt-1 font-semibold">FERPA &amp; SOC2 Enforced</span>
+                            </div>
+                        </div>
+
+                        <!-- Live Interactive Element: Donor Warmth Sentiment Simulator -->
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-4 border-t border-slate-100">
+                            <div class="lg:col-span-7 bg-slate-50/50 rounded-2xl p-6 border border-slate-200/60 flex flex-col justify-between">
+                                <div class="space-y-3">
+                                    <div class="flex items-center space-x-2 text-blue-600">
+                                        <i class="fa-solid fa-heart-pulse text-sm"></i>
+                                        <span class="text-xs font-bold uppercase tracking-wider font-mono">Real-Time Sentiment Monitoring Demo</span>
+                                    </div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Interactive Community Member Warmth Index Alert</h4>
+                                    <p class="text-xs text-slate-500 leading-relaxed">
+                                        Operating entirely within your secure network, our platform analyzes local engagement data to capture real-time indicators of user alignment and institutional support, while translating these touchpoints into actionable relationship insights. Click below to preview how a secure alert is routed directly to your development leadership.
+                                    </p>
+                                </div>
+                                <div class="mt-6">
+                                    <button onclick="simulateDonorAlert()" class="bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold px-5 py-3 rounded-lg flex items-center space-x-2 transition-all shadow-md active:scale-95">
+                                        <i class="fa-solid fa-bell"></i>
+                                        <span>Trigger Simulated Member Alert</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="lg:col-span-5 bg-slate-950 rounded-2xl p-6 border border-slate-800 text-white flex flex-col justify-between min-h-[200px]">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[9px] font-mono text-slate-400 uppercase">Alert Receiver Pipeline</span>
+                                    <span id="alertStatus" class="bg-slate-800 text-slate-400 text-[8px] font-bold px-2 py-0.5 rounded font-mono uppercase">Listening</span>
+                                </div>
+                                
+                                <div id="alertOutput" class="my-4 text-center py-6 text-slate-500 text-xs italic font-medium">
+                                    Waiting for interactive trigger event... Click the button on the left.
+                                </div>
+
+                                <div class="border-t border-slate-900 pt-3 flex items-center justify-between text-[8px] font-mono text-slate-500">
+                                    <span>TARGET: PRIVATE DEAN EMAIL</span>
+                                    <span>DATA PRIVACY SECURED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB PANE 2: Learner Active Track -->
+                    <div id="simPane-learner" class="sim-pane hidden space-y-8 relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 gap-4">
+                            <div>
+                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider font-mono">Learner Workspace Console</span>
+                                <h3 class="text-xl font-bold text-slate-950 mt-1">Strategic Advisor Alignment Panel</h3>
+                            </div>
+                            <span class="bg-emerald-50 border border-emerald-100 text-[10px] font-mono text-emerald-600 px-3 py-1 rounded-full flex items-center self-start sm:self-auto">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+                                ONBOARDING GATE CLEARED
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                            <div class="lg:col-span-5 space-y-4">
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">Live Goal Checklist (Interactive)</span>
+                                <p class="text-xs text-slate-500 mb-2">Check off the boxes to simulate progressing through your pre-flight soft skills gate.</p>
+                                
+                                <div class="space-y-2.5">
+                                    <label class="flex items-center space-x-3 p-3 bg-slate-50 border border-slate-200/80 rounded-xl cursor-pointer hover:bg-slate-100 transition-all">
+                                        <input type="checkbox" checked id="goal1" onchange="updateProgressBar()" class="rounded text-blue-600 border-slate-300 focus:ring-0">
+                                        <div>
+                                            <p class="text-xs font-bold text-slate-900">Define Professional OKRs</p>
+                                            <p class="text-[9px] text-slate-500">Vetted by organization alignment filters</p>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-3 bg-slate-50 border border-slate-200/80 rounded-xl cursor-pointer hover:bg-slate-100 transition-all">
+                                        <input type="checkbox" id="goal2" onchange="updateProgressBar()" class="rounded text-blue-600 border-slate-300 focus:ring-0">
+                                        <div>
+                                            <p class="text-xs font-bold text-slate-900">Security+ Certification Review</p>
+                                            <p class="text-[9px] text-slate-500">Map security blueprints with Jane M.</p>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-3 bg-slate-50 border border-slate-200/80 rounded-xl cursor-pointer hover:bg-slate-100 transition-all">
+                                        <input type="checkbox" id="goal3" onchange="updateProgressBar()" class="rounded text-blue-600 border-slate-300 focus:ring-0">
+                                        <div>
+                                            <p class="text-xs font-bold text-slate-900">SEC Target Review</p>
+                                            <p class="text-[9px] text-slate-500">Review real-time financial filings</p>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="pt-4 space-y-2">
+                                    <div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
+                                        <span>ONBOARDING PROGRESS</span>
+                                        <span id="progressBarText">33%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200/60">
+                                        <div id="progressBarFill" class="bg-blue-600 h-full transition-all duration-300" style="width: 33%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-7 space-y-4">
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">Pre-Meeting Strategic Briefings</span>
+                                
+                                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 space-y-4">
+                                    <div class="flex flex-wrap items-center justify-between gap-2">
+                                        <p class="text-xs font-bold text-slate-900 flex items-center">
+                                            <i class="fa-solid fa-wand-magic-sparkles text-blue-600 mr-1.5 animate-pulse"></i>
+                                            Select Target Employer Simulation:
+                                        </p>
+                                        <select id="simTargetSelect" onchange="updatePrepBrief()" class="text-xs bg-white border border-slate-200 rounded px-2.5 py-1 text-slate-700 font-medium">
+                                            <option value="realpha">reAlpha Compliance Node</option>
+                                            <option value="govcon">Lockheed GovCon Unit</option>
+                                            <option value="mdtech">Maryland Cybersecurity Labs</option>
+                                        </select>
+                                    </div>
+
+                                    <div id="prepOutput" class="p-3.5 bg-white border border-slate-200 rounded-xl font-mono text-[10px] text-slate-700 shadow-inner h-[120px] overflow-y-auto">
+                                        &gt; "reAlpha targeting AI-led compliance talent. Discuss how your Security+ milestone addresses their dynamic database isolation standards..."
+                                    </div>
+                                    
+                                    <p class="text-[9px] text-slate-400 italic font-medium leading-relaxed">
+                                        *To maximize engagement efficiency, TheyAssist pre-maps public organizational insights to ensure comprehensive alignment before connecting with Jane M.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB PANE 3: Expert Console -->
+                    <div id="simPane-expert" class="sim-pane hidden space-y-8 relative z-10">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 gap-4">
+                            <div>
+                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider font-mono">Expert Advisor Console</span>
+                                <h3 class="text-xl font-bold text-slate-950 mt-1">Profile Shield &amp; Dynamic Impact Points</h3>
+                            </div>
+                            <span class="bg-blue-50 border border-blue-100 text-[10px] font-mono text-blue-600 px-3 py-1 rounded-full flex items-center self-start sm:self-auto">
+                                <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5"></span>
+                                SHIELD STATUS: FULL LOCKDOWN
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                            <div class="md:col-span-4 bg-slate-50 p-6 border border-slate-200/80 rounded-2xl text-center space-y-3">
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">My Consolidated Balance</span>
+                                <div class="text-3xl font-extrabold text-blue-600 heading-font" id="redesignImpactPoints">✨ 850 Pts</div>
+                                <p class="text-[10px] text-slate-500 leading-relaxed">Earn points securely after local NLP transcribers confirm check-in milestones.</p>
+                            </div>
+                            <div class="md:col-span-8 space-y-3">
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">Points Redemption Marketplace</span>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-blue-300 transition shadow-xs">
+                                        <div>
+                                            <h4 class="text-xs font-bold text-slate-900">Notion Pro Annual</h4>
+                                            <p class="text-[9px] text-slate-500 mt-1">Full advanced workspace key.</p>
+                                        </div>
+                                        <button onclick="redeemPointsRedesign(250, 'Notion Pro Annual')" class="bg-slate-950 hover:bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-md mt-4 self-end transition-all">Redeem (250 pts)</button>
+                                    </div>
+                                    <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-blue-300 transition shadow-xs">
+                                        <div>
+                                            <h4 class="text-xs font-bold text-slate-900">C-Suite Regional Dinners</h4>
+                                            <p class="text-[9px] text-slate-500 mt-1">Private dinners with peers.</p>
+                                        </div>
+                                        <button onclick="redeemPointsRedesign(600, 'C-Suite Dinner Pass')" class="bg-slate-950 hover:bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-md mt-4 self-end transition-all">Redeem (600 pts)</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-5 bg-blue-50/50 border border-blue-100 rounded-2xl flex items-start space-x-3.5">
+                            <i class="fa-solid fa-shield-halved text-blue-600 text-lg mt-0.5"></i>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-900">Dynamic Soft Skills Shield Gating</h4>
+                                <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">
+                                    TheyAssist automatically protects your profile. Members cannot request a sync or message your inbox until they complete specific milestones. This ensures absolute calendar protection and zero wasted time.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="moat" class="py-24 px-6 border-b border-slate-200/80 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-16">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <span class="text-xs font-mono text-blue-600 font-bold uppercase tracking-widest">UNASSAILABLE SECURITY MOAT</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">Why Deans &amp; Defense Contractors Choose TheyAssist</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 font-mono">
+                        Standard career portals co-mingle data on shared cloud engines. TheyAssist delivers air-gapped data sovereignty.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-2xl p-6 space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Multi-Tenant Database Isolation</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                            We deploy dedicated isolated database schemas per institution. Young professional data, chat logs, and meeting transcripts never co-mingle with external organizations.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-microphone-slash"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Zero-Knowledge Transcripts</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                            Session audio is encrypted using zero-knowledge AES-256 protocols and processed via private AI for sentiment indexing. Raw audio files are auto-scrubbed within 24 hours.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-calendar-xmark"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Universal Calendar Shielding</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                            Advisors sync availability via air-gapped middleware without exposing personal or work calendar metadata, completely shielding C-suite schedules from public scrapers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-24 px-6 border-t border-slate-200 bg-slate-50/50 relative">
+            <div class="max-w-7xl mx-auto">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">TRANSPARENT VALUE MODEL</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">Predictable Stewardship Costs</h2>
+                    <p class="text-slate-600 text-sm sm:text-base font-medium">
+                        Gain direct access to elite advisors, protect your personal data sovereignty, and map your next career move without the noise of traditional social networks.
+                    </p>
+                    <p class="text-slate-600 text-sm sm:text-base font-medium">
+                        Whether tracking personal milestones or launching organization-wide cohort programs, select your secure infrastructure.
+                    </p>
+
+                    <!-- Billing Switcher Toggle -->
+                    <div class="flex items-center justify-center space-x-4 pt-6">
+                        <span id="monthlyLabel" class="text-xs font-bold text-blue-600">Monthly Billing</span>
+                        <label for="billingToggle" class="flex items-center cursor-pointer relative">
+                            <input type="checkbox" id="billingToggle" class="sr-only" onchange="toggleBillingCycle()">
+                            <div id="toggleBg" class="toggle-bg block bg-slate-200 border border-slate-300 w-12 h-6 rounded-full transition-colors duration-200"></div>
+                            <div id="toggleDot" class="toggle-dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full shadow-sm transition-transform duration-200"></div>
+                        </label>
+                        <span id="annualLabel" class="text-xs font-semibold text-slate-500">Annual <span class="bg-blue-100 text-blue-700 text-[9px] px-2 py-0.5 rounded-full uppercase font-bold ml-1">Save 25%</span></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+                    <!-- Explorer -->
+                    <div class="bg-white border border-slate-200 rounded-[24px] p-6 flex flex-col justify-between shadow-xs transition-all hover:border-slate-300">
+                        <div class="space-y-4">
+                            <h3 class="text-base font-bold text-slate-900 heading-font">Explorer</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Read-only access to discover resources and advisors.</p>
+                            <div class="text-3xl font-extrabold text-slate-900 heading-font">$0</div>
+                            <ul class="space-y-3 pt-6 text-xs text-slate-600 border-t border-slate-100">
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Browse Verified Advisor Directory</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Access Curated Insights</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> View Highlights Feed</li>
+                                <li class="opacity-30 line-through"><i class="fa-solid fa-circle-xmark text-slate-400 mr-2"></i> Active match booking</li>
+                                <li class="opacity-30 line-through"><i class="fa-solid fa-circle-xmark text-slate-400 mr-2"></i> Deep Profile Setup</li>
+                            </ul>
+                        </div>
+                        <button onclick="triggerPaywallModal('Explorer Registration')" class="w-full text-center py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition mt-8">Launch Explorer</button>
+                    </div>
+
+                    <!-- Basic -->
+                    <div class="bg-white border border-slate-200 rounded-[24px] p-6 flex flex-col justify-between shadow-xs transition-all hover:border-slate-300">
+                        <div class="space-y-4">
+                            <h3 class="text-base font-bold text-slate-900 heading-font">Basic Active</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Active matching filters and structured guidance.</p>
+                            <div class="text-3xl font-extrabold text-slate-900 heading-font">
+                                <span id="price-basic">$9.99</span><span class="text-xs text-slate-500 font-normal"> / mo</span>
+                            </div>
+                            <ul class="space-y-3 pt-6 text-xs text-slate-600 border-t border-slate-100">
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> 1 Active Board Connection</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Full Interactive Profile Setup</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Milestone Progress Tracking</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Platform Messaging Tool</li>
+                                <li class="opacity-30 line-through"><i class="fa-solid fa-circle-xmark text-slate-400 mr-2"></i> Board of Advisors Model</li>
+                            </ul>
+                        </div>
+                        <button onclick="triggerPaywallModal('Basic Active Subscription')" class="w-full text-center py-3 border border-slate-200 text-slate-800 font-semibold rounded-xl text-xs hover:bg-slate-50 transition mt-8">Experience Basic</button>
+                    </div>
+
+                    <!-- Premium -->
+                    <div class="bg-white border-2 border-blue-600 rounded-[24px] p-6 flex flex-col justify-between relative scale-105 shadow-md shadow-blue-500/5 my-4 lg:my-0 z-10">
+                        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[9px] font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow-sm">MOST SECURE VALUE</span>
+                        <div class="space-y-4">
+                            <h3 class="text-base font-bold text-slate-900 heading-font">Premium Shield</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">Full multi-advisor networks and prep systems.</p>
+                            <div class="text-3xl font-extrabold text-slate-900 heading-font">
+                                <span id="price-premium">$24.99</span><span class="text-xs text-slate-500 font-normal"> / mo</span>
+                            </div>
+                            <ul class="space-y-3 pt-6 text-xs text-slate-700 border-t border-slate-100">
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> <strong> Board of Advisors Model</strong></li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Unlimited Advisor Connections</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> <strong>Session Prep Briefings</strong></li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Verified Sentiment Vectoring</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> <strong>Priority Session Booking</strong></li>
+                            </ul>
+                        </div>
+                        <button onclick="triggerPaywallModal('Premium Strategic Accelerator')" class="w-full text-center py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition mt-8 shadow-md">Acquire Premium</button>
+                    </div>
+
+                    <!-- Enterprise -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-[24px] p-6 flex flex-col justify-between text-white shadow-xs">
+                        <div class="space-y-4">
+                            <h3 class="text-base font-bold text-white heading-font">Enterprise</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Institutional portals for structured talent development.</p>
+                            <div class="text-xl font-bold text-blue-400">Organization Portal</div>
+                            <ul class="space-y-3 pt-6 text-xs text-slate-300 border-t border-slate-800">
+                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> Dedicated Data Store</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> 3 Admin Seats / Program Setup</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> Organization Administrator Alerts</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> Program Performance Analytics</li>
+                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> Org Code Redemptions</li>
+                            </ul>
+                        </div>
+                        <button onclick="openInquiryModal()" class="w-full text-center py-3 bg-white text-slate-950 hover:bg-slate-100 rounded-xl text-xs font-bold transition mt-8">Engage Our Development Team</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="border-t border-slate-200 py-12 px-6 bg-slate-50 text-slate-500 text-xs font-mono">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center space-x-3">
+                    <img src="theyassist_logo.png" alt="TheyAssist" class="w-8 h-8 rounded-full border border-slate-200" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                    <span class="text-slate-950 font-bold heading-font text-sm">TheyAssist, Inc.</span>
+                </div>
+                <p class="text-center md:text-right">
+                    CONFIDENTIAL • Delaware C-Corp (In Formation) • Sovereign Talent Stewardship Infrastructure (STSI)
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- VIEW 2: ABOUT US PANEL (SPA MODE) -->
+    <div id="view-about" class="view-panel hidden">
+        <header class="relative py-20 px-6 overflow-hidden bg-white border-b border-slate-200">
+            <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-1 pointer-events-none"></div>
+            
+            <div class="max-w-5xl mx-auto text-center relative z-10 space-y-6">
+                <div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 px-4 py-1.5 rounded-full text-xs text-slate-800 font-mono font-semibold shadow-xs">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                    <span>MISSION &amp; PRINCIPLES</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight max-w-4xl mx-auto">
+                    A Sovereignty-First Knowledge Nexus
+                </h1>
+                
+                <p class="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal">
+                    We empower rising talent and complex organizations through secure, on-platform structured guidance, establishing an environment where IP stays safe and learning thrives.
+                </p>
+            </div>
+        </header>
+
+        <section class="py-16 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            <div class="bg-white border border-slate-200 rounded-[28px] p-8 space-y-4 shadow-xs">
+                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-md">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <h2 class="text-2xl font-bold heading-font text-slate-950">Our Vision</h2>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    To build the leading, high-security infrastructure for professionals seeking curated industry insights, cooperative knowledge sharing, and structured professional guidance to fuel career paths and local economic expansion.
+                </p>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-[28px] p-8 space-y-4 shadow-xs">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-md">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <h2 class="text-2xl font-bold heading-font text-slate-950">Our Purpose</h2>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    To accelerate the careers of emerging talent by providing direct access to trusted, top-tier professional expertise.
+                </p>
+            </div>
+        </section>
+
+        <!-- Principles of Sovereign Mentoring -->
+        <section class="py-20 px-6 bg-slate-50/50 border-t border-b border-slate-200/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">OUR PILLARS</span>
+                    <h2 class="text-3xl font-extrabold heading-font text-slate-950">Principles of Sovereign Mentoring</h2>
+                    <p class="text-slate-600 text-xs sm:text-sm font-medium">
+                        These four core principles mandate how we code, how we secure meeting channels, and how we protect executive schedules.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white border border-slate-200 rounded-[24px] p-6 shadow-xs flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-bold shrink-0">
+                            <i class="fa-solid fa-graduation-cap text-sm"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-sm font-bold text-slate-950">Knowledge Empowerment</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                We believe accessible, audited insight forms the cornerstone of sound corporate decisions. Our platform functions as a protective shield and secure conduit for intellectual transfer.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-[24px] p-6 shadow-xs flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center font-bold shrink-0">
+                            <i class="fa-solid fa-people-arrows text-sm"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-sm font-bold text-slate-950">Authentic Connections</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                We build long-term partnerships rooted in transparency and mutual respect. By safeguarding our professionals' privacy and time, we create a secure, high-integrity environment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-[24px] p-6 shadow-xs flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center font-bold shrink-0">
+                            <i class="fa-solid fa-chart-line text-sm"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-sm font-bold text-slate-950">Impact through Guidance</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                We accelerate business outcomes by connecting organizations with high-momentum talent. Driven by precision software, our platform tracks and optimizes candidate velocity.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-[24px] p-6 shadow-xs flex items-start space-x-4">
+                        <div class="w-10 h-10 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center font-bold shrink-0">
+                            <i class="fa-solid fa-arrows-spin text-sm"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-sm font-bold text-slate-950">Continuous Evolution</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Dedicated to continuous evolution, we relentlessly refine our platform to ensure our knowledge nexus remains a dynamic, uninterrupted resource for future-focused professionals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Team -->
+        <section class="py-20 px-6 max-w-7xl mx-auto space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">FOUNDING TEAM</span>
+                <h2 class="text-3xl font-extrabold heading-font text-slate-950">The Leadership Team</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="bg-white border border-slate-200 rounded-[24px] p-6 text-center space-y-3 shadow-xs">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-slate-950 to-blue-800 text-white rounded-2xl mx-auto flex items-center justify-center font-bold text-xl shadow-sm">
+                        BS
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-950">Bill S.</h3>
+                        <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; CEO</p>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Bill leads the company's strategic vision, investor alignment, and enterprise expansion across target corridors.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-[24px] p-6 text-center space-y-3 shadow-xs">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-blue-700 to-sky-400 text-white rounded-2xl mx-auto flex items-center justify-center font-bold text-xl shadow-sm">
+                        DJ
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-950">Dori J.</h3>
+                        <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Program Officer</p>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Dori leads talent development blueprints and onboarding gate curricula for university and enterprise cohorts.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-[24px] p-6 text-center space-y-3 shadow-xs">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-indigo-700 to-teal-400 text-white rounded-2xl mx-auto flex items-center justify-center font-bold text-xl shadow-sm">
+                        KM
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-950">Kabir M.</h3>
+                        <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Operating Officer</p>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Kabir manages operations and technical compliance, ensuring air-gapped database isolation across tenant stores.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- INTERACTIVE PAYWALL & UPGRADE MODAL -->
+    <div id="paywallModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50 transition-all">
+        <div class="bg-white border-2 border-blue-600 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative text-center space-y-6">
+            <button onclick="closePaywallModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 border border-blue-200 rounded-full flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="space-y-2">
+                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase tracking-wider">ACTIVE TRACK COMMITMENT REQUIRED</span>
+                <h3 class="text-xl font-bold heading-font text-slate-950" id="paywallTitle">Unlock Full Market Intelligence</h3>
+                <p class="text-xs text-slate-600 leading-relaxed" id="paywallDesc">
+                    To protect expert advisor time and ensure high-intent cohort quality, deep analysis reports, pre-meeting prompts, and mentor matching require membership.
+                </p>
+            </div>
+            <div class="space-y-3 pt-2">
+                <button onclick="closePaywallModal(); scrollToSection('pricing');" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded-xl shadow-md transition">
+                    View Subscription Plans — From $9.99/mo
+                </button>
+                <button onclick="closePaywallModal()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-mono">
+                    Continue Browsing Explorer Overview
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- REDEEM ORG CODE MODAL -->
+    <div id="redeemModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50 transition-all">
+        <div class="bg-white border-2 border-amber-500 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative space-y-6">
+            <button onclick="closeRedeemModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider">ORGANIZATION ACCESS</span>
+                <h3 class="text-xl font-bold heading-font text-slate-950">Redeem Organization Code</h3>
+                <p class="text-xs text-slate-600">If your academic institution or employer is a TheyAssist sponsor, enter your custom access code below.</p>
+            </div>
+            <div class="space-y-4">
+                <input type="text" id="accessCode" placeholder="e.g. UMD-SMITH-2026" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase font-mono font-bold tracking-widest text-sm text-slate-900 focus:outline-none transition">
+                <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold text-xs rounded-xl shadow-md transition">
+                    Validate Access Code
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENTERPRISE INQUIRY MODAL (WITH HUMAN VERIFICATION CAPTCHA) -->
+    <div id="inquiryModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50 transition-all">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 max-w-lg w-full relative max-h-[90vh] overflow-y-auto space-y-6">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase">SECURE B2B OUTBOUND</span>
+                <h3 class="text-xl font-bold heading-font text-slate-950">Inquire About Enterprise Portal</h3>
+                <p class="text-xs text-slate-600">Sovereign portal setup for university deans, GovCon contractors, and corporate HR teams.</p>
+            </div>
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-4 text-xs font-mono">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-slate-500 uppercase text-[9px] block mb-1">First Name</label>
+                        <input type="text" id="inqFirstName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
+                    </div>
+                    <div>
+                        <label class="text-slate-500 uppercase text-[9px] block mb-1">Last Name</label>
+                        <input type="text" id="inqLastName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-500 uppercase text-[9px] block mb-1">Work Email</label>
+                    <input type="email" id="inqWorkEmail" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
+                </div>
+                <div>
+                    <label class="text-slate-500 uppercase text-[9px] block mb-1">Organization Name</label>
+                    <input type="text" id="inqOrgName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
+                </div>
+                <!-- HUMAN VERIFICATION WIDGET -->
+                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label class="text-slate-700 uppercase text-[9px] font-bold flex items-center">
+                            <i class="fa-solid fa-user-shield text-blue-600 mr-1.5"></i> Human Verification
+                        </label>
+                        <button type="button" onclick="generateCaptcha()" class="text-[9px] text-blue-600 hover:text-blue-800 underline">
+                            <i class="fa-solid fa-arrows-rotate mr-1"></i>Refresh
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span id="captchaQuestion" class="font-bold text-slate-800 text-xs bg-slate-200 px-3 py-2 rounded-lg shrink-0">8 + 5 =</span>
+                        <input type="number" id="captchaAnswer" required placeholder="Answer" class="w-full p-2 bg-white border border-slate-200 rounded-lg text-slate-900 text-xs focus:outline-none focus:border-blue-600">
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-3 bg-slate-950 hover:bg-slate-900 text-white font-bold rounded-xl transition">
+                    Send Enterprise Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white font-mono text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toastText">Notification message</span>
+    </div>
+
+    <script>
+        let isAnnualBilling = false;
+        let redesignPoints = 850;
+        let captchaNum1 = 0;
+        let captchaNum2 = 0;
+
+        const GOOGLE_SHEET_ID = "12qobIeAQds_lYZXqSHxFdKFlnyG1QUe3ifauHAJIeUI";
+        let GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz_GOOGLE_APPS_SCRIPT_ENDPOINT_PLACEHOLDER/exec";
+
+        function generateCaptcha() {
+            captchaNum1 = Math.floor(Math.random() * 9) + 1;
+            captchaNum2 = Math.floor(Math.random() * 9) + 1;
+            const qEl = document.getElementById('captchaQuestion');
+            const aEl = document.getElementById('captchaAnswer');
+            if (qEl) qEl.textContent = `${captchaNum1} + ${captchaNum2} =`;
+            if (aEl) aEl.value = '';
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('mobileMenuIcon');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                if (icon) {
+                    if (menu.classList.contains('hidden')) {
+                        icon.className = "fa-solid fa-bars text-lg";
+                    } else {
+                        icon.className = "fa-solid fa-xmark text-lg";
+                    }
+                }
+            }
+        }
+
+        function scrollToSection(id) {
+            const targetId = (id === 'moat' || id === 'stsi-moat') ? 'moat' : id;
+            const section = document.getElementById(targetId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function navigateToPage(pageId) {
+            if (pageId === 'about') {
+                window.location.href = 'about_us.html';
+                return;
+            }
+            if (pageId === 'home' || pageId === 'hero') {
+                scrollToSection('hero');
+            } else {
+                scrollToSection(pageId);
+            }
+        }
+
+        function navigateAndScroll(pageId, sectionId) {
+            scrollToSection(sectionId);
+        }
+
+        function navigateAndScrollMobile(pageId, sectionId) {
+            const menu = document.getElementById('mobileMenu');
+            if (menu && !menu.classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+            scrollToSection(sectionId);
+        }
+
+        function switchSimTab(tab) {
+            const panes = document.querySelectorAll('.sim-pane');
+            panes.forEach(p => p.classList.add('hidden'));
+
+            const targetPane = document.getElementById(`simPane-${tab}`);
+            if (targetPane) targetPane.classList.remove('hidden');
+
+            const tabButtons = document.querySelectorAll('[id^="simTabBtn-"]');
+            tabButtons.forEach(btn => {
+                btn.className = "flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all text-slate-500 hover:text-slate-900 flex items-center justify-center space-x-2";
+            });
+
+            const activeBtn = document.getElementById(`simTabBtn-${tab}`);
+            if (activeBtn) {
+                activeBtn.className = "flex-1 py-3 px-4 rounded-xl text-xs font-bold transition-all text-slate-950 bg-white shadow-sm flex items-center justify-center space-x-2";
+            }
+        }
+
+        function toggleBillingCycle() {
+            const toggleDot = document.getElementById('toggleDot');
+            const toggleBg = document.getElementById('toggleBg');
+            const monthlyLabel = document.getElementById('monthlyLabel');
+            const annualLabel = document.getElementById('annualLabel');
+            const priceBasic = document.getElementById('price-basic');
+            const pricePremium = document.getElementById('price-premium');
+
+            isAnnualBilling = document.getElementById('billingToggle').checked;
+
+            if (isAnnualBilling) {
+                if (toggleDot) toggleDot.style.transform = 'translateX(24px)';
+                if (toggleBg) {
+                    toggleBg.classList.remove('bg-slate-200', 'border-slate-300');
+                    toggleBg.classList.add('bg-blue-600', 'border-blue-600');
+                }
+                if (monthlyLabel) monthlyLabel.className = 'text-xs font-semibold text-slate-400';
+                if (annualLabel) annualLabel.className = 'text-xs font-bold text-blue-600';
+                if (priceBasic) priceBasic.textContent = '$7.49';
+                if (pricePremium) pricePremium.textContent = '$18.74';
+            } else {
+                if (toggleDot) toggleDot.style.transform = 'translateX(0px)';
+                if (toggleBg) {
+                    toggleBg.classList.remove('bg-blue-600', 'border-blue-600');
+                    toggleBg.classList.add('bg-slate-200', 'border-slate-300');
+                }
+                if (monthlyLabel) monthlyLabel.className = 'text-xs font-bold text-blue-600';
+                if (annualLabel) annualLabel.className = 'text-xs font-semibold text-slate-400';
+                if (priceBasic) priceBasic.textContent = '$9.99';
+                if (pricePremium) pricePremium.textContent = '$24.99';
+            }
+        }
+
+        function triggerPaywallModal(featureTitle) {
+            document.getElementById('paywallTitle').textContent = `Unlock ${featureTitle}`;
+            const modal = document.getElementById('paywallModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePaywallModal() {
+            const modal = document.getElementById('paywallModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function openRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleCodeRedeem() {
+            const code = document.getElementById('accessCode').value.trim().toUpperCase();
+            if (code) {
+                closeRedeemModal();
+                showToast(`Code verified! Access granted to ${code} sponsored workspace.`);
+                triggerConfetti();
+            } else {
+                showToast("Please enter a valid organization code.");
+            }
+        }
+
+        function openInquiryModal() {
+            generateCaptcha();
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        async function handleInquirySubmit(e) {
+            e.preventDefault();
+            const ansInput = document.getElementById('captchaAnswer');
+            const userAnswer = ansInput ? parseInt(ansInput.value, 10) : NaN;
+            if (userAnswer !== (captchaNum1 + captchaNum2)) {
+                showToast("Human verification failed. Please check your answer.");
+                generateCaptcha();
+                return;
+            }
+
+            const firstName = document.getElementById('inqFirstName').value.trim();
+            const lastName = document.getElementById('inqLastName').value.trim();
+            const workEmail = document.getElementById('inqWorkEmail').value.trim();
+            const orgName = document.getElementById('inqOrgName').value.trim();
+            const timestamp = new Date().toLocaleString();
+
+            const payload = {
+                timestamp: timestamp,
+                firstName: firstName,
+                lastName: lastName,
+                workEmail: workEmail,
+                orgName: orgName,
+                sheetId: GOOGLE_SHEET_ID
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = "Recording to Google Sheet...";
+            submitBtn.disabled = true;
+
+            try {
+                await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.warn("Google Sheet submission notice:", err);
+            }
+
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+
+            closeInquiryModal();
+            showToast(`Inquiry recorded to Google Sheet for ${firstName} ${lastName}!`);
+            triggerConfetti();
+
+            document.getElementById('inqFirstName').value = '';
+            document.getElementById('inqLastName').value = '';
+            document.getElementById('inqWorkEmail').value = '';
+            document.getElementById('inqOrgName').value = '';
+        }
+
+        function simulateDonorAlert() {
+            const alertOutput = document.getElementById('alertOutput');
+            const alertStatus = document.getElementById('alertStatus');
+            if (alertStatus) {
+                alertStatus.textContent = "DISPATCHED";
+                alertStatus.className = "bg-emerald-500 text-slate-950 text-[8px] font-bold px-2 py-0.5 rounded font-mono uppercase";
+            }
+            if (alertOutput) {
+                alertOutput.innerHTML = `<span class="text-emerald-600 font-bold">ALERT DISPATCHED:</span> High-affinity alumni engagement score (+94.2%) flagged for major gift officer outreach.`;
+            }
+            showToast("Simulated Donor Warmth Alert dispatched to advancement lead inbox.");
+            triggerConfetti();
+        }
+
+        function redeemPointsRedesign(cost, itemName) {
+            if (redesignPoints >= cost) {
+                redesignPoints -= cost;
+                const ptEl = document.getElementById('redesignImpactPoints');
+                if (ptEl) ptEl.textContent = `✨ ${redesignPoints} Pts`;
+                showToast(`Redeemed! Secure serial credentials for ${itemName} generated.`);
+                triggerConfetti();
+            } else {
+                showToast(`Insufficient Impact Balance.`);
+            }
+        }
+
+        function updateProgressBar() {
+            const goal1 = document.getElementById('goal1');
+            const goal2 = document.getElementById('goal2');
+            const goal3 = document.getElementById('goal3');
+            const checklistItems = [
+                goal1 ? goal1.checked : false,
+                goal2 ? goal2.checked : false,
+                goal3 ? goal3.checked : false
+            ];
+            const completedCount = checklistItems.filter(Boolean).length;
+            const percentage = Math.round((completedCount / 3) * 100);
+            
+            const txt = document.getElementById('progressBarText');
+            const fill = document.getElementById('progressBarFill');
+            if (txt) txt.textContent = `${percentage}%`;
+            if (fill) fill.style.width = `${percentage}%`;
+
+            if (percentage === 100) {
+                showToast("STSI gate credentials verified! Soft skills criteria unlocked.");
+                triggerConfetti();
+            }
+        }
+
+        const prepBriefs = {
+            realpha: `&gt; "reAlpha targeting AI-led compliance talent. Discuss how your Security+ milestone addresses their dynamic database isolation standards..."`,
+            govcon: `&gt; "Lockheed GovCon Unit focuses on regulatory vectors. Emphasize your knowledge of zero-knowledge NLP transcribing pipelines..."`,
+            mdtech: `&gt; "Maryland Cybersecurity Labs is updating state deans on student retention tracking. Detail your progress metrics on STSI goal tracking..."`
+        };
+
+        function updatePrepBrief() {
+            const selector = document.getElementById('simTargetSelect');
+            const outputElement = document.getElementById('prepOutput');
+            if (outputElement && selector) {
+                outputElement.innerHTML = prepBriefs[selector.value] || prepBriefs.realpha;
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        function triggerConfetti() {
+            try {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.8 },
+                    colors: ['#2563eb', '#10b981', '#f59e0b']
+                });
+            } catch (e) {
+                console.warn("Confetti skipped.");
+            }
+        }
+    </script>
+</body>
+</html>

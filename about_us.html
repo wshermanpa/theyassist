@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | TheyAssist Sovereign Talent Stewardship Infrastructure</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Space Grotesk, Plus Jakarta Sans, JetBrains Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            600: '#1d4ed8',
+                            900: '#1e3a8a',
+                            950: '#0b1329',
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfdfe;
+            color: #0f172a;
+        }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Bloomberg Ticker Keyframes */
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-ticker {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        .ambient-glow-1 {
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(255,255,255,0) 70%);
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.06);
+            transform: translateY(-2px);
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <!-- BLOOMBERG-STYLE LIVE LABOR TICKER -->
+    <div class="bg-slate-950 text-slate-300 py-2.5 px-4 text-xs relative z-50 overflow-hidden font-mono border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex items-center">
+            <div class="flex items-center space-x-2 shrink-0 bg-slate-950 pr-4 z-10 border-r border-slate-800">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                <span class="font-bold text-emerald-400 text-[11px] uppercase tracking-wider">LIVE LABOR TICKER</span>
+            </div>
+            <div class="overflow-hidden w-full relative">
+                <div class="animate-ticker text-[11px] font-medium tracking-tight space-x-8">
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Cyber Defense MD Corridor:</span><span class="text-emerald-400 font-bold">+8.1% ▲</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">FedTech AI Roles:</span><span class="text-emerald-400 font-bold">+14.2% ▲</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Strategy Consulting DMV:</span><span class="text-rose-400 font-bold">-2.4% ▼</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">DoD 8140/8570 Directive:</span><span class="text-blue-400 font-bold">MANDATORY Q4</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">OPT STEM Extensions:</span><span class="text-amber-400 font-bold">24-MO ACTIVE</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Average Starting Tech (DMV):</span><span class="text-slate-100 font-bold">$102,500</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Cyber Defense MD Corridor:</span><span class="text-emerald-400 font-bold">+8.1% ▲</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">FedTech AI Roles:</span><span class="text-emerald-400 font-bold">+14.2% ▲</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 py-4 px-6 z-40">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="relative flex items-center justify-center">
+                    <div class="absolute inset-0 bg-blue-600/10 rounded-full blur-md"></div>
+                    <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-9 h-9 rounded-full shadow-md relative z-10 border border-slate-100" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                </div>
+                <span class="text-xl font-bold heading-font tracking-tight text-slate-950">TheyAssist</span>
+            </a>
+            
+            <!-- Desktop Nav Items -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <a href="index.html#intelligence" class="hover:text-slate-950 transition">Labor Intelligence</a>
+                <a href="index.html#ecosystem" class="hover:text-slate-950 transition">Interactive Portal</a>
+                <a href="index.html#moat" class="hover:text-slate-950 transition">The Moat</a>
+                <a href="index.html#pricing" class="hover:text-slate-950 transition">Pricing</a>
+                <a href="about_us.html" class="text-slate-950 font-bold transition">About Us</a>
+                <button onclick="openRedeemModal()" class="text-blue-600 hover:text-blue-700 transition font-bold">
+                    Redeem Code
+                </button>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openInquiryModal()" class="text-xs font-bold text-slate-600 hover:text-slate-950 transition hidden sm:inline-block">Connect with Program Development</button>
+                <a href="https://theyassist.io" class="bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 inline-block">
+                    Login
+                </a>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-slate-950 focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg" id="mobileMenuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-slate-200/60 flex flex-col space-y-3.5 text-sm font-semibold text-slate-500">
+            <a href="index.html#intelligence" class="text-left py-2 hover:text-slate-950 transition">Labor Intelligence</a>
+            <a href="index.html#ecosystem" class="text-left py-2 hover:text-slate-950 transition">Interactive Portal</a>
+            <a href="index.html#moat" class="text-left py-2 hover:text-slate-950 transition">The Moat</a>
+            <a href="index.html#pricing" class="text-left py-2 hover:text-slate-950 transition">Pricing</a>
+            <a href="about_us.html" class="text-left py-2 text-slate-950 font-bold">About Us</a>
+            <button onclick="openRedeemModal(); toggleMobileMenu();" class="text-left py-2 text-blue-600 font-bold">
+                Redeem Code
+            </button>
+            <button onclick="openInquiryModal(); toggleMobileMenu();" class="text-left py-2 text-slate-950 font-bold border-t border-slate-100 pt-2">Connect with Development</button>
+        </div>
+    </nav>
+
+    <!-- ABOUT US HERO HEADER -->
+    <header class="relative py-24 px-6 overflow-hidden bg-white border-b border-slate-200/80">
+        <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-1 pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto text-center relative z-10 space-y-6">
+            <div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 px-4 py-1.5 rounded-full text-xs text-slate-800 font-mono font-semibold shadow-xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                <span>MISSION &amp; PRINCIPLES</span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight max-w-4xl mx-auto">
+                A Sovereignty-First <br>Knowledge Nexus
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal">
+                We empower rising talent and complex organizations through secure, on-platform structured guidance, establishing an environment where IP stays safe and learning thrives.
+            </p>
+        </div>
+    </header>
+
+    <!-- VISION & PURPOSE SECTION -->
+    <section class="py-16 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        <div class="bg-white border border-slate-200 rounded-[28px] p-8 space-y-4 shadow-xs hover:border-slate-300 transition-all">
+            <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-md">
+                <i class="fa-solid fa-eye"></i>
+            </div>
+            <h2 class="text-2xl font-bold heading-font text-slate-950">Our Vision</h2>
+            <p class="text-slate-600 text-sm leading-relaxed">
+                To build the leading, high-security infrastructure for professionals seeking curated industry insights, cooperative knowledge sharing, and structured professional guidance to fuel career paths and local economic expansion.
+            </p>
+        </div>
+
+        <div class="bg-white border border-slate-200 rounded-[28px] p-8 space-y-4 shadow-xs hover:border-slate-300 transition-all">
+            <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-md">
+                <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <h2 class="text-2xl font-bold heading-font text-slate-950">Our Purpose</h2>
+            <p class="text-slate-600 text-sm leading-relaxed">
+                To accelerate the careers of emerging talent by providing direct access to trusted, top-tier professional expertise.
+            </p>
+        </div>
+    </section>
+
+    <!-- PRINCIPLES OF SOVEREIGN MENTORING -->
+    <section class="py-20 px-6 bg-slate-50/50 border-t border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">OUR PILLARS</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">Principles of Sovereign Mentoring</h2>
+                <p class="text-slate-600 text-xs sm:text-sm font-medium">
+                    These four core principles mandate how we code, how we secure meeting channels, and how we protect executive schedules.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Value Card 1 -->
+                <div class="bg-white border border-slate-200 rounded-[24px] p-6 shadow-xs flex items-start space-x-4 hover:border-blue-300 transition-all">
+                    <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center font-bold shrink-0">
+                        <i class="fa-solid fa-graduation-cap text-sm"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-base font-bold text-slate-950">Knowledge Empowerment</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            We believe accessible, audited insight forms the cornerstone of sound corporate decisions. Our platform functions as a protective shield and secure conduit for intellectual transfer.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Value Card 2 -->
+                <div class="bg-white border border-slate-200 rounded-[24px] p-6 shadow-xs flex items-start space-x-4 hover:border-blue-300 transition-all">
+                    <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center font-bold shrink-0">
+                        <i class="fa-solid fa-people-arrows text-sm"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-base font-bold text-slate-950">Authentic Connections</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            We build long-term partnerships rooted in transparency and mutual respect. By safeguarding our professionals' privacy and time, we create a secure, high-integrity environment.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Value Card 3 -->
+                <div class="bg-white border border-slate-200 rounded-[24px] p-6 shadow-xs flex items-start space-x-4 hover:border-blue-300 transition-all">
+                    <div class="w-10 h-10 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center font-bold shrink-0">
+                        <i class="fa-solid fa-chart-line text-sm"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-base font-bold text-slate-950">Impact through Guidance</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            We accelerate business outcomes by connecting organizations with high-momentum talent. Driven by precision software, our platform tracks and optimizes candidate velocity.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Value Card 4 -->
+                <div class="bg-white border border-slate-200 rounded-[24px] p-6 shadow-xs flex items-start space-x-4 hover:border-blue-300 transition-all">
+                    <div class="w-10 h-10 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center font-bold shrink-0">
+                        <i class="fa-solid fa-arrows-spin text-sm"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-base font-bold text-slate-950">Continuous Evolution</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Dedicated to continuous evolution, we relentlessly refine our platform to ensure our knowledge nexus remains a dynamic, uninterrupted resource for future-focused professionals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDING TEAM SECTION -->
+    <section class="py-20 px-6 max-w-7xl mx-auto space-y-12">
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+            <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">FOUNDING TEAM</span>
+            <h2 class="text-3xl font-extrabold heading-font text-slate-950">The Leadership Team</h2>
+            <p class="text-slate-600 text-xs sm:text-sm font-medium">
+                The visionaries shaping independent, high-stature, and fully private talent-tracking infrastructures.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <!-- Member 1 -->
+            <div class="bg-white border border-slate-200 rounded-[24px] p-6 text-center space-y-3 shadow-xs hover:border-slate-300 transition-all">
+                <div class="w-16 h-16 bg-gradient-to-tr from-slate-950 to-blue-800 text-white rounded-2xl mx-auto flex items-center justify-center font-bold text-xl shadow-sm">
+                    BS
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-950">Bill S.</h3>
+                    <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Executive Officer</p>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    Bill leads the company's strategic vision and expansion, leveraging corporate relations experience to build trusted partnerships with organization leaders.
+                </p>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="bg-white border border-slate-200 rounded-[24px] p-6 text-center space-y-3 shadow-xs hover:border-slate-300 transition-all">
+                <div class="w-16 h-16 bg-gradient-to-tr from-blue-700 to-sky-400 text-white rounded-2xl mx-auto flex items-center justify-center font-bold text-xl shadow-sm">
+                    DJ
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-950">Dori J.</h3>
+                    <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Program Officer</p>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    Dori leads the structuring of premium talent development blueprints for institutional programs and compliant user metrics management.
+                </p>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="bg-white border border-slate-200 rounded-[24px] p-6 text-center space-y-3 shadow-xs hover:border-slate-300 transition-all">
+                <div class="w-16 h-16 bg-gradient-to-tr from-indigo-700 to-teal-400 text-white rounded-2xl mx-auto flex items-center justify-center font-bold text-xl shadow-sm">
+                    KM
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-950">Kabir M.</h3>
+                    <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Operating Officer</p>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    Kabir leads the architecture of secure technical frameworks and isolated data stores, ensuring uncompromising privacy for enterprise tenants.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVISORY COUNCIL SECTION -->
+    <section class="py-20 px-6 max-w-7xl mx-auto space-y-12 border-t border-slate-200/60 bg-white">
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+            <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">GOVERNING STEWARDS</span>
+            <h2 class="text-3xl font-extrabold heading-font text-slate-950">Our Advisors</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="bg-slate-50 border border-slate-200/80 p-6 rounded-[20px] flex items-start space-x-4 mx-auto w-full max-w-lg">
+                <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center font-bold shrink-0 text-sm">
+                    NM
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-slate-950">Neta M.</h3>
+                    <p class="text-[10px] text-blue-600 font-mono uppercase tracking-wider mt-0.5">PLATFORM &amp; PROGRAM ADVISOR</p>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                        Guiding TheyAssist’s talent leadership frameworks and organizational program design, leveraging her extensive expertise in leadership development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 py-12 px-6 bg-slate-50 text-slate-500 text-xs font-mono">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-3">
+                <img src="theyassist_logo.png" alt="TheyAssist" class="w-8 h-8 rounded-full border border-slate-200" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                <span class="text-slate-950 font-bold heading-font text-sm">TheyAssist, Inc.</span>
+            </div>
+            <p class="text-center md:text-right">
+                CONFIDENTIAL • Delaware C-Corp (In Formation) • Sovereign Talent Stewardship Infrastructure (STSI)
+            </p>
+        </div>
+    </footer>
+
+    <!-- REDEEM ORG CODE MODAL -->
+    <div id="redeemModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50 transition-all">
+        <div class="bg-white border-2 border-amber-500 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative space-y-6">
+            <button onclick="closeRedeemModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider">ORGANIZATION ACCESS</span>
+                <h3 class="text-xl font-bold heading-font text-slate-950">Redeem Organization Code</h3>
+                <p class="text-xs text-slate-600">If your academic institution or employer is a TheyAssist sponsor, enter your custom access code below.</p>
+            </div>
+            <div class="space-y-4">
+                <input type="text" id="accessCode" placeholder="e.g. UMD-SMITH-2026" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase font-mono font-bold tracking-widest text-sm text-slate-900 focus:outline-none transition">
+                <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold text-xs rounded-xl shadow-md transition">
+                    Validate Access Code
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENTERPRISE INQUIRY MODAL (WITH HUMAN VERIFICATION CAPTCHA) -->
+    <div id="inquiryModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50 transition-all">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 max-w-lg w-full relative max-h-[90vh] overflow-y-auto space-y-6">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase">SECURE B2B OUTBOUND</span>
+                <h3 class="text-xl font-bold heading-font text-slate-950">Inquire About Enterprise Portal</h3>
+                <p class="text-xs text-slate-600">Sovereign portal setup for university deans, GovCon contractors, and corporate HR teams.</p>
+            </div>
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-4 text-xs font-mono">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-slate-500 uppercase text-[9px] block mb-1">First Name</label>
+                        <input type="text" id="inqFirstName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
+                    </div>
+                    <div>
+                        <label class="text-slate-500 uppercase text-[9px] block mb-1">Last Name</label>
+                        <input type="text" id="inqLastName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-500 uppercase text-[9px] block mb-1">Work Email</label>
+                    <input type="email" id="inqWorkEmail" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
+                </div>
+                <div>
+                    <label class="text-slate-500 uppercase text-[9px] block mb-1">Organization Name</label>
+                    <input type="text" id="inqOrgName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
+                </div>
+                <!-- HUMAN VERIFICATION WIDGET -->
+                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label class="text-slate-700 uppercase text-[9px] font-bold flex items-center">
+                            <i class="fa-solid fa-user-shield text-blue-600 mr-1.5"></i> Human Verification
+                        </label>
+                        <button type="button" onclick="generateCaptcha()" class="text-[9px] text-blue-600 hover:text-blue-800 underline">
+                            <i class="fa-solid fa-arrows-rotate mr-1"></i>Refresh
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span id="captchaQuestion" class="font-bold text-slate-800 text-xs bg-slate-200 px-3 py-2 rounded-lg shrink-0">8 + 5 =</span>
+                        <input type="number" id="captchaAnswer" required placeholder="Answer" class="w-full p-2 bg-white border border-slate-200 rounded-lg text-slate-900 text-xs focus:outline-none focus:border-blue-600">
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-3 bg-slate-950 hover:bg-slate-900 text-white font-bold rounded-xl transition">
+                    Send Enterprise Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white font-mono text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toastText">Notification message</span>
+    </div>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        let captchaNum1 = 0;
+        let captchaNum2 = 0;
+        const GOOGLE_SHEET_ID = "12qobIeAQds_lYZXqSHxFdKFlnyG1QUe3ifauHAJIeUI";
+        let GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz_GOOGLE_APPS_SCRIPT_ENDPOINT_PLACEHOLDER/exec";
+
+        function generateCaptcha() {
+            captchaNum1 = Math.floor(Math.random() * 9) + 1;
+            captchaNum2 = Math.floor(Math.random() * 9) + 1;
+            const qEl = document.getElementById('captchaQuestion');
+            const aEl = document.getElementById('captchaAnswer');
+            if (qEl) qEl.textContent = `${captchaNum1} + ${captchaNum2} =`;
+            if (aEl) aEl.value = '';
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('mobileMenuIcon');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                if (icon) {
+                    if (menu.classList.contains('hidden')) {
+                        icon.className = "fa-solid fa-bars text-lg";
+                    } else {
+                        icon.className = "fa-solid fa-xmark text-lg";
+                    }
+                }
+            }
+        }
+
+        function openRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleCodeRedeem() {
+            const code = document.getElementById('accessCode').value.trim().toUpperCase();
+            if (code) {
+                closeRedeemModal();
+                showToast(`Code verified! Access granted to ${code} sponsored workspace.`);
+                triggerConfetti();
+            } else {
+                showToast("Please enter a valid organization code.");
+            }
+        }
+
+        function openInquiryModal() {
+            generateCaptcha();
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        async function handleInquirySubmit(e) {
+            e.preventDefault();
+            const ansInput = document.getElementById('captchaAnswer');
+            const userAnswer = ansInput ? parseInt(ansInput.value, 10) : NaN;
+            if (userAnswer !== (captchaNum1 + captchaNum2)) {
+                showToast("Human verification failed. Please check your answer.");
+                generateCaptcha();
+                return;
+            }
+
+            const firstName = document.getElementById('inqFirstName').value.trim();
+            const lastName = document.getElementById('inqLastName').value.trim();
+            const workEmail = document.getElementById('inqWorkEmail').value.trim();
+            const orgName = document.getElementById('inqOrgName').value.trim();
+            const timestamp = new Date().toLocaleString();
+
+            const payload = {
+                timestamp: timestamp,
+                firstName: firstName,
+                lastName: lastName,
+                workEmail: workEmail,
+                orgName: orgName,
+                sheetId: GOOGLE_SHEET_ID
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = "Recording to Google Sheet...";
+            submitBtn.disabled = true;
+
+            try {
+                await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.warn("Google Sheet submission notice:", err);
+            }
+
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+
+            closeInquiryModal();
+            showToast(`Inquiry recorded to Google Sheet for ${firstName} ${lastName}!`);
+            triggerConfetti();
+
+            document.getElementById('inqFirstName').value = '';
+            document.getElementById('inqLastName').value = '';
+            document.getElementById('inqWorkEmail').value = '';
+            document.getElementById('inqOrgName').value = '';
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        function triggerConfetti() {
+            try {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.8 },
+                    colors: ['#2563eb', '#10b981', '#f59e0b']
+                });
+            } catch (e) {
+                console.warn("Confetti skipped.");
+            }
+        }
+    </script>
+</body>
+</html>
