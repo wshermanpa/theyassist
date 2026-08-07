@@ -679,7 +679,10 @@
                                 <li class="opacity-30 line-through"><i class="fa-solid fa-circle-xmark text-slate-400 mr-2"></i> Deep Profile Setup</li>
                             </ul>
                         </div>
-                        <button onclick="triggerPaywallModal('Explorer Registration')" class="w-full text-center py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition mt-8">Launch Explorer</button>
+                        
+                       <button onclick="triggerPaywallModal('Explorer Registration')" class="w-full text-center py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition mt-8">Launch Explorer</button> 
+                       <!--  <a href="https://www.theyassist.io/auth/sign-up" class="w-full text-center py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition mt-8 inline-block">Launch Explorer</a> -->
+
                     </div>
 
                     <!-- Basic -->
@@ -1023,7 +1026,9 @@
         let captchaNum2 = 0;
 
         const GOOGLE_SHEET_ID = "12qobIeAQds_lYZXqSHxFdKFlnyG1QUe3ifauHAJIeUI";
-        let GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz_GOOGLE_APPS_SCRIPT_ENDPOINT_PLACEHOLDER/exec";
+        //let GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz_GOOGLE_APPS_SCRIPT_ENDPOINT_PLACEHOLDER/exec";
+        let GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyg9rcHlBUZLj9hrVfC2fVQ3Z_WySphJn0IieP4PttiQyYzzqW9C2eisP7p94W2eUrG/exec";
+
 
         function generateCaptcha() {
             captchaNum1 = Math.floor(Math.random() * 9) + 1;
