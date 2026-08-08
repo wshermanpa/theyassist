@@ -745,7 +745,7 @@
             </div>
         </section>
 
-        <footer class="border-t border-slate-200 py-12 px-6 bg-slate-50 text-slate-500 text-xs font-mono">
+       <!-- <footer class="border-t border-slate-200 py-12 px-6 bg-slate-50 text-slate-500 text-xs font-mono">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center space-x-3">
                     <img src="theyassist_logo.png" alt="TheyAssist" class="w-8 h-8 rounded-full border border-slate-200" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
@@ -755,7 +755,98 @@
                     CONFIDENTIAL • Delaware C-Corp (In Formation) • Sovereign Talent Stewardship Infrastructure (STSI)
                 </p>
             </div>
+        </footer> -->
+        <!-- PRE-LOGIN FOOTER -->
+        <footer class="bg-slate-100 border-t border-slate-200 py-10 px-6 text-slate-600 text-xs font-sans">
+            <div class="max-w-7xl mx-auto space-y-8">
+                <!-- Top Footer Brand & Headline -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-200/80 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-7 h-7 rounded-full border border-slate-300" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="text-slate-950 font-bold heading-font text-base tracking-tight">TheyAssist</span>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium">
+                        Sovereign Talent Stewardship Infrastructure (STSI)
+                    </p>
+                </div>
+
+                <!-- Multi-Column Link Directories (LinkedIn Pre-Login Style) -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-[11px] leading-relaxed">
+                    <div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">General Navigation</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><a href="about_us.html" class="hover:text-blue-600 hover:underline transition">About Us</a></li>
+                            <li><button onclick="scrollToSection('hero')" class="hover:text-blue-600 hover:underline transition text-left">Platform Overview</button></li>
+                            <li><button onclick="scrollToSection('intelligence')" class="hover:text-blue-600 hover:underline transition text-left">Labor Intelligence</button></li>
+                            <li><button onclick="scrollToSection('ecosystem')" class="hover:text-blue-600 hover:underline transition text-left">Interactive Simulator</button></li>
+                            <li><button onclick="scrollToSection('pricing')" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">Directories &amp; Talent</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><button onclick="triggerPaywallModal('Verified Advisor Directory')" class="hover:text-blue-600 hover:underline transition text-left">Verified Advisor Directory</button></li>
+                            <li><button onclick="triggerPaywallModal('Certification Trajectories')" class="hover:text-blue-600 hover:underline transition text-left">Certification Blueprints</button></li>
+                            <li><button onclick="triggerPaywallModal('Regional Labor Corridors')" class="hover:text-blue-600 hover:underline transition text-left">Regional Labor Corridors</button></li>
+                            <li><button onclick="triggerPaywallModal('F-1 OPT/STEM Extensions')" class="hover:text-blue-600 hover:underline transition text-left">F-1 OPT &amp; STEM Pathways</button></li>
+                            <li><button onclick="triggerPaywallModal('First-Gen Talent Networks')" class="hover:text-blue-600 hover:underline transition text-left">First-Gen Talent Networks</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">Enterprise Solutions</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">University Advancement</button></li>
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">Donor Warmth Index</button></li>
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">GovCon Compliance (DoD 8140)</button></li>
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">Corporate L&amp;D Portals</button></li>
+                            <li><button onclick="openRedeemModal()" class="hover:text-blue-600 hover:underline transition text-left">Redeem Organization Code</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">Sovereignty &amp; Moat</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><button onclick="scrollToSection('moat')" class="hover:text-blue-600 hover:underline transition text-left">Database Isolation</button></li>
+                            <li><button onclick="scrollToSection('moat')" class="hover:text-blue-600 hover:underline transition text-left">Zero-Knowledge Transcripts</button></li>
+                            <li><button onclick="scrollToSection('moat')" class="hover:text-blue-600 hover:underline transition text-left">Universal Calendar Shielding</button></li>
+                            <li><button onclick="scrollToSection('moat')" class="hover:text-blue-600 hover:underline transition text-left">FERPA &amp; SOC2 Integrity</button></li>
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">Human Verification Standards</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">Trust &amp; Governance</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><button onclick="triggerPaywallModal('User Agreement')" class="hover:text-blue-600 hover:underline transition text-left">User Agreement</button></li>
+                            <li><button onclick="triggerPaywallModal('Privacy Policy')" class="hover:text-blue-600 hover:underline transition text-left">Privacy Policy</button></li>
+                            <li><button onclick="triggerPaywallModal('Community Guidelines')" class="hover:text-blue-600 hover:underline transition text-left">Community Guidelines</button></li>
+                            <li><button onclick="triggerPaywallModal('Cookie Policy')" class="hover:text-blue-600 hover:underline transition text-left">Cookie Policy</button></li>
+                            <li><button onclick="triggerPaywallModal('Copyright Policy')" class="hover:text-blue-600 hover:underline transition text-left">Copyright Policy</button></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Bottom Copyright & Legal Links Bar (LinkedIn Style) -->
+                <div class="pt-6 border-t border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                    <div class="flex items-center space-x-2">
+                        <img src="theyassist_logo.png" alt="TheyAssist Icon" class="w-4 h-4 rounded-full opacity-80" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="font-semibold text-slate-700">TheyAssist Corporation &copy; 2026</span>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-slate-500 font-medium">
+                        <button onclick="triggerPaywallModal('User Agreement')" class="hover:text-blue-600 hover:underline transition">User Agreement</button>
+                        <button onclick="triggerPaywallModal('Privacy Policy')" class="hover:text-blue-600 hover:underline transition">Privacy Policy</button>
+                        <button onclick="triggerPaywallModal('Community Guidelines')" class="hover:text-blue-600 hover:underline transition">Community Guidelines</button>
+                        <button onclick="triggerPaywallModal('Cookie Policy')" class="hover:text-blue-600 hover:underline transition">Cookie Policy</button>
+                        <button onclick="triggerPaywallModal('Copyright Policy')" class="hover:text-blue-600 hover:underline transition">Copyright Policy</button>
+                        <button onclick="triggerPaywallModal('Guest Controls')" class="hover:text-blue-600 hover:underline transition">Guest Controls</button>
+                    </div>
+                </div>
+            </div>
         </footer>
+        
     </div>
 
     <!-- VIEW 2: ABOUT US PANEL (SPA MODE) -->
