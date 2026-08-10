@@ -779,7 +779,10 @@
                             <li><button onclick="scrollToSection('hero')" class="hover:text-blue-600 hover:underline transition text-left">Platform Overview</button></li>
                             <li><button onclick="scrollToSection('intelligence')" class="hover:text-blue-600 hover:underline transition text-left">Labor Intelligence</button></li>
                             <li><button onclick="scrollToSection('ecosystem')" class="hover:text-blue-600 hover:underline transition text-left">Interactive Simulator</button></li>
-                            <li><button onclick="scrollToSection('pricing')" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</button></li>
+                            <!-- <li><button onclick="scrollToSection('pricing')" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</button></li> -->
+                            <!-- <li><button onclick="window.location.href='https://www.theyassist.io/pricing';" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</button></li> -->
+                            <li><a href="https://www.theyassist.io/pricing" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</a></li> 
+
                         </ul>
                     </div>
 
@@ -1022,9 +1025,13 @@
                 </p>
             </div>
             <div class="space-y-3 pt-2">
-                <button onclick="closePaywallModal(); scrollToSection('pricing');" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded-xl shadow-md transition">
+                 <!--  <button onclick="closePaywallModal(); scrollToSection('pricing');" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded-xl shadow-md transition">
                     View Subscription Plans — From $9.99/mo
-                </button>
+                </button> -->                
+                <button onclick="window.location.href='https://www.theyassist.io/pricing';" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded-xl shadow-md transition">
+    				View Subscription Plans — From $9.99/month
+				</button>
+				
                 <button onclick="closePaywallModal()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-mono">
                     Continue Browsing Explorer Overview
                 </button>
@@ -1059,7 +1066,7 @@
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="text-center space-y-2">
-                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase">SECURE B2B OUTBOUND</span>
+                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase">TheyAssist</span>
                 <h3 class="text-xl font-bold heading-font text-slate-950">Inquire About Enterprise Portal</h3>
                 <p class="text-xs text-slate-600">Sovereign portal setup for university deans, GovCon contractors, and corporate HR teams.</p>
             </div>
@@ -1119,7 +1126,6 @@
         const GOOGLE_SHEET_ID = "12qobIeAQds_lYZXqSHxFdKFlnyG1QUe3ifauHAJIeUI";
         //let GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz_GOOGLE_APPS_SCRIPT_ENDPOINT_PLACEHOLDER/exec";
         let GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyg9rcHlBUZLj9hrVfC2fVQ3Z_WySphJn0IieP4PttiQyYzzqW9C2eisP7p94W2eUrG/exec";
-
 
         function generateCaptcha() {
             captchaNum1 = Math.floor(Math.random() * 9) + 1;
