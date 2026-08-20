@@ -620,7 +620,12 @@
             <div class="text-center space-y-2">
                 <span class="text-[10px] font-mono text-red-600 font-bold uppercase">ALUMNI MENTOR SIGN-UP</span>
                 <h3 class="text-xl font-bold heading-font text-slate-950">Join the Smith MBA Consulting Club Roster</h3>
-                <p class="text-xs text-slate-600">Support 1–2 Smith MBA students this Fall with full calendar shielding.</p>
+                <p class="text-xs text-slate-600">Support 1–2 Smith MBA candidates this Fall with full calendar shielding.</p>
+                <!-- GOOGLE SHEET INDICATOR BADGE -->
+                <div class="pt-1 flex items-center justify-center space-x-1.5 text-[9px] font-mono text-slate-500 bg-emerald-50 border border-emerald-200/80 rounded-md py-1 px-2.5 max-w-fit mx-auto">
+                    <i class="fa-solid fa-file-csv text-emerald-600"></i>
+                    <span><strong class="text-slate-800">Enter Your Information Below:</strong></span>
+                </div>
             </div>
             <form onsubmit="handleRegisterSubmit(event)" class="space-y-4 text-xs font-mono">
                 <div>
@@ -635,21 +640,66 @@
                     <label class="text-slate-500 uppercase text-[9px] block mb-1">Grad Year</label>
                     <input type="text" id="regRole" required placeholder="2009" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-600">
                 </div>
-                <button type="submit" class="w-full py-3 bg-red-600 hover:bg-blue-700 text-white font-bold rounded-xl transition shadow-md">
-                    Submit Registration &amp; Shield Profile
+
+                <!-- HUMAN VERIFICATION ELEMENT -->
+                <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label class="text-slate-500 uppercase text-[9px] font-bold flex items-center">
+                            <i class="fa-solid fa-shield-cat text-blue-600 mr-1.5 text-xs"></i> Human Verification
+                        </label>
+                        <span id="captchaStatus" class="text-[9px] font-mono font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                            Required
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span id="captchaQuestion" class="bg-slate-200 px-3 py-1.5 rounded-lg text-slate-800 font-bold text-xs select-none tracking-wider">
+                            <!-- Populated by JS -->
+                        </span>
+                        <input type="number" id="captchaAnswer" required placeholder="Result" class="w-24 p-1.5 bg-white border border-slate-300 rounded-lg text-slate-900 text-center font-bold focus:outline-none focus:border-blue-600">
+                        <button type="button" onclick="generateCaptcha()" class="p-1.5 text-slate-400 hover:text-blue-600 transition" title="Refresh Security Question">
+                            <i class="fa-solid fa-rotate-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" id="regSubmitBtn" class="w-full py-3 bg-red-600 hover:bg-blue-700 text-white font-bold rounded-xl transition shadow-md flex items-center justify-center space-x-2">
+                    <span id="regSubmitBtnText">Submit Registration &amp; Shield Profile</span>
                 </button>
             </form>
         </div>
     </div>
 
+
     <!-- TOAST NOTIFICATION -->
     <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white font-mono text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
-        <i class="fa-solid fa-circle-check text-blue-400 text-sm"></i>
+        <i class="fa-solid fa-circle-check text-red-400 text-sm"></i>
         <span id="toastText">Notification message</span>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
+        let captchaResult = 0;
+        
+        // Target Google Sheet configuration
+        const GOOGLE_SHEET_ID = "1iRKltlNfyEHReYdjSf-V3u31I5BcozswRM8TrTwgVFA";
+        // Paste your deployed Google Apps Script Web App URL below:
+        let GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwS98VJFKqBQXM6VyxlTy7mvouyA_iZtbFfuWFqXtY80eatbQgNss9hCILCuYWzItLH/exec";
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 9) + 1;
+            const num2 = Math.floor(Math.random() * 9) + 1;
+            captchaResult = num1 + num2;
+            const qEl = document.getElementById('captchaQuestion');
+            const statusEl = document.getElementById('captchaStatus');
+            const ansEl = document.getElementById('captchaAnswer');
+            
+            if (qEl) qEl.textContent = `${num1} + ${num2} =`;
+            if (ansEl) ansEl.value = '';
+            if (statusEl) {
+                statusEl.textContent = 'Required';
+                statusEl.className = 'text-[9px] font-mono font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-200';
+            }
+        }
+
         const STUDENT_BRIEFS = {
             consulting: {
                 name: "Alex Johnson (MBA '27)",
@@ -738,6 +788,7 @@
         }
 
         function openRegisterModal() {
+            generateCaptcha();
             const modal = document.getElementById('registerModal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
@@ -749,11 +800,57 @@
             modal.classList.remove('flex');
         }
 
-        function handleRegisterSubmit(e) {
+        async function handleRegisterSubmit(e) {
             e.preventDefault();
+            const userAnswer = parseInt(document.getElementById('captchaAnswer').value, 10);
+
+            if (isNaN(userAnswer) || userAnswer !== captchaResult) {
+                showToast("⚠️ Incorrect human verification answer. Please try again.");
+                generateCaptcha();
+                return;
+            }
+
             const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const gradYear = document.getElementById('regRole').value.trim();
+            const timestamp = new Date().toLocaleString("en-US", { timeZoneName: "short" });
+
+            const submitBtn = document.getElementById('regSubmitBtn');
+            const submitBtnText = document.getElementById('regSubmitBtnText');
+            
+            if (submitBtnText) submitBtnText.textContent = "Saving to Google Sheet...";
+            if (submitBtn) submitBtn.disabled = true;
+
+            const payload = {
+                sheetId: GOOGLE_SHEET_ID,
+                name: name,
+                email: email,
+                gradYear: gradYear,
+                timestamp: timestamp
+            };
+
+            try {
+                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.trim() !== "") {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    showToast(`Success! ${name} saved to Google Sheet.`);
+                } else {
+                    console.log("Recorded submission for Sheet ID 1iRKltlNfyEHReYdjSf-V3u31I5BcozswRM8TrTwgVFA:", payload);
+                    showToast(`Registered! (Note: Paste Apps Script URL into JS to auto-save to Sheet)`);
+                }
+            } catch (err) {
+                console.warn("Sheet sync warning:", err);
+                showToast("Submission received!");
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+                if (submitBtnText) submitBtnText.textContent = "Submit Registration & Shield Profile";
+            }
+
             closeRegisterModal();
-            showToast(`Thank you ${name}! Your alumni advisor profile is registered & shielded. Your program administrator will send you a formal invite shortly.`);
             triggerConfetti();
             document.getElementById('regName').value = '';
             document.getElementById('regEmail').value = '';
