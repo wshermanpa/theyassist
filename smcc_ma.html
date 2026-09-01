@@ -23,21 +23,20 @@
                             gold: '#FFD200',
                             black: '#000000',
                         },
-                        // Overriding default palettes used in the form to match UMD theme
                         red: {
                             50: '#fdedef',
                             100: '#f9d1d6',
                             200: '#f3a4ad',
                             300: '#ed7683',
                             400: '#e7495a',
-                            500: '#E21833', // UMD Red primary
-                            600: '#E21833', // UMD Red
-                            700: '#E21833', // UMD Red for submit button
-                            800: '#C2102A', // Darker UMD Red for hover states
+                            500: '#E21833',
+                            600: '#E21833',
+                            700: '#E21833',
+                            800: '#C2102A',
                             900: '#A30D22',
                         },
                         slate: {
-                            900: '#000000', // Mapping dark slate to UMD Black
+                            900: '#000000',
                         }
                     }
                 }
@@ -69,7 +68,7 @@
                              class="w-full h-full object-contain drop-shadow-md"
                              onerror="this.classList.add('hidden'); document.getElementById('umdGlobeSvg').classList.remove('hidden');">
                         
-                        <!-- Inline Vector UMD Globe Logo (Renders if local image is unavailable in preview) -->
+                        <!-- Inline Vector UMD Globe Logo -->
                         <svg id="umdGlobeSvg" class="w-full h-full drop-shadow-md hidden" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <clipPath id="globeClip">
@@ -83,44 +82,31 @@
                             </defs>
                             
                             <g clip-path="url(#globeClip)">
-                                <!-- Base Red Sphere -->
                                 <circle cx="50" cy="50" r="48" fill="#E21833"/>
-                                
-                                <!-- Top Left: Calvert Gold/Black Patterns -->
                                 <rect x="0" y="0" width="50" height="50" fill="#FFD200"/>
                                 <path d="M-10 10 L50 -50 M-10 30 L50 -30 M-10 50 L50 -10 M10 60 L60 10 M30 60 L60 30" stroke="#000000" stroke-width="7"/>
                                 <line x1="0" y1="25" x2="50" y2="25" stroke="#000000" stroke-width="3"/>
                                 <line x1="25" y1="0" x2="25" y2="50" stroke="#000000" stroke-width="3"/>
-                                
-                                <!-- Top Right: Red & White Crossland Cross -->
                                 <rect x="50" y="0" width="50" height="50" fill="#E21833"/>
                                 <path d="M75 12 V38 M62 25 H88" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
                                 <circle cx="75" cy="12" r="3.5" fill="#FFFFFF"/>
                                 <circle cx="75" cy="38" r="3.5" fill="#FFFFFF"/>
                                 <circle cx="62" cy="25" r="3.5" fill="#FFFFFF"/>
                                 <circle cx="88" cy="25" r="3.5" fill="#FFFFFF"/>
-                                
-                                <!-- Bottom Left: Red & White Crossland Cross -->
                                 <rect x="0" y="50" width="50" height="50" fill="#E21833"/>
                                 <path d="M25 62 V88 M12 75 H38" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
                                 <circle cx="25" cy="62" r="3.5" fill="#FFFFFF"/>
                                 <circle cx="25" cy="88" r="3.5" fill="#FFFFFF"/>
                                 <circle cx="12" cy="75" r="3.5" fill="#FFFFFF"/>
                                 <circle cx="38" cy="75" r="3.5" fill="#FFFFFF"/>
-
-                                <!-- Bottom Right: Calvert Gold/Black Patterns -->
                                 <rect x="50" y="50" width="50" height="50" fill="#FFD200"/>
                                 <path d="M40 60 L100 0 M40 80 L100 20 M40 100 L100 40 M60 110 L110 60 M80 110 L110 80" stroke="#000000" stroke-width="7"/>
                                 <line x1="50" y1="75" x2="100" y2="75" stroke="#000000" stroke-width="3"/>
                                 <line x1="75" y1="50" x2="75" y2="100" stroke="#000000" stroke-width="3"/>
-
-                                <!-- Globe Grid Lines -->
                                 <line x1="0" y1="50" x2="100" y2="50" stroke="#000000" stroke-width="1.5"/>
                                 <line x1="50" y1="0" x2="50" y2="100" stroke="#000000" stroke-width="1.5"/>
                                 <ellipse cx="50" cy="50" rx="48" ry="22" fill="none" stroke="#000000" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
                                 <ellipse cx="50" cy="50" rx="22" ry="48" fill="none" stroke="#000000" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
-
-                                <!-- 3D Globe Shine -->
                                 <circle cx="50" cy="50" r="48" fill="url(#sphereShine)"/>
                             </g>
                             <circle cx="50" cy="50" r="48" stroke="#FFD200" stroke-width="2" fill="none"/>
@@ -153,7 +139,7 @@
                         <i class="fa-solid fa-user-check text-lg"></i>
                     </div>
                     <div>
-                        <h4 class="font-semibold text-slate-900">A curated community. Selected for drive and professional polish.</h4>
+                        <h4 class="font-semibold text-slate-900">Curated Community</h4>
                         <p class="text-slate-600 text-xs mt-0.5">Designed for ambitious students demonstrating high professional polish.</p>
                     </div>
                 </div>
@@ -189,19 +175,19 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Full Name *</label>
-                        <input type="text" required placeholder="e.g. Jane Doe" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
+                        <input type="text" name="fullName" required placeholder="e.g. Jane Doe" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Smith Email Address *</label>
-                        <input type="email" required placeholder="jdoe@umd.edu" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
+                        <input type="email" name="email" required placeholder="jdoe@umd.edu" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Phone Number *</label>
-                        <input type="tel" required placeholder="(555) 000-0000" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
+                        <input type="tel" name="phone" required placeholder="(555) 000-0000" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">LinkedIn Profile URL *</label>
-                        <input type="url" required placeholder="https://linkedin.in/in/username" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
+                        <input type="url" name="linkedin" required placeholder="https://linkedin.com/in/username" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
                     </div>
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">MBA Program & Status *</label>
@@ -223,6 +209,7 @@
                 </div>
             </div>
 
+            <!-- Section 2: Background -->
             <div>
                 <div class="flex items-center gap-3 pb-3 border-b border-slate-200 mb-6">
                     <span class="w-7 h-7 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">2</span>
@@ -230,42 +217,19 @@
                 </div>
                 
                 <div class="space-y-6">
-                   
-                   <!-- <div>
-                        <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Target Consulting Focus Areas *(Select up to 2)*</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <label class="flex items-center p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
-                                <input type="checkbox" name="focusArea" value="Strategy & Operations" class="rounded text-red-600 focus:ring-red-500">
-                                <span class="ml-2 text-xs font-medium text-slate-700">Strategy & Operations</span>
-                            </label>
-                            <label class="flex items-center p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
-                                <input type="checkbox" name="focusArea" value="Change Management" class="rounded text-red-600 focus:ring-red-500">
-                                <span class="ml-2 text-xs font-medium text-slate-700">Change Management / Org Transformation</span>
-                            </label>
-                            <label class="flex items-center p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
-                                <input type="checkbox" name="focusArea" value="Technology & Digital" class="rounded text-red-600 focus:ring-red-500">
-                                <span class="ml-2 text-xs font-medium text-slate-700">Technology & Digital Consulting</span>
-                            </label>
-                            <label class="flex items-center p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
-                                <input type="checkbox" name="focusArea" value="Healthcare & Life Sciences" class="rounded text-red-600 focus:ring-red-500">
-                                <span class="ml-2 text-xs font-medium text-slate-700">Healthcare / Life Sciences</span>
-                            </label>
-                        </div>
-                    </div>
-                    -->
                     <div>
                         <div class="flex justify-between items-center mb-2">
                             <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
                                 Target Consulting Focus Areas *(Select up to 2)*
                             </label>
-                            <span class="text-[11px] text-slate-400" id="q1Count">0 / 150 words</span>
+                            <span class="text-[11px] text-slate-400" id="focusCount">0 / 150 words</span>
                         </div>
-                        <textarea required rows="3" oninput="updateWordCount(this, 'q1Count', 150)" placeholder="Strategy & Operations, Change Management / Org Transformation, Technology & Digital Consulting, Healthcare / Life Sciences, etc..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
+                        <textarea name="focusAreas" required rows="3" oninput="updateWordCount(this, 'focusCount', 150)" placeholder="Strategy & Operations, Change Management / Org Transformation, Technology & Digital Consulting, Healthcare / Life Sciences, etc..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
                     </div>
 
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Target Post-MBA Goal / Target Firms *</label>
-                        <input type="text" required placeholder="e.g. Senior Consultant at MBB or Big 4 focusing on Organizational Strategy" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
+                        <input type="text" name="targetGoal" required placeholder="e.g. Senior Consultant at MBB or Big 4 focusing on Organizational Strategy" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm">
                     </div>
 
                     <div>
@@ -274,12 +238,13 @@
                             <i class="fa-solid fa-cloud-arrow-up text-3xl text-slate-400 mb-2"></i>
                             <div class="text-xs font-semibold text-slate-700" id="fileLabel">Click to select or drag and drop your resume</div>
                             <div class="text-[11px] text-slate-400 mt-1">PDF format required (Max 5MB)</div>
-                            <input type="file" id="resumeInput" accept=".pdf" class="hidden" required onchange="handleFileSelect(this)">
+                            <input type="file" id="resumeInput" name="resumeFile" accept=".pdf" class="hidden" required onchange="handleFileSelect(this)">
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Section 3: Fit & Readiness -->
             <div>
                 <div class="flex items-center gap-3 pb-3 border-b border-slate-200 mb-6">
                     <span class="w-7 h-7 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">3</span>
@@ -294,7 +259,7 @@
                             </label>
                             <span class="text-[11px] text-slate-400" id="q1Count">0 / 150 words</span>
                         </div>
-                        <textarea required rows="3" oninput="updateWordCount(this, 'q1Count', 150)" placeholder="Share your motivation and concrete goals for the next 3 months..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
+                        <textarea name="q1_motivation" required rows="3" oninput="updateWordCount(this, 'q1Count', 150)" placeholder="Share your motivation and concrete goals for the next 3 months..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
                     </div>
 
                     <div>
@@ -304,23 +269,12 @@
                             </label>
                             <span class="text-[11px] text-slate-400" id="q2Count">0 / 100 words</span>
                         </div>
-                        <textarea required rows="3" oninput="updateWordCount(this, 'q2Count', 100)" placeholder="Describe how you will set agendas, take ownership, and manage scheduling..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
+                        <textarea name="q2_preparation" required rows="3" oninput="updateWordCount(this, 'q2Count', 100)" placeholder="Describe how you will set agendas, take ownership, and manage scheduling..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
                     </div>
-<!-- 
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                                3. Briefly describe a situation where you demonstrated professionalism or leadership under pressure. *
-                            </label>
-                            <span class="text-[11px] text-slate-400" id="q3Count">0 / 100 words</span>
-                        </div>
-                        <textarea required rows="3" oninput="updateWordCount(this, 'q3Count', 100)" placeholder="Highlight a key moment from your career or academic projects..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
-                    </div>
--->
                 </div>
-                
             </div>
 
+            <!-- Section 4: Program Commitment -->
             <div>
                 <div class="flex items-center gap-3 pb-3 border-b border-slate-200 mb-6">
                     <span class="w-7 h-7 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">4</span>
@@ -329,27 +283,28 @@
 
                 <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-3 mb-8">
                     <label class="flex items-start gap-3 cursor-pointer">
-                        <input type="checkbox" required class="mt-1 rounded text-red-600 focus:ring-red-500">
+                        <input type="checkbox" name="commit_time" required class="mt-1 rounded text-red-600 focus:ring-red-500">
                         <span class="text-xs text-slate-700"><strong>Time Commitment:</strong> I agree to dedicate 1–2 hours per month over 4 months to meet with my mentor and submit scheduled program feedback.</span>
                     </label>
                     <label class="flex items-start gap-3 cursor-pointer">
-                        <input type="checkbox" required class="mt-1 rounded text-red-600 focus:ring-red-500">
+                        <input type="checkbox" name="commit_ownership" required class="mt-1 rounded text-red-600 focus:ring-red-500">
                         <span class="text-xs text-slate-700"><strong>Proactive Ownership:</strong> I understand that as a mentee, it is my responsibility to schedule meetings, prepare structured agendas, and drive communication.</span>
                     </label>
                     <label class="flex items-start gap-3 cursor-pointer">
-                        <input type="checkbox" required class="mt-1 rounded text-red-600 focus:ring-red-500">
+                        <input type="checkbox" name="commit_etiquette" required class="mt-1 rounded text-red-600 focus:ring-red-500">
                         <span class="text-xs text-slate-700"><strong>Professional Etiquette:</strong> I commit to representing the Smith MBA Management Consulting Club with professionalism, punctuality, and respect.</span>
                     </label>
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="w-full py-4 bg-red-700 hover:bg-red-800 text-white font-bold rounded-xl shadow-lg hover:shadow-red-900/20 transition duration-200 flex items-center justify-center gap-2">
-                    <span>Submit Application</span>
-                    <i class="fa-solid fa-paper-plane text-sm"></i>
+                <button type="submit" id="submitBtn" class="w-full py-4 bg-red-700 hover:bg-red-800 text-white font-bold rounded-xl shadow-lg hover:shadow-red-900/20 transition duration-200 flex items-center justify-center gap-2">
+                    <span id="btnText">Submit Application</span>
+                    <i id="btnIcon" class="fa-solid fa-paper-plane text-sm"></i>
                 </button>
             </div>
         </form>
 
+        <!-- Success Submission Modal -->
         <div id="successModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
             <div class="bg-white rounded-2xl max-w-md w-full p-8 text-center shadow-2xl space-y-4">
                 <div class="w-16 h-16 bg-umd-gold/20 text-umd-red rounded-full flex items-center justify-center mx-auto text-2xl">
@@ -369,18 +324,22 @@
     </div>
 
     <script>
+        // Set your published Google Apps Script Web App URL below
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwX9WDbzgqHj04SolFI-SDXHmKJCFFL_3-d6nYgk8ga741mt0HXfzkgWwPvT5SiVJ5_WQ/exec";
+
         function updateWordCount(textarea, countId, maxWords) {
             const words = textarea.value.trim().split(/\s+/).filter(word => word.length > 0);
             const count = textarea.value.trim() === '' ? 0 : words.length;
             const display = document.getElementById(countId);
-            display.innerText = `${count} / ${maxWords} words`;
-            
-            if (count > maxWords) {
-                display.classList.add('text-red-500', 'font-bold');
-                display.classList.remove('text-slate-400');
-            } else {
-                display.classList.remove('text-red-500', 'font-bold');
-                display.classList.add('text-slate-400');
+            if (display) {
+                display.innerText = `${count} / ${maxWords} words`;
+                if (count > maxWords) {
+                    display.classList.add('text-red-500', 'font-bold');
+                    display.classList.remove('text-slate-400');
+                } else {
+                    display.classList.remove('text-red-500', 'font-bold');
+                    display.classList.add('text-slate-400');
+                }
             }
         }
 
@@ -391,19 +350,206 @@
             }
         }
 
-        function handleFormSubmit(event) {
+        // Helper function to convert resume PDF to Base64 string for Google Apps Script
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    const base64String = reader.result.split(',')[1];
+                    resolve({
+                        base64: base64String,
+                        filename: file.name,
+                        mimeType: file.type
+                    });
+                };
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        async function handleFormSubmit(event) {
             event.preventDefault();
-            document.getElementById('successModal').classList.remove('hidden');
+
+            const form = document.getElementById('mentorshipForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+
+            // UI Loading state
+            submitBtn.disabled = true;
+            btnText.innerText = "Submitting Application...";
+            btnIcon.className = "fa-solid fa-circle-notch fa-spin text-sm";
+
+            try {
+                // Collect form data into object
+                const formData = new FormData(form);
+                const payload = {
+                    timestamp: new Date().toISOString(),
+                    fullName: formData.get('fullName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    linkedin: formData.get('linkedin'),
+                    programStatus: formData.get('programStatus'),
+                    focusAreas: formData.get('focusAreas'),
+                    targetGoal: formData.get('targetGoal'),
+                    q1_motivation: formData.get('q1_motivation'),
+                    q2_preparation: formData.get('q2_preparation'),
+                    commit_time: formData.get('commit_time') ? "Yes" : "No",
+                    commit_ownership: formData.get('commit_ownership') ? "Yes" : "No",
+                    commit_etiquette: formData.get('commit_etiquette') ? "Yes" : "No"
+                };
+
+                // Read file if attached
+                const fileInput = document.getElementById('resumeInput');
+                if (fileInput.files.length > 0) {
+                    const fileData = await fileToBase64(fileInput.files[0]);
+                    payload.file = fileData;
+                }
+
+                // If Google Script URL is configured, post to Google Apps Script
+                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // Standard mode for Google Apps Script redirects
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                } else {
+                    console.log("Demo Mode Submission Payload:", payload);
+                }
+
+                // Show Success Modal
+                document.getElementById('successModal').classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Submission Error:", error);
+                alert("There was an issue submitting your application. Please try again or contact the administrator.");
+            } finally {
+                // Reset Button State
+                submitBtn.disabled = false;
+                btnText.innerText = "Submit Application";
+                btnIcon.className = "fa-solid fa-paper-plane text-sm";
+            }
         }
 
         function closeModal() {
             document.getElementById('successModal').classList.add('hidden');
             document.getElementById('mentorshipForm').reset();
             document.getElementById('fileLabel').innerText = 'Click to select or drag and drop your resume';
-            document.getElementById('q1Count').innerText = '0 / 150 words';
-            document.getElementById('q2Count').innerText = '0 / 100 words';
-            document.getElementById('q3Count').innerText = '0 / 100 words';
+            if(document.getElementById('focusCount')) document.getElementById('focusCount').innerText = '0 / 150 words';
+            if(document.getElementById('q1Count')) document.getElementById('q1Count').innerText = '0 / 150 words';
+            if(document.getElementById('q2Count')) document.getElementById('q2Count').innerText = '0 / 100 words';
         }
     </script>
 </body>
 </html>
+
+<!--
+  ===================================================================================
+  GOOGLE APPS SCRIPT BACKEND CODE (Copy and Paste into Apps Script)
+  ===================================================================================
+  1. Create or open your Google Sheet named "SMCC_Mentoring_Program_Application".
+  2. In the top menu, click "Extensions" -> "Apps Script".
+  3. Replace any default code in Code.gs with the script below.
+  4. Click "Deploy" -> "New Deployment".
+  5. Select type "Web App", set "Execute as: Me", and "Who has access: Anyone".
+  6. Click "Deploy", authorize the Google permissions, copy the Web App URL, 
+     and paste it into GOOGLE_SCRIPT_URL in your HTML file!
+
+  ```javascript
+  function doPost(e) {
+    try {
+      var targetSheetName = "SMCC_Mentoring_Program_Application";
+      var ss;
+      
+      // 1. Locate or open the Google Sheet "SMCC_Mentoring_Program_Application"
+      var activeSs = SpreadsheetApp.getActiveSpreadsheet();
+      if (activeSs && activeSs.getName() === targetSheetName) {
+        ss = activeSs;
+      } else {
+        var files = DriveApp.getFilesByName(targetSheetName);
+        if (files.hasNext()) {
+          var file = files.next();
+          ss = SpreadsheetApp.open(file);
+        } else {
+          // If the spreadsheet doesn't exist yet, automatically create it in Google Drive
+          ss = SpreadsheetApp.create(targetSheetName);
+        }
+      }
+      
+      var sheet = ss.getActiveSheet();
+      var data = JSON.parse(e.postData.contents);
+      
+      // Auto-create header row with UMD Red styling if sheet is brand new
+      if (sheet.getLastRow() === 0) {
+        sheet.appendRow([
+          "Timestamp",
+          "Full Name",
+          "Email",
+          "Phone",
+          "LinkedIn",
+          "Program Status",
+          "Focus Areas",
+          "Target Goal",
+          "Q1 Motivation",
+          "Q2 Preparation",
+          "Time Commit",
+          "Ownership Commit",
+          "Etiquette Commit",
+          "Google Drive Resume URL"
+        ]);
+        sheet.getRange(1, 1, 1, 14).setFontWeight("bold").setBackground("#E21833").setFontColor("#FFFFFF");
+      }
+      
+      // 2. Save PDF Resume directly to your Google Drive in folder "SMCC Mentorship Resumes"
+      var fileUrl = "";
+      if (data.file) {
+        var folderName = "SMCC Mentorship Resumes";
+        var folders = DriveApp.getFoldersByName(folderName);
+        var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(folderName);
+        
+        var cleanName = (data.fullName || "Applicant").replace(/[^a-zA-Z0-9]/g, "_");
+        var fileName = cleanName + "_Resume.pdf";
+        
+        var blob = Utilities.newBlob(
+          Utilities.base64Decode(data.file.base64),
+          data.file.mimeType || "application/pdf",
+          fileName
+        );
+        
+        var driveFile = folder.createFile(blob);
+        // Generates an accessible view link for Laurel & selection team
+        driveFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        fileUrl = driveFile.getUrl();
+      }
+      
+      // 3. Append the form data row to "SMCC_Mentoring_Program_Application"
+      sheet.appendRow([
+        data.timestamp,
+        data.fullName,
+        data.email,
+        data.phone,
+        data.linkedin,
+        data.programStatus,
+        data.focusAreas,
+        data.targetGoal,
+        data.q1_motivation,
+        data.q2_preparation,
+        data.commit_time,
+        data.commit_ownership,
+        data.commit_etiquette,
+        fileUrl
+      ]);
+      
+      return ContentService.createTextOutput(
+        JSON.stringify({ result: "success" })
+      ).setMimeType(ContentService.MimeType.JSON);
+      
+    } catch (error) {
+      return ContentService.createTextOutput(
+        JSON.stringify({ result: "error", message: error.toString() })
+      ).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
