@@ -215,16 +215,28 @@
                     <span class="w-7 h-7 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">2</span>
                     <h2 class="text-lg font-bold text-slate-900">Background & Consulting Focus</h2>
                 </div>
-                
+
                 <div class="space-y-6">
                     <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                                Target Consulting Focus Areas *(Select up to 2)*
+                        <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Target Consulting Focus Areas *(Select up to 2)*</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                <input type="checkbox" name="focusArea" value="Strategy & Operations" class="rounded text-red-600 focus:ring-red-500">
+                                <span class="ml-2 text-xs font-medium text-slate-700">Strategy & Operations</span>
                             </label>
-                            <span class="text-[11px] text-slate-400" id="focusCount">0 / 150 words</span>
+                            <label class="flex items-center p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                <input type="checkbox" name="focusArea" value="Change Management" class="rounded text-red-600 focus:ring-red-500">
+                                <span class="ml-2 text-xs font-medium text-slate-700">Change Management / Org Transformation</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                <input type="checkbox" name="focusArea" value="Technology & Digital" class="rounded text-red-600 focus:ring-red-500">
+                                <span class="ml-2 text-xs font-medium text-slate-700">Technology & Digital Consulting</span>
+                            </label>
+                            <label class="flex items-center p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50">
+                                <input type="checkbox" name="focusArea" value="Healthcare & Life Sciences" class="rounded text-red-600 focus:ring-red-500">
+                                <span class="ml-2 text-xs font-medium text-slate-700">Healthcare / Life Sciences</span>
+                            </label>
                         </div>
-                        <textarea name="focusAreas" required rows="3" oninput="updateWordCount(this, 'focusCount', 150)" placeholder="Strategy & Operations, Change Management / Org Transformation, Technology & Digital Consulting, Healthcare / Life Sciences, etc..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
                     </div>
 
                     <div>
@@ -244,40 +256,10 @@
                 </div>
             </div>
 
-            <!-- Section 3: Fit & Readiness -->
+            <!-- Section 3: Program Commitment -->
             <div>
                 <div class="flex items-center gap-3 pb-3 border-b border-slate-200 mb-6">
                     <span class="w-7 h-7 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">3</span>
-                    <h2 class="text-lg font-bold text-slate-900">Fit & Readiness Responses</h2>
-                </div>
-
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                                1. Why are you seeking a mentor at this stage of your MBA, and what specific outcomes do you hope to achieve? *
-                            </label>
-                            <span class="text-[11px] text-slate-400" id="q1Count">0 / 150 words</span>
-                        </div>
-                        <textarea name="q1_motivation" required rows="3" oninput="updateWordCount(this, 'q1Count', 150)" placeholder="Share your motivation and concrete goals for the next 3 months..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
-                                2. How do you plan to prepare for and drive value during your 1:1 sessions with a senior industry mentor? *
-                            </label>
-                            <span class="text-[11px] text-slate-400" id="q2Count">0 / 100 words</span>
-                        </div>
-                        <textarea name="q2_preparation" required rows="3" oninput="updateWordCount(this, 'q2Count', 100)" placeholder="Describe how you will set agendas, take ownership, and manage scheduling..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none transition text-sm resize-none"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 4: Program Commitment -->
-            <div>
-                <div class="flex items-center gap-3 pb-3 border-b border-slate-200 mb-6">
-                    <span class="w-7 h-7 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">4</span>
                     <h2 class="text-lg font-bold text-slate-900">Program Commitment</h2>
                 </div>
 
@@ -327,22 +309,6 @@
         // Set your published Google Apps Script Web App URL below
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwX9WDbzgqHj04SolFI-SDXHmKJCFFL_3-d6nYgk8ga741mt0HXfzkgWwPvT5SiVJ5_WQ/exec";
 
-        function updateWordCount(textarea, countId, maxWords) {
-            const words = textarea.value.trim().split(/\s+/).filter(word => word.length > 0);
-            const count = textarea.value.trim() === '' ? 0 : words.length;
-            const display = document.getElementById(countId);
-            if (display) {
-                display.innerText = `${count} / ${maxWords} words`;
-                if (count > maxWords) {
-                    display.classList.add('text-red-500', 'font-bold');
-                    display.classList.remove('text-slate-400');
-                } else {
-                    display.classList.remove('text-red-500', 'font-bold');
-                    display.classList.add('text-slate-400');
-                }
-            }
-        }
-
         function handleFileSelect(input) {
             const label = document.getElementById('fileLabel');
             if (input.files && input.files[0]) {
@@ -381,8 +347,11 @@
             btnIcon.className = "fa-solid fa-circle-notch fa-spin text-sm";
 
             try {
-                // Collect form data into object
                 const formData = new FormData(form);
+                
+                // Collect multiple selected checkboxes into a comma-separated string
+                const selectedFocusAreas = formData.getAll('focusArea').join(', ');
+
                 const payload = {
                     timestamp: new Date().toISOString(),
                     fullName: formData.get('fullName'),
@@ -390,10 +359,10 @@
                     phone: formData.get('phone'),
                     linkedin: formData.get('linkedin'),
                     programStatus: formData.get('programStatus'),
-                    focusAreas: formData.get('focusAreas'),
+                    focusAreas: selectedFocusAreas,
                     targetGoal: formData.get('targetGoal'),
-                    q1_motivation: formData.get('q1_motivation'),
-                    q2_preparation: formData.get('q2_preparation'),
+                    q1_motivation: formData.get('q1_motivation') || "N/A",
+                    q2_preparation: formData.get('q2_preparation') || "N/A",
                     commit_time: formData.get('commit_time') ? "Yes" : "No",
                     commit_ownership: formData.get('commit_ownership') ? "Yes" : "No",
                     commit_etiquette: formData.get('commit_etiquette') ? "Yes" : "No"
@@ -410,7 +379,7 @@
                 if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
                     await fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
-                        mode: 'no-cors', // Standard mode for Google Apps Script redirects
+                        mode: 'no-cors',
                         headers: {
                             'Content-Type': 'application/json'
                         },
@@ -438,9 +407,6 @@
             document.getElementById('successModal').classList.add('hidden');
             document.getElementById('mentorshipForm').reset();
             document.getElementById('fileLabel').innerText = 'Click to select or drag and drop your resume';
-            if(document.getElementById('focusCount')) document.getElementById('focusCount').innerText = '0 / 150 words';
-            if(document.getElementById('q1Count')) document.getElementById('q1Count').innerText = '0 / 150 words';
-            if(document.getElementById('q2Count')) document.getElementById('q2Count').innerText = '0 / 100 words';
         }
     </script>
 </body>
@@ -448,15 +414,8 @@
 
 <!--
   ===================================================================================
-  GOOGLE APPS SCRIPT BACKEND CODE (Copy and Paste into Apps Script)
+  GOOGLE APPS SCRIPT BACKEND CODE (Copy and Paste into Code.gs in Apps Script)
   ===================================================================================
-  1. Create or open your Google Sheet named "SMCC_Mentoring_Program_Application".
-  2. In the top menu, click "Extensions" -> "Apps Script".
-  3. Replace any default code in Code.gs with the script below.
-  4. Click "Deploy" -> "New Deployment".
-  5. Select type "Web App", set "Execute as: Me", and "Who has access: Anyone".
-  6. Click "Deploy", authorize the Google permissions, copy the Web App URL, 
-     and paste it into GOOGLE_SCRIPT_URL in your HTML file!
 
   ```javascript
   function doPost(e) {
@@ -474,7 +433,6 @@
           var file = files.next();
           ss = SpreadsheetApp.open(file);
         } else {
-          // If the spreadsheet doesn't exist yet, automatically create it in Google Drive
           ss = SpreadsheetApp.create(targetSheetName);
         }
       }
@@ -482,7 +440,7 @@
       var sheet = ss.getActiveSheet();
       var data = JSON.parse(e.postData.contents);
       
-      // Auto-create header row with UMD Red styling if sheet is brand new
+      // Auto-create header row with UMD Red styling if sheet is empty
       if (sheet.getLastRow() === 0) {
         sheet.appendRow([
           "Timestamp",
@@ -503,7 +461,7 @@
         sheet.getRange(1, 1, 1, 14).setFontWeight("bold").setBackground("#E21833").setFontColor("#FFFFFF");
       }
       
-      // 2. Save PDF Resume directly to your Google Drive in folder "SMCC Mentorship Resumes"
+      // 2. Save PDF Resume to Google Drive in folder "SMCC Mentorship Resumes"
       var fileUrl = "";
       if (data.file) {
         var folderName = "SMCC Mentorship Resumes";
@@ -520,12 +478,11 @@
         );
         
         var driveFile = folder.createFile(blob);
-        // Generates an accessible view link for Laurel & selection team
         driveFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
         fileUrl = driveFile.getUrl();
       }
       
-      // 3. Append the form data row to "SMCC_Mentoring_Program_Application"
+      // 3. Append row to Google Sheet
       sheet.appendRow([
         data.timestamp,
         data.fullName,
