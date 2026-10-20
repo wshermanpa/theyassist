@@ -46,7 +46,7 @@
             color: #0f172a;
         }
         .heading-font { font-family: 'Space Grotesk', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .  { font-family: 'JetBrains Mono', monospace; }
 
         /* Bloomberg Ticker Keyframes */
         @keyframes ticker {
@@ -86,7 +86,7 @@
 <body class="overflow-x-hidden antialiased">
 
     <!-- BLOOMBERG-STYLE LIVE LABOR TICKER -->
-    <div class="bg-slate-950 text-slate-300 py-2.5 px-4 text-xs relative z-50 overflow-hidden font-mono border-b border-slate-800">
+    <div class="bg-slate-950 text-slate-300 py-2.5 px-4 text-xs relative z-50 overflow-hidden   border-b border-slate-800">
         <div class="max-w-7xl mx-auto flex items-center">
             <div class="flex items-center space-x-2 shrink-0 bg-slate-950 pr-4 z-10 border-r border-slate-800">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
@@ -127,11 +127,12 @@
             
             <!-- Desktop Nav Items -->
             <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
-                <a href="index.html#intelligence" class="hover:text-slate-950 transition">Labor Intelligence</a>
-                <a href="index.html#ecosystem" class="hover:text-slate-950 transition">Interactive Portal</a>
-                <a href="index.html#moat" class="hover:text-slate-950 transition">The Moat</a>
-                <a href="index.html#pricing" class="hover:text-slate-950 transition">Pricing</a>
-                <a href="about_us.html" class="text-slate-950 font-bold transition">About Us</a>
+                <!--<button onclick="navigateAndScroll('home', 'intelligence')" class="hover:text-slate-950 transition nav-link">Labor Intelligence</button> -->
+                <button onclick="navigateAndScroll('home', 'ecosystem')" class="hover:text-slate-950 transition nav-link text-slate-950 font-bold" id="nav-ecosystem">Interactive Portal</button>
+                <button onclick="navigateAndScroll('home', 'moat')" class="hover:text-slate-950 transition nav-link" id="nav-moat">The Moat</button>
+                <!--<button onclick="navigateAndScroll('home', 'pricing')" class="hover:text-slate-950 transition nav-link" id="nav-pricing">Pricing</button> -->
+                <a href="https://www.theyassist.io/pricing" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</a>
+                <a href="about_us.html" class="hover:text-slate-950 transition nav-link" id="nav-about">About Us</a>
                 <button onclick="openRedeemModal()" class="text-blue-600 hover:text-blue-700 transition font-bold">
                     Redeem Code
                 </button>
@@ -151,10 +152,11 @@
 
         <!-- Mobile Drawer Menu -->
         <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-slate-200/60 flex flex-col space-y-3.5 text-sm font-semibold text-slate-500">
-            <a href="index.html#intelligence" class="text-left py-2 hover:text-slate-950 transition">Labor Intelligence</a>
+              <!--<a href="index.html#intelligence" class="text-left py-2 hover:text-slate-950 transition">Labor Intelligence</a> -->
             <a href="index.html#ecosystem" class="text-left py-2 hover:text-slate-950 transition">Interactive Portal</a>
             <a href="index.html#moat" class="text-left py-2 hover:text-slate-950 transition">The Moat</a>
-            <a href="index.html#pricing" class="text-left py-2 hover:text-slate-950 transition">Pricing</a>
+              <!--<a href="index.html#pricing" class="text-left py-2 hover:text-slate-950 transition">Pricing</a> -->
+            <a href="https://www.theyassist.io/pricing" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</a>
             <a href="about_us.html" class="text-left py-2 text-slate-950 font-bold">About Us</a>
             <button onclick="openRedeemModal(); toggleMobileMenu();" class="text-left py-2 text-blue-600 font-bold">
                 Redeem Code
@@ -168,7 +170,7 @@
         <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-1 pointer-events-none"></div>
         
         <div class="max-w-5xl mx-auto text-center relative z-10 space-y-6">
-            <div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 px-4 py-1.5 rounded-full text-xs text-slate-800 font-mono font-semibold shadow-xs">
+            <div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 px-4 py-1.5 rounded-full text-xs text-slate-800   font-semibold shadow-xs">
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
                 <span>MISSION &amp; PRINCIPLES</span>
             </div>
@@ -210,7 +212,7 @@
     <section class="py-20 px-6 bg-slate-50/50 border-t border-b border-slate-200/60">
         <div class="max-w-7xl mx-auto space-y-12">
             <div class="text-center max-w-3xl mx-auto space-y-3">
-                <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">OUR PILLARS</span>
+                <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest  ">OUR PILLARS</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">Principles of Sovereign Mentoring</h2>
                 <p class="text-slate-600 text-xs sm:text-sm font-medium">
                     These four core principles mandate how we code, how we secure meeting channels, and how we protect executive schedules.
@@ -276,7 +278,7 @@
     <!-- FOUNDING TEAM SECTION -->
     <section class="py-20 px-6 max-w-7xl mx-auto space-y-12">
         <div class="text-center max-w-3xl mx-auto space-y-3">
-            <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">FOUNDING TEAM</span>
+            <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest  ">FOUNDING TEAM</span>
             <h2 class="text-3xl font-extrabold heading-font text-slate-950">The Leadership Team</h2>
             <p class="text-slate-600 text-xs sm:text-sm font-medium">
                 The visionaries shaping independent, high-stature, and fully private talent-tracking infrastructures.
@@ -292,7 +294,7 @@
                 </div>
                 <div>
                     <h3 class="text-sm font-bold text-slate-950">Bill S.</h3>
-                    <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Executive Officer</p>
+                    <p class="text-[9px] text-blue-600   uppercase mt-0.5">Co-Founder &amp; Chief Executive Officer</p>
                 </div>
                 <p class="text-xs text-slate-500 leading-relaxed">
                     Bill leads the company's strategic vision and expansion, leveraging corporate relations experience to build trusted partnerships with organization leaders.
@@ -307,7 +309,7 @@
                 </div>
                 <div>
                     <h3 class="text-sm font-bold text-slate-950">Dori J.</h3>
-                    <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Program Officer</p>
+                    <p class="text-[9px] text-blue-600   uppercase mt-0.5">Co-Founder &amp; Chief Program Officer</p>
                 </div>
                 <p class="text-xs text-slate-500 leading-relaxed">
                     Dori leads the structuring of premium talent development blueprints for institutional programs and compliant user metrics management.
@@ -322,7 +324,7 @@
                 </div>
                 <div>
                     <h3 class="text-sm font-bold text-slate-950">Kabir M.</h3>
-                    <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Operating Officer</p>
+                    <p class="text-[9px] text-blue-600   uppercase mt-0.5">Co-Founder &amp; Chief Operating Officer</p>
                 </div>
                 <p class="text-xs text-slate-500 leading-relaxed">
                     Kabir leads the architecture of secure technical frameworks and isolated data stores, ensuring uncompromising privacy for enterprise tenants.
@@ -334,7 +336,7 @@
     <!-- ADVISORY COUNCIL SECTION -->
     <section class="py-20 px-6 max-w-7xl mx-auto space-y-12 border-t border-slate-200/60 bg-white">
         <div class="text-center max-w-3xl mx-auto space-y-3">
-            <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">GOVERNING STEWARDS</span>
+            <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest  ">GOVERNING STEWARDS</span>
             <h2 class="text-3xl font-extrabold heading-font text-slate-950">Our Advisors</h2>
         </div>
 
@@ -345,7 +347,7 @@
                 </div>
                 <div>
                     <h3 class="text-sm font-bold text-slate-950">Neta M.</h3>
-                    <p class="text-[10px] text-blue-600 font-mono uppercase tracking-wider mt-0.5">PLATFORM &amp; PROGRAM ADVISOR</p>
+                    <p class="text-[10px] text-blue-600   uppercase tracking-wider mt-0.5">PLATFORM &amp; PROGRAM ADVISOR</p>
                     <p class="text-xs text-slate-500 mt-2 leading-relaxed">
                         Guiding TheyAssist’s talent leadership frameworks and organizational program design, leveraging her extensive expertise in leadership development.
                     </p>
@@ -355,7 +357,7 @@
     </section>
 
     <!-- FOOTER -->
-   <!-- <footer class="border-t border-slate-200 py-12 px-6 bg-slate-50 text-slate-500 text-xs font-mono">
+   <!-- <footer class="border-t border-slate-200 py-12 px-6 bg-slate-50 text-slate-500 text-xs  ">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center space-x-3">
                 <img src="theyassist_logo.png" alt="TheyAssist" class="w-8 h-8 rounded-full border border-slate-200" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
@@ -390,7 +392,8 @@
                             <li><button onclick="scrollToSection('hero')" class="hover:text-blue-600 hover:underline transition text-left">Platform Overview</button></li>
                             <li><button onclick="scrollToSection('intelligence')" class="hover:text-blue-600 hover:underline transition text-left">Labor Intelligence</button></li>
                             <li><button onclick="scrollToSection('ecosystem')" class="hover:text-blue-600 hover:underline transition text-left">Interactive Simulator</button></li>
-                            <li><button onclick="scrollToSection('pricing')" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</button></li>
+                             <!--<li><button onclick="scrollToSection('pricing')" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</button></li> -->
+                            <li><a href="https://www.theyassist.io/pricing" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</a></li> 
                         </ul>
                     </div>
 
@@ -465,13 +468,13 @@
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="text-center space-y-2">
-                <span class="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider">ORGANIZATION ACCESS</span>
+                <span class="text-[10px]   text-amber-600 font-bold uppercase tracking-wider">ORGANIZATION ACCESS</span>
                 <h3 class="text-xl font-bold heading-font text-slate-950">Redeem Organization Code</h3>
                 <p class="text-xs text-slate-600">If your academic institution or employer is a TheyAssist sponsor, enter your custom access code below.</p>
             </div>
             <div class="space-y-4">
-                <input type="text" id="accessCode" placeholder="e.g. UMD-SMITH-2026" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase font-mono font-bold tracking-widest text-sm text-slate-900 focus:outline-none transition">
-                <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold text-xs rounded-xl shadow-md transition">
+                <input type="text" id="accessCode" placeholder="e.g. UMD-SMITH-2026" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase   font-bold tracking-widest text-sm text-slate-900 focus:outline-none transition">
+                <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950   font-bold text-xs rounded-xl shadow-md transition">
                     Validate Access Code
                 </button>
             </div>
@@ -485,11 +488,11 @@
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="text-center space-y-2">
-                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase">SECURE B2B OUTBOUND</span>
+                <span class="text-[10px]   text-blue-600 font-bold uppercase">SECURE B2B OUTBOUND</span>
                 <h3 class="text-xl font-bold heading-font text-slate-950">Inquire About Enterprise Portal</h3>
                 <p class="text-xs text-slate-600">Sovereign portal setup for university deans, GovCon contractors, and corporate HR teams.</p>
             </div>
-            <form onsubmit="handleInquirySubmit(event)" class="space-y-4 text-xs font-mono">
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-4 text-xs  ">
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="text-slate-500 uppercase text-[9px] block mb-1">First Name</label>
@@ -531,7 +534,7 @@
     </div>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white font-mono text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white   text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
         <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
         <span id="toastText">Notification message</span>
     </div>
