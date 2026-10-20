@@ -46,7 +46,7 @@
             color: #0f172a;
         }
         .heading-font { font-family: 'Space Grotesk', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .  { font-family: 'JetBrains Mono', monospace; }
 
         /* Bloomberg Ticker Keyframes */
         @keyframes ticker {
@@ -101,7 +101,7 @@
 <body class="overflow-x-hidden antialiased">
 
     <!-- BLOOMBERG-STYLE LIVE LABOR TICKER -->
-    <div class="bg-slate-950 text-slate-300 py-2.5 px-4 text-xs relative z-50 overflow-hidden font-mono border-b border-slate-800">
+    <div class="bg-slate-950 text-slate-300 py-2.5 px-4 text-xs relative z-50 overflow-hidden   border-b border-slate-800">
         <div class="max-w-7xl mx-auto flex items-center">
             <div class="flex items-center space-x-2 shrink-0 bg-slate-950 pr-4 z-10 border-r border-slate-800">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
@@ -147,11 +147,12 @@
             
             <!-- Mid Menu (Desktop) -->
             <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
-                <button onclick="navigateAndScroll('home', 'intelligence')" class="hover:text-slate-950 transition nav-link">Labor Intelligence</button>
+                <!--<button onclick="navigateAndScroll('home', 'intelligence')" class="hover:text-slate-950 transition nav-link">Labor Intelligence</button> -->
                 <button onclick="navigateAndScroll('home', 'ecosystem')" class="hover:text-slate-950 transition nav-link text-slate-950 font-bold" id="nav-ecosystem">Interactive Portal</button>
                 <button onclick="navigateAndScroll('home', 'moat')" class="hover:text-slate-950 transition nav-link" id="nav-moat">The Moat</button>
-                <button onclick="navigateAndScroll('home', 'pricing')" class="hover:text-slate-950 transition nav-link" id="nav-pricing">Pricing</button>
-                <!-- <a href="about_us.html" class="hover:text-slate-950 transition nav-link" id="nav-about">About Us</a> -->
+                <!--<button onclick="navigateAndScroll('home', 'pricing')" class="hover:text-slate-950 transition nav-link" id="nav-pricing">Pricing</button> -->
+                <a href="https://www.theyassist.io/pricing" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</a></li> 
+                <a href="about_us.html" class="hover:text-slate-950 transition nav-link" id="nav-about">About Us</a>
                 <button onclick="openRedeemModal()" class="text-blue-600 hover:text-blue-700 transition font-bold">
                     Redeem Code
                 </button>
@@ -194,10 +195,16 @@
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                 <!-- Hero Text Block -->
                 <div class="lg:col-span-7 space-y-8 text-left">
-                    <div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200/80 px-4 py-1.5 rounded-full text-xs text-slate-800 font-mono font-semibold shadow-xs">
+                	
+                	<!--<div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200/80 px-4 py-1.5 rounded-full text-xs text-slate-800   font-semibold shadow-xs">
                         <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
                         <span>Sovereign Talent Stewardship Infrastructure</span>
-                    </div>
+                    </div>-->
+                    
+                	<div class="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200/80 px-4 py-1.5 rounded-full text-xs text-blue-900 font-bold shadow-xs">
+                    	<i class="fa-solid fa-layer-group text-blue-600"></i>
+                    	<span>The Digital Platform Engine for Workforce Programs</span>
+                	</div>
                     
                     <h1 class="text-4xl sm:text-6xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight">
                         Secure, structured, professional pathways. <span class="text-blue-600">Bypass the noise.</span>
@@ -208,18 +215,18 @@
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center gap-4 max-w-lg">
-                        <button onclick="scrollToSection('pricing')" class="w-full sm:w-auto px-8 py-4 bg-slate-950 hover:bg-slate-900 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 text-center font-mono text-xs">
+                        <!--<button onclick="scrollToSection('pricing')" class="w-full sm:w-auto px-8 py-4 bg-slate-950 hover:bg-slate-900 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 text-center   text-xs">
                             Explore Plans
-                        </button>
-                        <button onclick="openInquiryModal()" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-800 font-semibold rounded-xl hover:bg-slate-50 transition-all text-center font-mono text-xs">
-                            Request Enterprise Demo
+                        </button> -->
+                        <button onclick="openInquiryModal()" class="w-full sm:w-auto px-8 py-4 bg-blue-600 border border-slate-200 text-white font-bold  rounded-xl hover:bg-blue-700 transition-all text-center   text-xs">
+                            Request Enterprise Demo  
                         </button>
                     </div>
 
                     <!-- Trusted Fields Indicators -->
                     <div class="pt-8 border-t border-slate-200/80 max-w-2xl">
-                        <p class="text-[10px] font-mono text-slate-400 uppercase font-bold tracking-widest mb-4">ENGINEERED FOR EXTREME PRIVACY DOMAINS</p>
-                        <div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-slate-500 font-bold text-xs font-mono">
+                        <p class="text-[10px]   text-slate-400 uppercase font-bold tracking-widest mb-4">ENGINEERED FOR EXTREME PRIVACY DOMAINS</p>
+                        <div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-slate-500 font-bold text-xs  ">
                             <span class="flex items-center"><i class="fa-solid fa-university mr-2 text-blue-500"></i> UNIVERSITY FOUNDATIONS</span>
                             <span class="flex items-center"><i class="fa-solid fa-briefcase mr-2 text-sky-500"></i> GOVCON PARTNERS</span>
                             <span class="flex items-center"><i class="fa-solid fa-microchip mr-2 text-indigo-500"></i> TECH RESEARCH CORRIDORS</span>
@@ -238,7 +245,7 @@
                                 <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
                             </div>
-                            <span class="text-[10px] font-mono font-bold bg-blue-50 text-blue-600 px-2.5 py-1 rounded-md uppercase">KNOWLEDGE NEXUS</span>
+                            <span class="text-[10px]   font-bold bg-blue-50 text-blue-600 px-2.5 py-1 rounded-md uppercase">KNOWLEDGE NEXUS</span>
                         </div>
                         
                         <div id="heroImageContainer" class="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md group bg-slate-100">
@@ -248,109 +255,61 @@
                 </div>
             </div>
         </header>
+        
+            <!-- SUPPORTED PROGRAM APPLICATIONS -->
+    <section id="programs" class="py-20 px-6 border-b border-slate-200/80 bg-slate-50/60">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-widest block">VERSATILE PLATFORM CAPABILITIES</span>
+                <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">One Platform. Four Powerful Applications.</h2>
+                <p class="text-sm text-slate-600">TheyAssist provides the software infrastructure so your organization can launch and run programs seamlessly.</p>
+            </div>
 
-        <section id="intelligence" class="py-20 px-6 border-b border-slate-200/80 bg-slate-50/60">
-            <div class="max-w-7xl mx-auto space-y-12">
-                
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                    <div>
-                        <span class="text-xs font-mono text-blue-600 font-bold uppercase tracking-widest block">INTELLIGENCE VECTORS</span>
-                        <h2 class="text-2xl sm:text-4xl font-bold heading-font text-slate-950 mt-1">Real-Time Labor &amp; Career Metrics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-users"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900">Mentorship Platform</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Automates match workflows, agenda preparation, and calendar shielding for university and alumni mentor initiatives.</p>
                     </div>
-                    <p class="text-xs font-mono text-slate-500 max-w-md">
-                        Automated data feeds aggregated via SEC filings, federal contract awards, and regional labor statistics.
-                    </p>
+                    <a href="index.html" class="mt-4 text-xs font-bold text-blue-600 hover:underline">Explore Mentorship Features &rarr;</a>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- VECTOR A -->
-                    <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-6">
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase bg-blue-50 px-2 py-0.5 rounded border border-blue-100">VECTOR A • MACRO</span>
-                                <i class="fa-solid fa-chart-pie text-slate-400"></i>
-                            </div>
-                            <h3 class="text-lg font-bold heading-font text-slate-950">Labor Market Metrics</h3>
-                            
-                            <ul class="space-y-3 text-xs text-slate-700 font-mono">
-                                <li class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
-                                    <span class="text-slate-500 block text-[10px]">Strategy Consulting DMV</span>
-                                    <span class="text-rose-600 font-bold text-sm">-2.4% Hiring Velocity</span>
-                                </li>
-                                <li class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
-                                    <span class="text-slate-500 block text-[10px]">Cyber Defense MD Corridor</span>
-                                    <span class="text-emerald-600 font-bold text-sm">+8.1% Hiring Velocity</span>
-                                </li>
-                                <li class="p-2.5 bg-slate-50 border border-slate-200 rounded-lg">
-                                    <span class="text-slate-500 block text-[10px]">FedTech AI Roles</span>
-                                    <span class="text-emerald-600 font-bold text-sm">+14.2% Expansion</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <button onclick="triggerPaywallModal('Macro Labor Intelligence Briefing')" class="w-full py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-mono text-blue-600 font-bold rounded-xl transition text-center">
-                            Read Deep Market Analysis →
-                        </button>
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900">Apprenticeships Platform</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Supports earn-and-learn programs by tracking step-by-step competency milestones and sponsor hours.</p>
                     </div>
+                    <a href="apprenticeships.html" class="mt-4 text-xs font-bold text-emerald-600 hover:underline">Explore Apprenticeship Features &rarr;</a>
+                </div>
 
-                    <!-- VECTOR B -->
-                    <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-6">
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="text-[10px] font-mono text-amber-600 font-bold uppercase bg-amber-50 px-2 py-0.5 rounded border border-amber-100">VECTOR B • BLUEPRINTS</span>
-                                <i class="fa-solid fa-certificate text-slate-400"></i>
-                            </div>
-                            <h3 class="text-lg font-bold heading-font text-slate-950">Certification Trajectories</h3>
-                            
-                            <div class="space-y-3 text-xs text-slate-700">
-                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                                    <span class="text-amber-600 font-bold text-xs block">DoD 8140/8570 Directive</span>
-                                    <p class="text-[11px] text-slate-500 mt-1">Cybersecurity compliance updates mandate baseline Security+ or CISSP for all defense contractors by Q4.</p>
-                                </div>
-                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                                    <span class="text-slate-900 font-bold text-xs block">Skill Demand Matrix</span>
-                                    <p class="text-[11px] text-slate-500 mt-1">AWS Defense Cloud and Zero-Trust architecture micro-project competencies trending +22%.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button onclick="triggerPaywallModal('Certification Blueprint Roadmap')" class="w-full py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-mono text-amber-600 font-bold rounded-xl transition text-center">
-                            View Compliance Syllabus →
-                        </button>
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900">Talent Development</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Drives internal mobility and employee upskilling with software tools for peer coaching and leadership tracking.</p>
                     </div>
+                    <a href="talent_development.html" class="mt-4 text-xs font-bold text-purple-600 hover:underline">Explore Talent Features &rarr;</a>
+                </div>
 
-                    <!-- VECTOR C -->
-                    <div class="glass-card rounded-2xl p-6 flex flex-col justify-between space-y-6">
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="text-[10px] font-mono text-emerald-600 font-bold uppercase bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">VECTOR C • CORPORATE</span>
-                                <i class="fa-solid fa-building text-slate-400"></i>
-                            </div>
-                            <h3 class="text-lg font-bold heading-font text-slate-950">Company Moves &amp; Capital</h3>
-                            
-                            <div class="space-y-3 text-xs text-slate-700">
-                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                                    <span class="text-emerald-600 font-bold text-xs block">reAlpha &amp; Lockheed Expansion</span>
-                                    <p class="text-[11px] text-slate-500 mt-1">New federal contract awards driving junior technical analyst hiring in Northern Virginia.</p>
-                                </div>
-                                <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                                    <span class="text-slate-900 font-bold text-xs block">C-Suite Transitions</span>
-                                    <p class="text-[11px] text-slate-500 mt-1">Executive leadership shifts across target firms signaling new strategic restructuring.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button onclick="triggerPaywallModal('Company Hiring & Contract Feed')" class="w-full py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-mono text-emerald-600 font-bold rounded-xl transition text-center">
-                            Access Employer Intelligence →
-                        </button>
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-compass"></i></div>
+                        <h3 class="text-lg font-bold text-slate-900">Decision Support</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Acts as a guided sounding board, helping less-experienced staff make structured, high-confidence strategic decisions.</p>
                     </div>
-
+                    <a href="decision_making_support.html" class="mt-4 text-xs font-bold text-orange-600 hover:underline">Explore Decision Features &rarr;</a>
                 </div>
             </div>
-        </section>
-
+        </div>
+    </section>
+    
         <section id="ecosystem" class="py-24 px-6 border-t border-slate-200/60 bg-slate-50 relative">
             <div class="max-w-7xl mx-auto">
                 
                 <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                    <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">INTERACTIVE PLATFORM EXPERIENCE</span>
+                    <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest  ">INTERACTIVE PLATFORM EXPERIENCE</span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">A Three-Portal Secure Universe</h2>
                     <p class="text-slate-600 text-sm sm:text-base font-medium">
                         Explore the live interactive simulation of TheyAssist. Switch dashboards below to see exactly how we optimize organization metrics, prepare learners, and protect advisors.
@@ -382,11 +341,11 @@
                     <div id="simPane-admin" class="sim-pane block space-y-8 relative z-10">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 gap-4">
                             <div>
-                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider font-mono">Administrative Control Console</span>
+                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider  ">Administrative Control Console</span>
                                 <h3 class="text-xl font-bold text-slate-950 mt-1">Configure &amp; Audit Career Journeys</h3>
                             </div>
                             <div class="flex items-center space-x-2 self-start sm:self-auto">
-                                <span class="bg-blue-50 border border-blue-100 text-[10px] font-mono text-blue-600 px-3 py-1 rounded-full flex items-center">
+                                <span class="bg-blue-50 border border-blue-100 text-[10px]   text-blue-600 px-3 py-1 rounded-full flex items-center">
                                     <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5 animate-pulse"></span>
                                     PORTAL: MARYLAND-TECH
                                 </span>
@@ -423,7 +382,7 @@
                                 <div class="space-y-3">
                                     <div class="flex items-center space-x-2 text-blue-600">
                                         <i class="fa-solid fa-heart-pulse text-sm"></i>
-                                        <span class="text-xs font-bold uppercase tracking-wider font-mono">Real-Time Sentiment Monitoring Demo</span>
+                                        <span class="text-xs font-bold uppercase tracking-wider  ">Real-Time Sentiment Monitoring Demo</span>
                                     </div>
                                     <h4 class="font-bold text-slate-900 text-sm">Interactive Community Member Warmth Index Alert</h4>
                                     <p class="text-xs text-slate-500 leading-relaxed">
@@ -440,15 +399,15 @@
                             
                             <div class="lg:col-span-5 bg-slate-950 rounded-2xl p-6 border border-slate-800 text-white flex flex-col justify-between min-h-[200px]">
                                 <div class="flex items-center justify-between">
-                                    <span class="text-[9px] font-mono text-slate-400 uppercase">Alert Receiver Pipeline</span>
-                                    <span id="alertStatus" class="bg-slate-800 text-slate-400 text-[8px] font-bold px-2 py-0.5 rounded font-mono uppercase">Listening</span>
+                                    <span class="text-[9px]   text-slate-400 uppercase">Alert Receiver Pipeline</span>
+                                    <span id="alertStatus" class="bg-slate-800 text-slate-400 text-[8px] font-bold px-2 py-0.5 rounded   uppercase">Listening</span>
                                 </div>
                                 
                                 <div id="alertOutput" class="my-4 text-center py-6 text-slate-500 text-xs italic font-medium">
                                     Waiting for interactive trigger event... Click the button on the left.
                                 </div>
 
-                                <div class="border-t border-slate-900 pt-3 flex items-center justify-between text-[8px] font-mono text-slate-500">
+                                <div class="border-t border-slate-900 pt-3 flex items-center justify-between text-[8px]   text-slate-500">
                                     <span>TARGET: PRIVATE DEAN EMAIL</span>
                                     <span>DATA PRIVACY SECURED</span>
                                 </div>
@@ -460,10 +419,10 @@
                     <div id="simPane-learner" class="sim-pane hidden space-y-8 relative z-10">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 gap-4">
                             <div>
-                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider font-mono">Learner Workspace Console</span>
+                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider  ">Learner Workspace Console</span>
                                 <h3 class="text-xl font-bold text-slate-950 mt-1">Strategic Advisor Alignment Panel</h3>
                             </div>
-                            <span class="bg-emerald-50 border border-emerald-100 text-[10px] font-mono text-emerald-600 px-3 py-1 rounded-full flex items-center self-start sm:self-auto">
+                            <span class="bg-emerald-50 border border-emerald-100 text-[10px]   text-emerald-600 px-3 py-1 rounded-full flex items-center self-start sm:self-auto">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
                                 ONBOARDING GATE CLEARED
                             </span>
@@ -471,7 +430,7 @@
 
                         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                             <div class="lg:col-span-5 space-y-4">
-                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">Live Goal Checklist (Interactive)</span>
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider  ">Live Goal Checklist (Interactive)</span>
                                 <p class="text-xs text-slate-500 mb-2">Check off the boxes to simulate progressing through your pre-flight soft skills gate.</p>
                                 
                                 <div class="space-y-2.5">
@@ -499,7 +458,7 @@
                                 </div>
 
                                 <div class="pt-4 space-y-2">
-                                    <div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
+                                    <div class="flex justify-between items-center text-[10px]   text-slate-400">
                                         <span>ONBOARDING PROGRESS</span>
                                         <span id="progressBarText">33%</span>
                                     </div>
@@ -510,7 +469,7 @@
                             </div>
 
                             <div class="lg:col-span-7 space-y-4">
-                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">Pre-Meeting Strategic Briefings</span>
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider  ">Pre-Meeting Strategic Briefings</span>
                                 
                                 <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 space-y-4">
                                     <div class="flex flex-wrap items-center justify-between gap-2">
@@ -525,7 +484,7 @@
                                         </select>
                                     </div>
 
-                                    <div id="prepOutput" class="p-3.5 bg-white border border-slate-200 rounded-xl font-mono text-[10px] text-slate-700 shadow-inner h-[120px] overflow-y-auto">
+                                    <div id="prepOutput" class="p-3.5 bg-white border border-slate-200 rounded-xl   text-[10px] text-slate-700 shadow-inner h-[120px] overflow-y-auto">
                                         &gt; "reAlpha targeting AI-led compliance talent. Discuss how your Security+ milestone addresses their dynamic database isolation standards..."
                                     </div>
                                     
@@ -541,10 +500,10 @@
                     <div id="simPane-expert" class="sim-pane hidden space-y-8 relative z-10">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-5 gap-4">
                             <div>
-                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider font-mono">Expert Advisor Console</span>
+                                <span class="text-[9px] uppercase font-bold text-blue-600 tracking-wider  ">Expert Advisor Console</span>
                                 <h3 class="text-xl font-bold text-slate-950 mt-1">Profile Shield &amp; Dynamic Impact Points</h3>
                             </div>
-                            <span class="bg-blue-50 border border-blue-100 text-[10px] font-mono text-blue-600 px-3 py-1 rounded-full flex items-center self-start sm:self-auto">
+                            <span class="bg-blue-50 border border-blue-100 text-[10px]   text-blue-600 px-3 py-1 rounded-full flex items-center self-start sm:self-auto">
                                 <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-1.5"></span>
                                 SHIELD STATUS: FULL LOCKDOWN
                             </span>
@@ -552,12 +511,12 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                             <div class="md:col-span-4 bg-slate-50 p-6 border border-slate-200/80 rounded-2xl text-center space-y-3">
-                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">My Consolidated Balance</span>
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider  ">My Consolidated Balance</span>
                                 <div class="text-3xl font-extrabold text-blue-600 heading-font" id="redesignImpactPoints">✨ 850 Pts</div>
                                 <p class="text-[10px] text-slate-500 leading-relaxed">Earn points securely after local NLP transcribers confirm check-in milestones.</p>
                             </div>
                             <div class="md:col-span-8 space-y-3">
-                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider font-mono">Points Redemption Marketplace</span>
+                                <span class="text-[10px] uppercase font-bold text-slate-400 block tracking-wider  ">Points Redemption Marketplace</span>
                                 
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col justify-between hover:border-blue-300 transition shadow-xs">
@@ -598,9 +557,9 @@
             <div class="max-w-7xl mx-auto space-y-16">
                 
                 <div class="text-center max-w-3xl mx-auto space-y-4">
-                    <span class="text-xs font-mono text-blue-600 font-bold uppercase tracking-widest">UNASSAILABLE SECURITY MOAT</span>
+                    <span class="text-xs   text-blue-600 font-bold uppercase tracking-widest">UNASSAILABLE SECURITY MOAT</span>
                     <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">Why Deans &amp; Defense Contractors Choose TheyAssist</h2>
-                    <p class="text-xs sm:text-sm text-slate-500 font-mono">
+                    <p class="text-xs sm:text-sm text-slate-500  ">
                         Standard career portals co-mingle data on shared cloud engines. TheyAssist delivers air-gapped data sovereignty.
                     </p>
                 </div>
@@ -638,114 +597,54 @@
                 </div>
             </div>
         </section>
-
-        <section id="pricing" class="py-24 px-6 border-t border-slate-200 bg-slate-50/50 relative">
-            <div class="max-w-7xl mx-auto">
+        
+            <!-- HERO SECTION -->
+    <header id="hero" class="relative pt-12 pb-20 px-6 border-b border-slate-200/80 bg-white">
+        <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-1 pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div class="lg:col-span-7 space-y-6 text-left">
+                <div class="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200/80 px-4 py-1.5 rounded-full text-xs text-blue-900 font-bold shadow-xs">
+                    <i class="fa-solid fa-layer-group text-blue-600"></i>
+                    <span>The Digital Platform Engine for Workforce Programs</span>
+                </div>
                 
-                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                    <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">TRANSPARENT VALUE MODEL</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">Predictable Stewardship Costs</h2>
-                    <p class="text-slate-600 text-sm sm:text-base font-medium">
-                        Gain direct access to elite advisors, protect your personal data sovereignty, and map your next career move without the noise of traditional social networks.
-                    </p>
-                    <p class="text-slate-600 text-sm sm:text-base font-medium">
-                        Whether tracking personal milestones or launching organization-wide cohort programs, select your secure infrastructure.
-                    </p>
+                <h1 class="text-4xl sm:text-6xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight">
+                    Power your programs. <br><span class="text-blue-600">Guide practitioners step-by-step.</span>
+                </h1>
+                
+                <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
+                    Built to power these high-value networks, TheyAssist supports your mentorship, apprenticeship, and talent development programs. It doubles as an intuitive decision-support system, equipping emerging practitioners with step-by-step guidance right when they need it most.
+                </p>
 
-                    <!-- Billing Switcher Toggle -->
-                    <div class="flex items-center justify-center space-x-4 pt-6">
-                        <span id="monthlyLabel" class="text-xs font-bold text-blue-600">Monthly Billing</span>
-                        <label for="billingToggle" class="flex items-center cursor-pointer relative">
-                            <input type="checkbox" id="billingToggle" class="sr-only" onchange="toggleBillingCycle()">
-                            <div id="toggleBg" class="toggle-bg block bg-slate-200 border border-slate-300 w-12 h-6 rounded-full transition-colors duration-200"></div>
-                            <div id="toggleDot" class="toggle-dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full shadow-sm transition-transform duration-200"></div>
-                        </label>
-                        <span id="annualLabel" class="text-xs font-semibold text-slate-500">Annual <span class="bg-blue-100 text-blue-700 text-[9px] px-2 py-0.5 rounded-full uppercase font-bold ml-1">Save 25%</span></span>
-                    </div>
+                <div class="flex flex-col sm:flex-row items-center gap-4 max-w-lg">
+					<button onclick="window.location.href='https://www.theyassist.io/pricing'" class="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/20 text-center text-sm">
+    					Explore Platform Licenses
+					</button>
+                    <button onclick="openInquiryModal()" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-50 transition-all text-center text-sm">
+                        Schedule Platform Tour
+                    </button>
                 </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
-                    <!-- Explorer -->
-                    <div class="bg-white border border-slate-200 rounded-[24px] p-6 flex flex-col justify-between shadow-xs transition-all hover:border-slate-300">
-                        <div class="space-y-4">
-                            <h3 class="text-base font-bold text-slate-900 heading-font">Explorer</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed">Read-only access to discover resources and advisors.</p>
-                            <div class="text-3xl font-extrabold text-slate-900 heading-font">$0</div>
-                            <ul class="space-y-3 pt-6 text-xs text-slate-600 border-t border-slate-100">
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Browse Verified Advisor Directory</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Access Curated Insights</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> View Highlights Feed</li>
-                                <li class="opacity-30 line-through"><i class="fa-solid fa-circle-xmark text-slate-400 mr-2"></i> Active match booking</li>
-                                <li class="opacity-30 line-through"><i class="fa-solid fa-circle-xmark text-slate-400 mr-2"></i> Deep Profile Setup</li>
-                            </ul>
-                        </div>
-                        
-                       <button onclick="triggerPaywallModal('Explorer Registration')" class="w-full text-center py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition mt-8">Launch Explorer</button> 
-                       <!--  <a href="https://www.theyassist.io/auth/sign-up" class="w-full text-center py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition mt-8 inline-block">Launch Explorer</a> -->
-
-                    </div>
-
-                    <!-- Basic -->
-                    <div class="bg-white border border-slate-200 rounded-[24px] p-6 flex flex-col justify-between shadow-xs transition-all hover:border-slate-300">
-                        <div class="space-y-4">
-                            <h3 class="text-base font-bold text-slate-900 heading-font">Basic Active</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed">Active matching filters and structured guidance.</p>
-                            <div class="text-3xl font-extrabold text-slate-900 heading-font">
-                                <span id="price-basic">$9.99</span><span class="text-xs text-slate-500 font-normal"> / mo</span>
-                            </div>
-                            <ul class="space-y-3 pt-6 text-xs text-slate-600 border-t border-slate-100">
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> 1 Active Board Connection</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Full Interactive Profile Setup</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Milestone Progress Tracking</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Platform Messaging Tool</li>
-                                <li class="opacity-30 line-through"><i class="fa-solid fa-circle-xmark text-slate-400 mr-2"></i> Board of Advisors Model</li>
-                            </ul>
-                        </div>
-                        <button onclick="triggerPaywallModal('Basic Active Subscription')" class="w-full text-center py-3 border border-slate-200 text-slate-800 font-semibold rounded-xl text-xs hover:bg-slate-50 transition mt-8">Experience Basic</button>
-                    </div>
-
-                    <!-- Premium -->
-                    <div class="bg-white border-2 border-blue-600 rounded-[24px] p-6 flex flex-col justify-between relative scale-105 shadow-md shadow-blue-500/5 my-4 lg:my-0 z-10">
-                        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[9px] font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow-sm">MOST SECURE VALUE</span>
-                        <div class="space-y-4">
-                            <h3 class="text-base font-bold text-slate-900 heading-font">Premium Shield</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed">Full multi-advisor networks and prep systems.</p>
-                            <div class="text-3xl font-extrabold text-slate-900 heading-font">
-                                <span id="price-premium">$24.99</span><span class="text-xs text-slate-500 font-normal"> / mo</span>
-                            </div>
-                            <ul class="space-y-3 pt-6 text-xs text-slate-700 border-t border-slate-100">
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> <strong> Board of Advisors Model</strong></li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Unlimited Advisor Connections</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> <strong>Session Prep Briefings</strong></li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> Verified Sentiment Vectoring</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-600 mr-2"></i> <strong>Priority Session Booking</strong></li>
-                            </ul>
-                        </div>
-                        <button onclick="triggerPaywallModal('Premium Strategic Accelerator')" class="w-full text-center py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition mt-8 shadow-md">Acquire Premium</button>
-                    </div>
-
-                    <!-- Enterprise -->
-                    <div class="bg-slate-950 border border-slate-800 rounded-[24px] p-6 flex flex-col justify-between text-white shadow-xs">
-                        <div class="space-y-4">
-                            <h3 class="text-base font-bold text-white heading-font">Enterprise</h3>
-                            <p class="text-xs text-slate-400 leading-relaxed">Institutional portals for structured talent development.</p>
-                            <div class="text-xl font-bold text-blue-400">Organization Portal</div>
-                            <ul class="space-y-3 pt-6 text-xs text-slate-300 border-t border-slate-800">
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> Dedicated Data Store</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> 3 Admin Seats / Program Setup</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> Organization Administrator Alerts</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> Program Performance Analytics</li>
-                                <li><i class="fa-solid fa-circle-check text-blue-400 mr-2"></i> Org Code Redemptions</li>
-                            </ul>
-                        </div>
-                        <button onclick="openInquiryModal()" class="w-full text-center py-3 bg-white text-slate-950 hover:bg-slate-100 rounded-xl text-xs font-bold transition mt-8">Engage Our Development Team</button>
-                    </div>
-                </div>
-
             </div>
-        </section>
 
-       <!-- <footer class="border-t border-slate-200 py-12 px-6 bg-slate-50 text-slate-500 text-xs font-mono">
+            <div class="lg:col-span-5 relative">
+                <div class="relative bg-white border border-slate-200 rounded-[32px] p-4 shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team Using TheyAssist Software Platform" class="w-full h-80 object-cover rounded-2xl">
+                    <div class="mt-4 p-3 bg-white border border-slate-100 rounded-xl shadow-md flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold shrink-0">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-900">Guided Decision Workflows</p>
+                            <p class="text-[11px] text-slate-500">Step-by-step UI prompts assist junior staff through complex problem solving.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+       <!-- <footer class="border-t border-slate-200 py-12 px-6 bg-slate-50 text-slate-500 text-xs  ">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center space-x-3">
                     <img src="theyassist_logo.png" alt="TheyAssist" class="w-8 h-8 rounded-full border border-slate-200" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
@@ -775,7 +674,7 @@
                     <div class="space-y-2.5">
                         <h4 class="font-bold text-slate-900 text-xs tracking-wide">General Navigation</h4>
                         <ul class="space-y-1.5 text-slate-600">
-                             <!--<li><a href="about_us.html" class="hover:text-blue-600 hover:underline transition">About Us</a></li> -->
+                             <li><a href="about_us.html" class="hover:text-blue-600 hover:underline transition">About Us</a></li>
                             <li><button onclick="scrollToSection('hero')" class="hover:text-blue-600 hover:underline transition text-left">Platform Overview</button></li>
                             <li><button onclick="scrollToSection('intelligence')" class="hover:text-blue-600 hover:underline transition text-left">Labor Intelligence</button></li>
                             <li><button onclick="scrollToSection('ecosystem')" class="hover:text-blue-600 hover:underline transition text-left">Interactive Simulator</button></li>
@@ -858,7 +757,7 @@
             <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-1 pointer-events-none"></div>
             
             <div class="max-w-5xl mx-auto text-center relative z-10 space-y-6">
-                <div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 px-4 py-1.5 rounded-full text-xs text-slate-800 font-mono font-semibold shadow-xs">
+                <div class="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 px-4 py-1.5 rounded-full text-xs text-slate-800   font-semibold shadow-xs">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
                     <span>MISSION &amp; PRINCIPLES</span>
                 </div>
@@ -899,7 +798,7 @@
         <section class="py-20 px-6 bg-slate-50/50 border-t border-b border-slate-200/60">
             <div class="max-w-7xl mx-auto space-y-12">
                 <div class="text-center max-w-3xl mx-auto space-y-3">
-                    <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">OUR PILLARS</span>
+                    <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest  ">OUR PILLARS</span>
                     <h2 class="text-3xl font-extrabold heading-font text-slate-950">Principles of Sovereign Mentoring</h2>
                     <p class="text-slate-600 text-xs sm:text-sm font-medium">
                         These four core principles mandate how we code, how we secure meeting channels, and how we protect executive schedules.
@@ -961,7 +860,7 @@
         <!-- Leadership Team -->
         <section class="py-20 px-6 max-w-7xl mx-auto space-y-12">
             <div class="text-center max-w-3xl mx-auto space-y-3">
-                <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest font-mono">FOUNDING TEAM</span>
+                <span class="text-xs text-blue-600 uppercase font-extrabold tracking-widest  ">FOUNDING TEAM</span>
                 <h2 class="text-3xl font-extrabold heading-font text-slate-950">The Leadership Team</h2>
             </div>
 
@@ -972,7 +871,7 @@
                     </div>
                     <div>
                         <h3 class="text-sm font-bold text-slate-950">Bill S.</h3>
-                        <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; CEO</p>
+                        <p class="text-[9px] text-blue-600   uppercase mt-0.5">Co-Founder &amp; CEO</p>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Bill leads the company's strategic vision, investor alignment, and enterprise expansion across target corridors.
@@ -985,7 +884,7 @@
                     </div>
                     <div>
                         <h3 class="text-sm font-bold text-slate-950">Dori J.</h3>
-                        <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Program Officer</p>
+                        <p class="text-[9px] text-blue-600   uppercase mt-0.5">Co-Founder &amp; Chief Program Officer</p>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Dori leads talent development blueprints and onboarding gate curricula for university and enterprise cohorts.
@@ -998,7 +897,7 @@
                     </div>
                     <div>
                         <h3 class="text-sm font-bold text-slate-950">Kabir M.</h3>
-                        <p class="text-[9px] text-blue-600 font-mono uppercase mt-0.5">Co-Founder &amp; Chief Operating Officer</p>
+                        <p class="text-[9px] text-blue-600   uppercase mt-0.5">Co-Founder &amp; Chief Operating Officer</p>
                     </div>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Kabir manages operations and technical compliance, ensuring air-gapped database isolation across tenant stores.
@@ -1018,21 +917,21 @@
                 <i class="fa-solid fa-lock"></i>
             </div>
             <div class="space-y-2">
-                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase tracking-wider">ACTIVE TRACK COMMITMENT REQUIRED</span>
+                <span class="text-[10px]   text-blue-600 font-bold uppercase tracking-wider">ACTIVE TRACK COMMITMENT REQUIRED</span>
                 <h3 class="text-xl font-bold heading-font text-slate-950" id="paywallTitle">Unlock Full Market Intelligence</h3>
                 <p class="text-xs text-slate-600 leading-relaxed" id="paywallDesc">
                     To protect expert advisor time and ensure high-intent cohort quality, deep analysis reports, pre-meeting prompts, and mentor matching require membership.
                 </p>
             </div>
             <div class="space-y-3 pt-2">
-                 <!--  <button onclick="closePaywallModal(); scrollToSection('pricing');" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded-xl shadow-md transition">
+                 <!--  <button onclick="closePaywallModal(); scrollToSection('pricing');" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white   font-bold text-xs rounded-xl shadow-md transition">
                     View Subscription Plans — From $9.99/mo
                 </button> -->                
-                <button onclick="window.location.href='https://www.theyassist.io/pricing';" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs rounded-xl shadow-md transition">
+                <button onclick="window.location.href='https://www.theyassist.io/pricing';" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white   font-bold text-xs rounded-xl shadow-md transition">
     				View Subscription Plans — From $9.99/month
 				</button>
 				
-                <button onclick="closePaywallModal()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-mono">
+                <button onclick="closePaywallModal()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs  ">
                     Continue Browsing Explorer Overview
                 </button>
             </div>
@@ -1046,13 +945,13 @@
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="text-center space-y-2">
-                <span class="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider">ORGANIZATION ACCESS</span>
+                <span class="text-[10px]   text-amber-600 font-bold uppercase tracking-wider">ORGANIZATION ACCESS</span>
                 <h3 class="text-xl font-bold heading-font text-slate-950">Redeem Organization Code</h3>
                 <p class="text-xs text-slate-600">If your academic institution or employer is a TheyAssist sponsor, enter your custom access code below.</p>
             </div>
             <div class="space-y-4">
-                <input type="text" id="accessCode" placeholder="e.g. UMD-SMITH-2026" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase font-mono font-bold tracking-widest text-sm text-slate-900 focus:outline-none transition">
-                <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-mono font-bold text-xs rounded-xl shadow-md transition">
+                <input type="text" id="accessCode" placeholder="e.g. UMD-SMITH-2026" class="w-full p-3 bg-slate-50 border-2 border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase   font-bold tracking-widest text-sm text-slate-900 focus:outline-none transition">
+                <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950   font-bold text-xs rounded-xl shadow-md transition">
                     Validate Access Code
                 </button>
             </div>
@@ -1066,11 +965,11 @@
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
             <div class="text-center space-y-2">
-                <span class="text-[10px] font-mono text-blue-600 font-bold uppercase">TheyAssist</span>
+                <span class="text-[10px]   text-blue-600 font-bold uppercase">TheyAssist</span>
                 <h3 class="text-xl font-bold heading-font text-slate-950">Inquire About Enterprise Portal</h3>
                 <p class="text-xs text-slate-600">Sovereign portal setup for university deans, GovCon contractors, and corporate HR teams.</p>
             </div>
-            <form onsubmit="handleInquirySubmit(event)" class="space-y-4 text-xs font-mono">
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-4 text-xs  ">
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="text-slate-500 uppercase text-[9px] block mb-1">First Name</label>
@@ -1112,7 +1011,7 @@
     </div>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white font-mono text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white   text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
         <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
         <span id="toastText">Notification message</span>
     </div>
@@ -1342,7 +1241,7 @@
             const alertStatus = document.getElementById('alertStatus');
             if (alertStatus) {
                 alertStatus.textContent = "DISPATCHED";
-                alertStatus.className = "bg-emerald-500 text-slate-950 text-[8px] font-bold px-2 py-0.5 rounded font-mono uppercase";
+                alertStatus.className = "bg-emerald-500 text-slate-950 text-[8px] font-bold px-2 py-0.5 rounded   uppercase";
             }
             if (alertOutput) {
                 alertOutput.innerHTML = `<span class="text-emerald-600 font-bold">ALERT DISPATCHED:</span> High-affinity alumni engagement score (+94.2%) flagged for major gift officer outreach.`;
