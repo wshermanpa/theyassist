@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheyAssist | The Workforce Development &amp; Mentorship Support Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Plus Jakarta Sans, Space Grotesk) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            600: '#1d4ed8',
+                            900: '#1e3a8a',
+                            950: '#0b1329',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfdfe;
+            color: #0f172a;
+        }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-ticker {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker 35s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* Ambient Glow & Warm Card Styles */
+        .ambient-glow-1 {
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, rgba(255,255,255,0) 70%);
+        }
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+
+        .toggle-bg { transition: background-color 0.2s ease; }
+        .toggle-dot { transition: transform 0.2s ease; }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <!-- LIVE WORKFORCE IMPACT TICKER -->
+    <div class="bg-slate-900 text-slate-200 py-2.5 px-4 text-xs relative z-50 overflow-hidden border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex items-center">
+            <div class="flex items-center space-x-2 shrink-0 bg-slate-900 pr-4 z-10 border-r border-slate-800">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="font-bold text-emerald-400 text-[11px] uppercase tracking-wider">WORKFORCE INFRASTRUCTURE IN ACTION</span>
+            </div>
+            <div class="overflow-hidden w-full relative">
+                <div class="animate-ticker text-[11px] font-medium tracking-tight space-x-8">
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Rapid Launch Window:</span><span class="text-emerald-400 font-bold">Deploy Programs in Under 14 Days</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Data Protection:</span><span class="text-blue-400 font-bold">FERPA &amp; MODPA Compliant</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Mentor Retention Engine:</span><span class="text-amber-300 font-bold">Zero Advisor Burnout</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">STEM &amp; Cyber Corridors:</span><span class="text-emerald-400 font-bold">Turnkey Scholar Matching</span></span>
+                    <span class="text-slate-700">|</span>
+                    <!-- Duplicate for infinite scroll -->
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Rapid Launch Window:</span><span class="text-emerald-400 font-bold">Deploy Programs in Under 14 Days</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Data Protection:</span><span class="text-blue-400 font-bold">FERPA &amp; MODPA Compliant</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Mentor Retention Engine:</span><span class="text-amber-300 font-bold">Zero Advisor Burnout</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 py-4 px-6 z-40">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateToPage('home')">
+                <div class="relative flex items-center justify-center">
+                    <div class="absolute inset-0 bg-blue-600/10 rounded-full blur-md"></div>
+                    <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-9 h-9 rounded-full shadow-md relative z-10 border border-slate-100" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                </div>
+                <span class="text-xl font-extrabold heading-font tracking-tight text-slate-950">TheyAssist</span>
+            </div>
+            
+            <!-- Mid Menu (Desktop) -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <button onclick="navigateAndScroll('home', 'people')" class="hover:text-slate-950 transition">Partner Success</button>
+                <button onclick="navigateAndScroll('home', 'ecosystem')" class="hover:text-slate-950 transition text-slate-950 font-bold">Platform Overview</button>
+                <button onclick="navigateAndScroll('home', 'moat')" class="hover:text-slate-950 transition">Compliance &amp; Security</button>
+                <!-- <button onclick="navigateAndScroll('home', 'pricing')" class="hover:text-slate-950 transition">Deploy a Program</button>
+                <button onclick="openRedeemModal()" class="text-blue-600 hover:text-blue-700 transition font-bold">
+                    Redeem Organization Code
+                </button> -->
+                <a href="https://www.theyassist.io/pricing" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</a>
+                <a href="about_us.html" class="hover:text-slate-950 transition nav-link" id="nav-about">About Us</a>
+                <button onclick="openRedeemModal()" class="text-blue-600 hover:text-blue-700 transition font-bold">
+                    Redeem Code
+                </button>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openInquiryModal()" class="text-xs font-bold text-slate-600 hover:text-slate-950 transition hidden sm:inline-block">Connect with Program Development</button>
+                <a href="https://theyassist.io" class="bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 inline-block">
+                    Login
+                </a>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-slate-950 focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg" id="mobileMenuIcon"></i>
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-slate-200/60 flex flex-col space-y-3.5 text-sm font-semibold text-slate-500">
+            <button onclick="navigateAndScrollMobile('home', 'people')" class="text-left py-2 hover:text-slate-950 transition">Partner Success</button>
+            <button onclick="navigateAndScrollMobile('home', 'ecosystem')" class="text-left py-2 hover:text-slate-950 transition">Platform Overview</button>
+            <button onclick="navigateAndScrollMobile('home', 'moat')" class="text-left py-2 hover:text-slate-950 transition">Compliance &amp; Security</button>
+            <button onclick="navigateAndScrollMobile('home', 'pricing')" class="text-left py-2 hover:text-slate-950 transition">Deploy a Program</button>
+             <!-- <button onclick="openRedeemModal(); toggleMobileMenu();" class="text-left py-2 text-blue-600 font-bold">
+                Redeem Organization Code
+            </button>
+            <button onclick="openInquiryModal(); toggleMobileMenu();" class="text-left py-2 text-slate-950 font-bold border-t border-slate-100 pt-2">Request Platform Demo</button> 
+            -->
+            <a href="https://www.theyassist.io/pricing" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</a>
+            <a href="about_us.html" class="text-left py-2 hover:text-slate-950 transition">About Us</a>
+            <button onclick="openRedeemModal(); toggleMobileMenu();" class="text-left py-2 text-blue-600 font-bold">
+                Redeem Code
+            </button>
+            <button onclick="openInquiryModal(); toggleMobileMenu();" class="text-left py-2 text-slate-950 font-bold border-t border-slate-100 pt-2">Connect with Development</button>
+        </div>
+    </nav>
+
+    <!-- MAIN HOME VIEW -->
+    <div id="view-home" class="block">
+
+        <!-- HERO SECTION: CLEAR WORKFORCE PLATFORM POSITIONING -->
+        <header id="hero" class="relative pt-12 pb-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-1 pointer-events-none"></div>
+            
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <!-- Hero Text Block -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <div class="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200/80 px-4 py-1.5 rounded-full text-xs text-blue-900 font-bold shadow-xs">
+                        <i class="fa-solid fa-layer-group text-blue-600"></i>
+                        <span>Workforce Development Infrastructure</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight">
+                        Turnkey Mentorship Operations for <span class="text-blue-600">Workforce Programs.</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
+                        TheyAssist is a modern workforce development support platform built to power structured mentorship programs. We give universities, state agencies, and enterprise employers the turnkey infrastructure needed to <strong>launch, manage, and scale high-impact mentorship initiatives in days</strong>—without manual spreadsheet chaos or mentor burnout.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 max-w-lg">
+                        <button onclick="openInquiryModal()" class="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/20 active:scale-95 text-center text-sm">
+                            Launch Your Mentorship Program
+                        </button>
+                        <button onclick="scrollToSection('ecosystem')" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-50 transition-all text-center text-sm">
+                            Explore Platform Features
+                        </button>
+                    </div>
+
+                    <!-- Social Proof / Program Indicators -->
+                    <div class="pt-6 border-t border-slate-200/80 max-w-2xl flex items-center space-x-4">
+                        <div class="flex -space-x-3 overflow-hidden">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Mentor Sarah">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Mentor Marcus">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Mentor Jessica">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Mentor David">
+                        </div>
+                        <div class="text-xs text-slate-600 font-medium">
+                            <strong class="text-slate-900 font-bold">Trusted by academic cohorts &amp; regional state funds</strong> to automate matching, privacy, and skill tracking.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image Showcase -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative bg-white border border-slate-200 rounded-[32px] p-4 shadow-xl">
+                        <div class="relative rounded-2xl overflow-hidden shadow-sm">
+                            <!-- Friendly mentorship session photo -->
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Structured Workforce Mentorship" class="w-full h-80 object-cover">
+                            
+                            <!-- Floating Overlay Card -->
+                            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-slate-100 shadow-lg flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold shrink-0">
+                                    <i class="fa-solid fa-rocket"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-900">Turnkey Program Operation</p>
+                                    <p class="text-[11px] text-slate-500">Automated matching, pre-flight meeting prep, and audit-ready reporting in one console.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SECTION: PARTNER SUCCESS & USE CASES -->
+        <section id="people" class="py-20 px-6 border-b border-slate-200/80 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest block">BUILT FOR ORGANIZATIONAL SUCCESS</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">Empowering Every Mentorship Stakeholder</h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        TheyAssist provides the administrative controls, privacy safeguards, and user tools needed to support workforce programs across higher education, state agencies, and corporate ecosystems.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Person Card 1 -->
+                    <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="Program Directors" class="w-full h-48 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">For Program Directors &amp; Admins</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"Launch &amp; manage cohort operations in minutes."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "Instead of managing matching spreadsheets and manual calendar invites, TheyAssist gave us an automated dashboard to run our entire mentorship program with full outcome analytics."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Dr. Elena R., Dean of Student Affairs &amp; Program Director
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Person Card 2 -->
+                    <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Executive Mentors" class="w-full h-48 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase">For Advisors &amp; Industry Experts</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"Protected calendars &amp; prepared mentees."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "TheyAssist shields my calendar and phone number while ensuring mentees complete an agenda before booking. I give back without burning out my work calendar."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Sarah M., Executive Advisor &amp; Industry Mentor
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Person Card 3 -->
+                    <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80" alt="Mentees and Scholars" class="w-full h-48 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full uppercase">For Scholars &amp; Early-Career Mentees</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"Structured growth from goals to verified skills."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "No more awkward cold outreach on LinkedIn. The platform helped me frame my goals, connect with verified advisors, and convert my career plans into real deliverables."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Alex J., STEM Scholar &amp; Program Participant
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: PLATFORM OVERVIEW (HOW IT WORKS FOR ORGANIZATIONS) -->
+        <section id="ecosystem" class="py-20 px-6 border-t border-slate-200/60 bg-white">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">RAPID PROGRAM DEPLOYMENT</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">How Organizations Launch with TheyAssist in 3 Steps</h2>
+                    <p class="text-slate-600 text-sm">Replace administrative overhead with a unified platform built to operate modern mentorship cohorts.</p>
+                </div>
+
+                <!-- 3 Simple Steps -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-extrabold text-xl mx-auto">
+                            1
+                        </div>
+                        <h3 class="font-bold text-slate-950 text-lg">Configure Your Program Portal</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Set up your custom organizational workspace, define mentor-mentee matching criteria, and issue access codes to your cohort participants in minutes.
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-extrabold text-xl mx-auto">
+                            2
+                        </div>
+                        <h3 class="font-bold text-slate-950 text-lg">Automate Prep &amp; Air-Gapped Matching</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Our platform matches scholars with verified industry experts. Mentees pass an automated Pre-Flight readiness check before booking sessions to protect mentor time.
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-extrabold text-xl mx-auto">
+                            3
+                        </div>
+                        <h3 class="font-bold text-slate-950 text-lg">Track Outcomes &amp; Engagement</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Monitor session velocity, deliverable completions, survey responses, and workforce readiness metrics through your central OrgAdmin dashboard.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: COMPLIANCE & SECURITY (WHY ORGANIZATIONS TRUST US) -->
+        <section id="moat" class="py-20 px-6 border-b border-slate-200/80 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">ENTERPRISE-GRADE INFRASTRUCTURE</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">Engineered for Data Privacy &amp; Operational Scale</h2>
+                    <p class="text-slate-600 text-sm">Built to meet the strict regulatory and data privacy standards of academic institutions and government programs.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">FERPA &amp; MODPA Compliant</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Includes a proprietary client-side Zero-PII pre-inference pipeline that scrubs sensitive student data before processing, maintaining full statutory privacy compliance.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-calendar-xmark"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Air-Gapped Calendar Shield</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Advisors never expose personal phone numbers, direct emails, or open calendar URLs. All scheduling executes via secure, proxy-mediated relay controls.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Audit-Ready Workforce Analytics</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Generate real-time reports on cohort engagement, meeting completion rates, and career milestone velocity for institutional stakeholders and grant compliance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRE-LOGIN FOOTER -->
+        <footer class="bg-slate-100 border-t border-slate-200 py-10 px-6 text-slate-600 text-xs font-sans">
+            <div class="max-w-7xl mx-auto space-y-8">
+                <!-- Top Footer Brand & Headline -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-200/80 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-7 h-7 rounded-full border border-slate-300" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="text-slate-950 font-bold heading-font text-base tracking-tight">TheyAssist</span>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium">
+                         Workforce Development Support Technology
+                    </p>
+                </div>
+
+                <!-- Multi-Column Link Directories (LinkedIn Pre-Login Style) -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-[11px] leading-relaxed">
+                     <!--<div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">General Navigation</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><a href="about_us.html" class="hover:text-blue-600 hover:underline transition">About Us</a></li>
+                            <li><button onclick="scrollToSection('hero')" class="hover:text-blue-600 hover:underline transition text-left">Platform Overview</button></li> 
+                            <li><button onclick="scrollToSection('intelligence')" class="hover:text-blue-600 hover:underline transition text-left">Labor Intelligence</button></li> 
+                            <li><button onclick="scrollToSection('ecosystem')" class="hover:text-blue-600 hover:underline transition text-left">Interactive Simulator</button></li>
+                           	<li><button onclick="scrollToSection('pricing')" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</button></li> 
+                            <li><button onclick="window.location.href='https://www.theyassist.io/pricing';" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</button></li>
+                            <li><a href="https://www.theyassist.io/pricing" class="hover:text-blue-600 hover:underline transition text-left">Pricing &amp; Tiers</a></li> 
+                        </ul>
+                    </div> -->
+
+                    <!--<div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">Directories &amp; Talent</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><button onclick="triggerPaywallModal('Verified Advisor Directory')" class="hover:text-blue-600 hover:underline transition text-left">Verified Advisor Directory</button></li>
+                            <li><button onclick="triggerPaywallModal('Certification Trajectories')" class="hover:text-blue-600 hover:underline transition text-left">Certification Blueprints</button></li>
+                            <li><button onclick="triggerPaywallModal('Regional Labor Corridors')" class="hover:text-blue-600 hover:underline transition text-left">Regional Labor Corridors</button></li>
+                            <li><button onclick="triggerPaywallModal('F-1 OPT/STEM Extensions')" class="hover:text-blue-600 hover:underline transition text-left">F-1 OPT &amp; STEM Pathways</button></li>
+                            <li><button onclick="triggerPaywallModal('First-Gen Talent Networks')" class="hover:text-blue-600 hover:underline transition text-left">First-Gen Talent Networks</button></li>
+                        </ul>
+                    </div> -->
+
+                    <!--<div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">Enterprise Solutions</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">University Advancement</button></li>
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">Donor Warmth Index</button></li>
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">GovCon Compliance (DoD 8140)</button></li>
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">Corporate L&amp;D Portals</button></li>
+                            <li><button onclick="openRedeemModal()" class="hover:text-blue-600 hover:underline transition text-left">Redeem Organization Code</button></li>
+                        </ul>
+                    </div> -->
+
+                    <!--<div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">Sovereignty &amp; Moat</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><button onclick="scrollToSection('moat')" class="hover:text-blue-600 hover:underline transition text-left">Database Isolation</button></li>
+                            <li><button onclick="scrollToSection('moat')" class="hover:text-blue-600 hover:underline transition text-left">Zero-Knowledge Transcripts</button></li>
+                            <li><button onclick="scrollToSection('moat')" class="hover:text-blue-600 hover:underline transition text-left">Universal Calendar Shielding</button></li>
+                            <li><button onclick="scrollToSection('moat')" class="hover:text-blue-600 hover:underline transition text-left">FERPA &amp; SOC2 Integrity</button></li>
+                            <li><button onclick="openInquiryModal()" class="hover:text-blue-600 hover:underline transition text-left">Human Verification Standards</button></li>
+                        </ul>
+                    </div> -->
+
+                   <!-- <div class="space-y-2.5">
+                        <h4 class="font-bold text-slate-900 text-xs tracking-wide">Trust &amp; Governance</h4>
+                        <ul class="space-y-1.5 text-slate-600">
+                            <li><button onclick="triggerPaywallModal('User Agreement')" class="hover:text-blue-600 hover:underline transition text-left">User Agreement</button></li>
+                            <li><button onclick="triggerPaywallModal('Privacy Policy')" class="hover:text-blue-600 hover:underline transition text-left">Privacy Policy</button></li>
+                            <li><button onclick="triggerPaywallModal('Community Guidelines')" class="hover:text-blue-600 hover:underline transition text-left">Community Guidelines</button></li>
+                            <li><button onclick="triggerPaywallModal('Cookie Policy')" class="hover:text-blue-600 hover:underline transition text-left">Cookie Policy</button></li>
+                            <li><button onclick="triggerPaywallModal('Copyright Policy')" class="hover:text-blue-600 hover:underline transition text-left">Copyright Policy</button></li>
+                        </ul>
+                    </div> -->
+                    
+                </div>
+
+                <!-- Bottom Copyright & Legal Links Bar (LinkedIn Style) -->
+                <div class="pt-6 border-t border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                    <div class="flex items-center space-x-2">
+                        <img src="theyassist_logo.png" alt="TheyAssist Icon" class="w-4 h-4 rounded-full opacity-80" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="font-semibold text-slate-700">TheyAssist Corporation &copy; 2026</span>
+                    </div>
+
+                   <!-- <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-slate-500 font-medium">
+                        <button onclick="triggerPaywallModal('User Agreement')" class="hover:text-blue-600 hover:underline transition">User Agreement</button>
+                        <button onclick="triggerPaywallModal('Privacy Policy')" class="hover:text-blue-600 hover:underline transition">Privacy Policy</button>
+                        <button onclick="triggerPaywallModal('Community Guidelines')" class="hover:text-blue-600 hover:underline transition">Community Guidelines</button>
+                        <button onclick="triggerPaywallModal('Cookie Policy')" class="hover:text-blue-600 hover:underline transition">Cookie Policy</button>
+                        <button onclick="triggerPaywallModal('Copyright Policy')" class="hover:text-blue-600 hover:underline transition">Copyright Policy</button>
+                        <button onclick="triggerPaywallModal('Guest Controls')" class="hover:text-blue-600 hover:underline transition">Guest Controls</button>
+                    </div> -->
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+
+    <!-- MODALS & SCRIPT LOGIC -->
+    <div id="paywallModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border-2 border-blue-600 rounded-2xl p-6 max-w-md w-full shadow-2xl relative text-center space-y-4">
+            <button onclick="closePaywallModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-950" id="paywallTitle">Deploy Your Program</h3>
+            <p class="text-xs text-slate-600" id="paywallDesc">
+                Power your mentorship program with TheyAssist's turn-key workforce development infrastructure.
+            </p>
+            <button onclick="window.location.href='https://www.theyassist.io/pricing';" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition">
+                Explore Program Plans
+            </button>
+        </div>
+    </div>
+
+    <div id="redeemModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border-2 border-amber-500 rounded-2xl p-6 max-w-md w-full shadow-2xl relative space-y-4">
+            <button onclick="closeRedeemModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="text-[10px] font-bold text-amber-600 uppercase">PROGRAM ACCESS</span>
+                <h3 class="text-lg font-bold text-slate-950">Enter Your Organization Access Code</h3>
+                <p class="text-xs text-slate-600">If your university, state agency, or employer provided a code (like UMD-SMITH-2026), type it below!</p>
+            </div>
+            <input type="text" id="accessCode" placeholder="e.g. UMD-SMITH-2026" class="w-full p-3 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase font-bold text-sm text-slate-900 focus:outline-none">
+            <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-md transition">
+                Redeem &amp; Join Program
+            </button>
+        </div>
+    </div>
+
+    <div id="inquiryModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-lg w-full relative max-h-[90vh] overflow-y-auto space-y-4">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-1">
+                <h3 class="text-lg font-bold text-slate-950">Schedule a Mentorship Program Demo</h3>
+                <p class="text-xs text-slate-600">See how quickly TheyAssist can launch and operate your mentorship program.</p>
+            </div>
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-slate-500 font-bold block mb-1">First Name</label>
+                        <input type="text" id="inqFirstName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="text-slate-500 font-bold block mb-1">Last Name</label>
+                        <input type="text" id="inqLastName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-500 font-bold block mb-1">Work / Institutional Email</label>
+                    <input type="email" id="inqWorkEmail" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                </div>
+                <div>
+                    <label class="text-slate-500 font-bold block mb-1">University, Agency, or Company Name</label>
+                    <input type="text" id="inqOrgName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition">
+                    Request Platform Demo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toastText">Notification message</span>
+    </div>
+
+    <script>
+        let isAnnualBilling = false;
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function navigateToPage(pageId) {
+            scrollToSection('hero');
+        }
+
+        function navigateAndScroll(pageId, sectionId) {
+            scrollToSection(sectionId);
+        }
+
+        function navigateAndScrollMobile(pageId, sectionId) {
+            toggleMobileMenu();
+            scrollToSection(sectionId);
+        }
+
+        function toggleBillingCycle() {
+            const priceBasic = document.getElementById('price-basic');
+            const pricePremium = document.getElementById('price-premium');
+            isAnnualBilling = document.getElementById('billingToggle').checked;
+
+            if (isAnnualBilling) {
+                if (priceBasic) priceBasic.textContent = '$7.49';
+                if (pricePremium) pricePremium.textContent = '$18.74';
+            } else {
+                if (priceBasic) priceBasic.textContent = '$9.99';
+                if (pricePremium) pricePremium.textContent = '$24.99';
+            }
+        }
+
+        function triggerPaywallModal(featureTitle) {
+            document.getElementById('paywallTitle').textContent = `Deploy ${featureTitle}`;
+            const modal = document.getElementById('paywallModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePaywallModal() {
+            const modal = document.getElementById('paywallModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function openRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleCodeRedeem() {
+            const code = document.getElementById('accessCode').value.trim().toUpperCase();
+            if (code) {
+                closeRedeemModal();
+                showToast(`Code verified! Access unlocked for ${code}.`);
+                triggerConfetti();
+            } else {
+                showToast("Please enter a valid organization code.");
+            }
+        }
+
+        function openInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('inqFirstName').value.trim();
+            closeInquiryModal();
+            showToast(`Thank you ${firstName}! We received your demo request and will reach out shortly.`);
+            triggerConfetti();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        function triggerConfetti() {
+            try {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.8 },
+                    colors: ['#2563eb', '#10b981', '#f59e0b']
+                });
+            } catch (e) {
+                console.warn("Confetti skipped.");
+            }
+        }
+    </script>
+</body>
+</html>
