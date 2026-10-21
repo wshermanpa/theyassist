@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheyAssist | Registered Apprenticeship Support &amp; OJT Operations Software</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Plus Jakarta Sans, Space Grotesk) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfdfe;
+            color: #0f172a;
+        }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-ticker {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker 35s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* Ambient Glow & Emerald Card Styles */
+        .ambient-glow-emerald {
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(255,255,255,0) 70%);
+        }
+        .glass-card-emerald {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            transition: all 0.3s ease;
+        }
+        .glass-card-emerald:hover {
+            border-color: #34d399;
+            box-shadow: 0 10px 30px rgba(5, 150, 105, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #059669; }
+
+        .toggle-bg { transition: background-color 0.2s ease; }
+        .toggle-dot { transition: transform 0.2s ease; }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <!-- LIVE WORKFORCE IMPACT TICKER -->
+    <div class="bg-slate-900 text-slate-200 py-2.5 px-4 text-xs relative z-50 overflow-hidden border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex items-center">
+            <div class="flex items-center space-x-2 shrink-0 bg-slate-900 pr-4 z-10 border-r border-slate-800">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="font-bold text-emerald-400 text-[11px] uppercase tracking-wider">APPRENTICESHIP INFRASTRUCTURE IN ACTION</span>
+            </div>
+            <div class="overflow-hidden w-full relative">
+                <div class="animate-ticker text-[11px] font-medium tracking-tight space-x-8">
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">OJT Skill Verification:</span><span class="text-emerald-400 font-bold">100% Digital Competency Sign-Offs</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Registered Apprenticeships (RAP):</span><span class="text-emerald-400 font-bold">Audit-Ready Compliance</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Sponsor Workflows:</span><span class="text-blue-400 font-bold">Deploy Programs in Under 14 Days</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Privacy Protection:</span><span class="text-emerald-400 font-bold">FERPA &amp; MODPA Compliant</span></span>
+                    <span class="text-slate-700">|</span>
+                    <!-- Duplicate for infinite scroll -->
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">OJT Skill Verification:</span><span class="text-emerald-400 font-bold">100% Digital Competency Sign-Offs</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Registered Apprenticeships (RAP):</span><span class="text-emerald-400 font-bold">Audit-Ready Compliance</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER (MATCHES MENTORSHIP.HTML STRUCTURE) -->
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 py-4 px-6 z-40">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="relative flex items-center justify-center">
+                    <div class="absolute inset-0 bg-emerald-600/10 rounded-full blur-md"></div>
+                    <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-9 h-9 rounded-full shadow-md relative z-10 border border-slate-100" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                </div>
+                <span class="text-xl font-bold heading-font tracking-tight text-slate-950">TheyAssist <span class="text-emerald-600 font-normal text-sm hidden sm:inline-block">| Apprenticeship Operations</span></span>
+            </a>
+            
+            <!-- Mid Menu (Desktop) -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <button onclick="navigateAndScroll('home', 'human-stories')" class="hover:text-emerald-600 transition">Partner Stories</button>
+                <button onclick="navigateAndScroll('home', 'capabilities')" class="hover:text-emerald-600 transition">Sponsor Core</button>
+                <button onclick="navigateAndScroll('home', 'ojt-matrix')" class="hover:text-emerald-600 transition text-slate-950 font-bold">OJT Operations</button>
+                <a href="https://www.theyassist.io/pricing" class="hover:text-emerald-600 hover:underline transition text-left">Pricing &amp; Tiers</a>
+                <a href="about_us.html" class="hover:text-slate-950 transition nav-link" id="nav-about">About Us</a>
+                <button onclick="openRedeemModal()" class="text-emerald-600 hover:text-emerald-700 transition font-bold">
+                    Redeem Code
+                </button>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openInquiryModal()" class="text-xs font-bold text-slate-600 hover:text-slate-950 transition hidden sm:inline-block">Connect with Program Development</button>
+                <a href="https://theyassist.io" class="bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 inline-block">
+                    Login
+                </a>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-slate-950 focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg" id="mobileMenuIcon"></i>
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-slate-200/60 flex flex-col space-y-3.5 text-sm font-semibold text-slate-500">
+            <button onclick="navigateAndScrollMobile('home', 'human-stories')" class="text-left py-2 hover:text-emerald-600 transition">Partner Stories</button>
+            <button onclick="navigateAndScrollMobile('home', 'capabilities')" class="text-left py-2 hover:text-emerald-600 transition">Sponsor Core</button>
+            <button onclick="navigateAndScrollMobile('home', 'ojt-matrix')" class="text-left py-2 hover:text-emerald-600 transition">OJT Operations</button>
+            <a href="https://www.theyassist.io/pricing" class="hover:text-emerald-600 hover:underline transition text-left py-2">Pricing &amp; Tiers</a>
+            <a href="about_us.html" class="text-left py-2 hover:text-slate-950 transition">About Us</a>
+            <button onclick="openRedeemModal(); toggleMobileMenu();" class="text-left py-2 text-emerald-600 font-bold">
+                Redeem Code
+            </button>
+            <button onclick="openInquiryModal(); toggleMobileMenu();" class="text-left py-2 text-slate-950 font-bold border-t border-slate-100 pt-2">Connect with Development</button>
+        </div>
+    </nav>
+
+    <!-- MAIN HOME VIEW -->
+    <div id="view-home" class="block">
+
+        <!-- HERO SECTION: HUMAN APPRENTICESHIP INTERACTION FOCUS -->
+        <header id="hero" class="relative pt-12 pb-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-emerald pointer-events-none"></div>
+            
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <!-- Hero Text Block -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <div class="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-200/80 px-4 py-1.5 rounded-full text-xs text-emerald-900 font-bold shadow-xs">
+                        <i class="fa-solid fa-users-gear text-emerald-600"></i>
+                        <span>Human-Centric Apprenticeship Technology</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight">
+                        Powering Registered <br><span class="text-emerald-600">Apprenticeships at Scale.</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
+                    TheyAssist is a modern workforce development platform built to power structured apprenticeship programs. We give employers, universities, state workforce agencies, and labor unions the turnkey technology needed to launch, manage, track, and scale registered apprenticeship initiatives, eliminating manual logging, tracking skill development, and ensuring sponsor compliance.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 max-w-lg">
+                        <button onclick="openInquiryModal()" class="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/20 active:scale-95 text-center text-sm">
+                            Launch Your Apprenticeship Program
+                        </button>
+                        <button onclick="scrollToSection('human-stories')" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-50 transition-all text-center text-sm">
+                            See How People Connect
+                        </button>
+                    </div>
+
+                    <!-- Social Proof Avatar Bar -->
+                    <div class="pt-6 border-t border-slate-200/80 max-w-2xl flex items-center space-x-4">
+                        <div class="flex -space-x-3 overflow-hidden">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Journeyworker Mentor">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Apprentice Engineer">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Workforce Lead">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Technical Advisor">
+                        </div>
+                        <div class="text-xs text-slate-600 font-medium">
+                            <strong class="text-slate-900 font-bold">Empowering 1,000+ apprentices &amp; workplace leads</strong> with digital OJT tracking, structured coaching, and verified skill pathways.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Image Card: People Interacting -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative bg-white border border-slate-200 rounded-[32px] p-4 shadow-xl">
+                        <div class="relative rounded-2xl overflow-hidden shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=80" alt="Journeyworker and Apprentice Interacting On-the-Job" class="w-full h-80 object-cover">
+                            
+                            <!-- Floating Overlay Card -->
+                            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-slate-100 shadow-lg flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold shrink-0">
+                                    <i class="fa-solid fa-handshake-angle"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-900">1:1 Journeyworker Coaching</p>
+                                    <p class="text-[11px] text-slate-500">Real-time skill verification and on-site guidance logged in 1-click.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SECTION: REAL PEOPLE & APPRENTICESHIP INTERACTIONS -->
+        <section id="human-stories" class="py-20 px-6 border-b border-slate-200/80 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest block">INTUITIVE HUMAN COLLABORATION</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">How People Experience TheyAssist on the Job</h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Technology should make human instruction easier, not harder. See how our support software creates confidence and momentum across every role.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Person Card 1: Journeyworker -->
+                    <div class="glass-card-emerald rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Journeyworker Coaching Apprentice" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full uppercase">For Journeyworkers &amp; Mentors</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"Sign off on skill competencies in seconds."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "I used to hate filling out paper logs after a long shift. Now, my apprentice shows me their progress on their phone, and I approve their competency sign-offs with a single click."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Marcus T., Senior Technical Journeyworker
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Person Card 2: Apprentice -->
+                    <div class="glass-card-emerald rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" alt="Apprentice Working with Instructor" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-full uppercase">For Apprentices &amp; Trainees</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"I always know where I stand on my roadmap."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "Before every weekly check-in, the platform guides me through my Pre-Flight readiness check. I show up to my mentor with a clear agenda and clear questions."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Monica L., Cybersecurity Apprentice
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Person Card 3: Sponsor / Director -->
+                    <div class="glass-card-emerald rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" alt="Workforce Directors Reviewing Cohort Progress" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-full uppercase">For Program Directors &amp; Sponsors</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"Audit-ready logs with complete peace of mind."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "When state auditors or university partners ask for cohort documentation, I export comprehensive reports directly from TheyAssist in minutes. It keeps our program 100% compliant."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — David K., Workforce Program Director
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: SPONSOR & EMPLOYER CAPABILITIES -->
+        <section id="capabilities" class="py-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="max-w-2xl space-y-3">
+                        <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest block">SPONSOR &amp; EMPLOYER CORE</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">Replace Administrative Overhead with Automated Infrastructure</h2>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Operating a Registered Apprenticeship Program (RAP) requires tracking work processes, mentor ratios, and wage progression schedules. TheyAssist standardizes the entire lifecycle.
+                        </p>
+                    </div>
+                    <button onclick="openInquiryModal()" class="px-6 py-3 bg-slate-950 text-white font-bold text-xs rounded-xl hover:bg-slate-900 transition shrink-0">
+                        Request Sponsor Term Sheet
+                    </button>
+                </div>
+
+                <!-- 4 Grid Capabilities -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-card-emerald p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">Digital OJT &amp; RTI Logging</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Apprentices log On-the-Job Training hours and Related Technical Instruction coursework directly through clean web and mobile interfaces.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-emerald p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-file-signature"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">1-Click Mentor Sign-Offs</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Assigned journeyworkers review, verify, and digitally approve apprentice competency milestones in 1-click without email back-and-forth.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-emerald p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">Multi-Employer Portals</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Workforce intermediaries and group sponsors can manage multiple participating employers under a single administrative dashboard.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-emerald p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">Wage Step Triggers</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Automatically notify HR and payroll when an apprentice completes required hour and skill tiers to qualify for wage progression step-ups.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: OJT OPERATIONS & WORKFLOW MATRIX -->
+        <section id="ojt-matrix" class="py-20 px-6 border-t border-slate-200/60 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">HUMAN-CENTERED LIFECYCLE</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">How TheyAssist Guides People Step-by-Step</h2>
+                    <p class="text-slate-600 text-sm">Structured technology supporting every phase of an apprentice's path from onboarding to full certification.</p>
+                </div>
+
+                <!-- 3 Horizontal Step Cards with Photos -->
+                <div class="space-y-6">
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=200&q=80" alt="Cohort Onboarding" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-emerald-600 uppercase">STEP 1 • SETUP &amp; MATCHING</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Framework Configuration &amp; Apprentice Matching</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    Sponsors upload occupational work processes while apprentices receive secure organization codes to pair with assigned workplace mentors.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200 shrink-0">Setup Phase</span>
+                    </div>
+
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=200&q=80" alt="1:1 Hands-on Coaching" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-emerald-600 uppercase">STEP 2 • ACTIVE INSTRUCTION</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Pre-Flight Readiness &amp; Hands-On Skill Sign-Offs</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    Apprentices pass Pre-Flight readiness audits before 1:1 syncs, ensuring focused, productive coaching sessions that respect journeyworker time.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200 shrink-0">Active OJT Phase</span>
+                    </div>
+
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=200&q=80" alt="Group Certification" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-emerald-600 uppercase">STEP 3 • CERTIFICATION</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Competency Sign-Off &amp; Audit-Ready Reporting</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    Upon completing work process hour thresholds, the platform generates immutable digital transcripts ready for state, federal, and institutional compliance exports.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200 shrink-0">Completion Phase</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: FRAMEWORKS & AUDIT COMPLIANCE -->
+        <section id="frameworks" class="py-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">AUDIT-READY PRIVACY &amp; SECURITY</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">Built for Rigorous Workforce Standards</h2>
+                    <p class="text-slate-600 text-sm">TheyAssist combines statutory student privacy protection with workforce framework compatibility.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card-emerald rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">FERPA &amp; MODPA Protected</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Our proprietary client-side pre-inference engine sanitizes student academic data and PII before processing, ensuring complete compliance with federal and state privacy statutes.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-emerald rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Air-Gapped Calendar Shield</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Workplace mentors maintain total calendar privacy. Scheduling executes through proxy-mediated relays without exposing personal phone numbers or direct email addresses.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-emerald rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">WIOA &amp; DoD 8140 Aligned</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Track skill progression against federal workforce frameworks, including Workforce Innovation and Opportunity Act (WIOA) benchmarks and DoD Cyber Workforce Directive 8140.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRE-LOGIN FOOTER (EXACT SYNTAX FROM MENTORSHIP.HTML) -->
+        <footer class="bg-slate-100 border-t border-slate-200 py-10 px-6 text-slate-600 text-xs font-sans">
+            <div class="max-w-7xl mx-auto space-y-8">
+                <!-- Top Footer Brand & Headline -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-200/80 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-7 h-7 rounded-full border border-slate-300" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="text-slate-950 font-bold heading-font text-base tracking-tight">TheyAssist</span>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium">
+                         Workforce Development Support Technology
+                    </p>
+                </div>
+
+                <!-- Multi-Column Link Directories -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-[11px] leading-relaxed">
+                </div>
+
+                <!-- Bottom Copyright & Legal Links Bar -->
+                <div class="pt-6 border-t border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                    <div class="flex items-center space-x-2">
+                        <img src="theyassist_logo.png" alt="TheyAssist Icon" class="w-4 h-4 rounded-full opacity-80" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="font-semibold text-slate-700">TheyAssist Corporation &copy; 2026</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+
+    <!-- MODALS & SCRIPT LOGIC -->
+    <div id="paywallModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border-2 border-emerald-600 rounded-2xl p-6 max-w-md w-full shadow-2xl relative text-center space-y-4">
+            <button onclick="closePaywallModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+                <i class="fa-solid fa-gears"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-950" id="paywallTitle">Deploy Your Apprenticeship Track</h3>
+            <p class="text-xs text-slate-600" id="paywallDesc">
+                Power your apprenticeship program with TheyAssist's turn-key workforce development infrastructure.
+            </p>
+            <button onclick="window.location.href='https://www.theyassist.io/pricing';" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition">
+                Explore Program Plans
+            </button>
+        </div>
+    </div>
+
+    <div id="redeemModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border-2 border-amber-500 rounded-2xl p-6 max-w-md w-full shadow-2xl relative space-y-4">
+            <button onclick="closeRedeemModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="text-[10px] font-bold text-amber-600 uppercase">PROGRAM ACCESS</span>
+                <h3 class="text-lg font-bold text-slate-950">Enter Your Organization Access Code</h3>
+                <p class="text-xs text-slate-600">If your sponsor, employer, or state agency provided a code (like MD-APPRENTICE-2026), type it below!</p>
+            </div>
+            <input type="text" id="accessCode" placeholder="e.g. MD-APPRENTICE-2026" class="w-full p-3 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase font-bold text-sm text-slate-900 focus:outline-none">
+            <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-md transition">
+                Redeem &amp; Join Program
+            </button>
+        </div>
+    </div>
+
+    <div id="inquiryModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-lg w-full relative max-h-[90vh] overflow-y-auto space-y-4">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-1">
+                <h3 class="text-lg font-bold text-slate-950">Schedule a Platform Demo</h3>
+                <p class="text-xs text-slate-600">See how quickly TheyAssist can launch and operate your apprenticeship track.</p>
+            </div>
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-slate-500 font-bold block mb-1">First Name</label>
+                        <input type="text" id="inqFirstName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="text-slate-500 font-bold block mb-1">Last Name</label>
+                        <input type="text" id="inqLastName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-500 font-bold block mb-1">Work / Institutional Email</label>
+                    <input type="email" id="inqWorkEmail" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                </div>
+                <div>
+                    <label class="text-slate-500 font-bold block mb-1">Organization or Sponsor Name</label>
+                    <input type="text" id="inqOrgName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition">
+                    Request Platform Demo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="toastText">Notification message</span>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function navigateToPage(pageId) {
+            scrollToSection('hero');
+        }
+
+        function navigateAndScroll(pageId, sectionId) {
+            scrollToSection(sectionId);
+        }
+
+        function navigateAndScrollMobile(pageId, sectionId) {
+            toggleMobileMenu();
+            scrollToSection(sectionId);
+        }
+
+        function triggerPaywallModal(featureTitle) {
+            document.getElementById('paywallTitle').textContent = `Deploy ${featureTitle}`;
+            const modal = document.getElementById('paywallModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePaywallModal() {
+            const modal = document.getElementById('paywallModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function openRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleCodeRedeem() {
+            const code = document.getElementById('accessCode').value.trim().toUpperCase();
+            if (code) {
+                closeRedeemModal();
+                showToast(`Code verified! Access unlocked for ${code}.`);
+                triggerConfetti();
+            } else {
+                showToast("Please enter a valid organization code.");
+            }
+        }
+
+        function openInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('inqFirstName').value.trim();
+            closeInquiryModal();
+            showToast(`Thank you ${firstName}! We received your demo request and will reach out shortly.`);
+            triggerConfetti();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        function triggerConfetti() {
+            try {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.8 },
+                    colors: ['#059669', '#10b981', '#f59e0b']
+                });
+            } catch (e) {
+                console.warn("Confetti skipped.");
+            }
+        }
+    </script>
+</body>
+</html>
