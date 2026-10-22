@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheyAssist | Junior-Level Decision Support &amp; Task Guidance Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Plus Jakarta Sans, Space Grotesk) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            900: '#7c2d12',
+                            950: '#431407',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfdfe;
+            color: #0f172a;
+        }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-ticker {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker 35s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* Ambient Glow & Orange Card Styles */
+        .ambient-glow-orange {
+            background: radial-gradient(circle, rgba(234, 88, 12, 0.15) 0%, rgba(255,255,255,0) 70%);
+        }
+        .glass-card-orange {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            transition: all 0.3s ease;
+        }
+        .glass-card-orange:hover {
+            border-color: #fb923c;
+            box-shadow: 0 10px 30px rgba(234, 88, 12, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ea580c; }
+
+        .toggle-bg { transition: background-color 0.2s ease; }
+        .toggle-dot { transition: transform 0.2s ease; }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <!-- LIVE WORKFORCE IMPACT TICKER -->
+    <div class="bg-slate-900 text-slate-200 py-2.5 px-4 text-xs relative z-50 overflow-hidden border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex items-center">
+            <div class="flex items-center space-x-2 shrink-0 bg-slate-900 pr-4 z-10 border-r border-slate-800">
+                <span class="w-2 h-2 rounded-full bg-orange-400 animate-ping"></span>
+                <span class="font-bold text-orange-400 text-[11px] uppercase tracking-wider">DECISION SUPPORT INFRASTRUCTURE IN ACTION</span>
+            </div>
+            <div class="overflow-hidden w-full relative">
+                <div class="animate-ticker text-[11px] font-medium tracking-tight space-x-8">
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Autonomous Task Execution:</span><span class="text-orange-400 font-bold">Empower Staff Without Direct Handholding</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Supervisor Delegation Engine:</span><span class="text-emerald-400 font-bold">Reduces Manager Interruption by 80%</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Air-Gapped Privacy:</span><span class="text-amber-300 font-bold">FERPA &amp; MODPA Compliant</span></span>
+                    <span class="text-slate-700">|</span>
+                    <!-- Duplicate for infinite scroll -->
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Autonomous Task Execution:</span><span class="text-orange-400 font-bold">Empower Staff Without Direct Handholding</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Supervisor Delegation Engine:</span><span class="text-emerald-400 font-bold">Reduces Manager Interruption by 80%</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 py-4 px-6 z-40">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="relative flex items-center justify-center">
+                    <div class="absolute inset-0 bg-orange-600/10 rounded-full blur-md"></div>
+                    <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-9 h-9 rounded-full shadow-md relative z-10 border border-slate-100" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                </div>
+                <span class="text-xl font-bold heading-font tracking-tight text-slate-950">TheyAssist <span class="text-orange-600 font-normal text-sm hidden sm:inline-block">| Decision Support for Junior Staff</span></span>
+            </a>
+            
+            <!-- Mid Menu (Desktop) -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <button onclick="navigateAndScroll('home', 'human-stories')" class="hover:text-orange-600 transition">Team Stories</button>
+                <button onclick="navigateAndScroll('home', 'capabilities')" class="hover:text-orange-600 transition">Task Instruction Suite</button>
+                <button onclick="navigateAndScroll('home', 'scenarios')" class="hover:text-orange-600 transition text-slate-950 font-bold">Problem-Solving Scenarios</button>
+                <a href="https://www.theyassist.io/pricing" class="hover:text-orange-600 hover:underline transition text-left">Pricing &amp; Tiers</a>
+                <a href="about_us.html" class="hover:text-slate-950 transition nav-link" id="nav-about">About Us</a>
+                <button onclick="openRedeemModal()" class="text-orange-600 hover:text-orange-700 transition font-bold">
+                    Redeem Code
+                </button>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openInquiryModal()" class="text-xs font-bold text-slate-600 hover:text-slate-950 transition hidden sm:inline-block">Connect with Program Development</button>
+                <a href="https://theyassist.io" class="bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 inline-block">
+                    Login
+                </a>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-slate-950 focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg" id="mobileMenuIcon"></i>
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-slate-200/60 flex flex-col space-y-3.5 text-sm font-semibold text-slate-500">
+            <button onclick="navigateAndScrollMobile('home', 'human-stories')" class="text-left py-2 hover:text-orange-600 transition">Team Stories</button>
+            <button onclick="navigateAndScrollMobile('home', 'capabilities')" class="text-left py-2 hover:text-orange-600 transition">Task Instruction Suite</button>
+            <button onclick="navigateAndScrollMobile('home', 'scenarios')" class="text-left py-2 hover:text-orange-600 transition">Problem-Solving Scenarios</button>
+            <a href="https://www.theyassist.io/pricing" class="hover:text-orange-600 hover:underline transition text-left py-2">Pricing &amp; Tiers</a>
+            <a href="about_us.html" class="text-left py-2 hover:text-slate-950 transition">About Us</a>
+            <button onclick="openRedeemModal(); toggleMobileMenu();" class="text-left py-2 text-orange-600 font-bold">
+                Redeem Code
+            </button>
+            <button onclick="openInquiryModal(); toggleMobileMenu();" class="text-left py-2 text-slate-950 font-bold border-t border-slate-100 pt-2">Connect with Development</button>
+        </div>
+    </nav>
+
+    <!-- MAIN HOME VIEW -->
+    <div id="view-home" class="block">
+
+        <!-- HERO SECTION: JUNIOR STAFF DECISION SUPPORT POSITIONING -->
+        <header id="hero" class="relative pt-12 pb-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-orange pointer-events-none"></div>
+            
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <!-- Hero Text Block -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <div class="inline-flex items-center space-x-2 bg-orange-50 border border-orange-200/80 px-4 py-1.5 rounded-full text-xs text-orange-900 font-bold shadow-xs">
+                        <i class="fa-solid fa-lightbulb text-orange-600"></i>
+                        <span>On-Demand Decision Support for Early-Career Staff</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight">
+                        Empower Junior Staff to Resolve Problems <span class="text-orange-600">Independently.</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
+                        TheyAssist is the workforce support platform where supervisors and managers provide structured task instructions, decision blueprints, and problem-solving workflows. We give junior staff the on-demand guidance needed to <strong>complete complex deliverables, overcome workplace hurdles, and make confident decisions—without constant supervisor handholding.</strong>
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 max-w-lg">
+                        <button onclick="openInquiryModal()" class="w-full sm:w-auto px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-500/20 active:scale-95 text-center text-sm">
+                            Deploy Decision Support for Teams
+                        </button>
+                        <button onclick="scrollToSection('human-stories')" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-50 transition-all text-center text-sm">
+                            See How Staff Solves Tasks
+                        </button>
+                    </div>
+
+                    <!-- Social Proof Avatar Bar -->
+                    <div class="pt-6 border-t border-slate-200/80 max-w-2xl flex items-center space-x-4">
+                        <div class="flex -space-x-3 overflow-hidden">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Junior Analyst">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Operations Manager">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Team Lead">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Junior Engineer">
+                        </div>
+                        <div class="text-xs text-slate-600 font-medium">
+                            <strong class="text-slate-900 font-bold">Used by managers &amp; junior staff</strong> to streamline task execution, reduce manager interruptions, and accelerate career autonomy.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Image Card -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative bg-white border border-slate-200 rounded-[32px] p-4 shadow-xl">
+                        <div class="relative rounded-2xl overflow-hidden shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Junior Employee Solving Task Independently with Decision Support" class="w-full h-80 object-cover">
+                            
+                            <!-- Floating Overlay Card -->
+                            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-slate-100 shadow-lg flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold shrink-0">
+                                    <i class="fa-solid fa-list-check"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-900">Guided Task Execution</p>
+                                    <p class="text-[11px] text-slate-500">Step-by-step instruction briefs allowing staff to resolve issues autonomously.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SECTION: REAL PEOPLE & TEAM SUCCESS STORIES -->
+        <section id="human-stories" class="py-20 px-6 border-b border-slate-200/80 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block">INTUITIVE AUTONOMY ON THE JOB</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">How Managers &amp; Staff Connect via TheyAssist</h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Delegation should empower junior staff while freeing supervisors from constant handholding. See how our decision support workflows create efficiency.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Person Card 1: Supervisor / Manager -->
+                    <div class="glass-card-orange rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="Operations Supervisor Uploading Task Instruction" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-orange-700 bg-orange-100 px-2.5 py-1 rounded-full uppercase">For Supervisors &amp; Team Leads</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"80% fewer Slack messages asking 'What do I do next?'"</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "I upload structured decision trees and task briefs once. When junior staff hit a roadblock, they follow the step-by-step guidance blueprint on TheyAssist instead of pulling me away from high-level meetings."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Marcus V., Operations Manager
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Person Card 2: Junior Staff / Analyst -->
+                    <div class="glass-card-orange rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Junior Employee Solving Complex Workflow" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-full uppercase">For Junior Staff &amp; Early-Career Staff</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"I can solve problems without feeling like a burden."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "When I hit an issue with a client report, I open my supervisor's decision support guide on TheyAssist. It gives me the exact checklist to troubleshoot and resolve the issue independently."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Sarah L., Junior Associate
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Person Card 3: Department Director -->
+                    <div class="glass-card-orange rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Department Director Reviewing Team Performance" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full uppercase">For Department Directors</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"Accelerated onboarding and faster time-to-productivity."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "New hires reach full autonomous productivity in half the time because our core operating protocols and problem-solving instructions are built directly into TheyAssist."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Eleanor R., Director of Customer Success
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: DECISION SUPPORT CAPABILITIES SUITE -->
+        <section id="capabilities" class="py-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="max-w-2xl space-y-3">
+                        <span class="text-xs font-bold text-orange-600 uppercase tracking-widest block">TASK INSTRUCTION CAPABILITIES</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">A Turnkey Infrastructure for Autonomous Task Completion</h2>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Stop spending hours in repetitive 1-on-1 handholding sessions. TheyAssist provides supervisors with structured tools to delegate tasks with clarity.
+                        </p>
+                    </div>
+                    <button onclick="openInquiryModal()" class="px-6 py-3 bg-slate-950 text-white font-bold text-xs rounded-xl hover:bg-slate-900 transition shrink-0">
+                        Request Team Demo
+                    </button>
+                </div>
+
+                <!-- 4 Grid Capabilities INCLUDING EXPLICIT CALENDAR PROXY CARD -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-card-orange p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">Interactive Decision Trees</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Supervisors map out "If-Then" logic for routine workplace challenges, guiding junior staff step-by-step through standard resolution protocols.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-orange p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">Pre-Flight Task Briefs</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Require junior staff to complete a brief pre-execution checklist before submitting deliverables, ensuring 100% compliance with team standards.
+                        </p>
+                    </div>
+
+                    <!-- AIR-GAPPED CALENDAR PROXY CARD -->
+                    <div class="glass-card-orange p-6 rounded-2xl space-y-3 border-2 border-orange-200 bg-orange-50/30">
+                        <div class="w-10 h-10 rounded-xl bg-orange-600 text-white flex items-center justify-center text-lg font-bold shadow-md">
+                            <i class="fa-solid fa-calendar-xmark"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-base font-bold heading-font text-slate-950">Air-Gapped Calendar Proxy</h3>
+                            <span class="text-[9px] bg-orange-100 text-orange-800 font-bold px-2 py-0.5 rounded-full">Bandwidth Protection</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Supervisors and managers maintain full calendar control. Escalation syncs execute via air-gapped proxy relays only after pre-task troubleshooting fails.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-orange p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">Autonomy &amp; Skill Analytics</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Track how quickly junior employees transition from guided task completion to fully independent execution across core work competencies.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: PROBLEM-SOLVING SCENARIOS -->
+        <section id="scenarios" class="py-20 px-6 border-t border-slate-200/60 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">REAL-WORLD TASK WORKFLOWS</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">Where Junior Staff Resolve Challenges</h2>
+                    <p class="text-slate-600 text-sm">Actionable decision support frameworks replacing constant supervisor handholding.</p>
+                </div>
+
+                <!-- 3 Horizontal Step Cards with Photos -->
+                <div class="space-y-6">
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=200&q=80" alt="Junior Employee Reviewing SOPs" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-orange-600 uppercase">SCENARIO 1 • TASK ONBOARDING</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Navigating Complex Operating Procedures</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    Junior staff follow interactive step-by-step instructions to execute complex data entries, financial reconciliations, or client reports with zero errors.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-orange-700 bg-orange-100 px-3 py-1 rounded-full border border-orange-200 shrink-0">Guided Workflow</span>
+                    </div>
+
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=200&q=80" alt="Troubleshooting Operations Issue" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-orange-600 uppercase">SCENARIO 2 • PROBLEM TROUBLESHOOTING</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Resolving Operational Roadblocks</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    When an unexpected glitch or missing client input occurs, staff consult the manager's pre-configured decision tree to fix the issue before escalating.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-orange-700 bg-orange-100 px-3 py-1 rounded-full border border-orange-200 shrink-0">Self-Resolution</span>
+                    </div>
+
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=200&q=80" alt="Deliverable Quality Sign-Off" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-orange-600 uppercase">SCENARIO 3 • FINAL QUALITY AUDIT</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Independent Deliverable Sign-Off</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    Junior staff verify their completed work against supervisor-defined quality rubrics before final submission, ensuring audit-ready output.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-orange-700 bg-orange-100 px-3 py-1 rounded-full border border-orange-200 shrink-0">Quality Control</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: COMPLIANCE & SECURITY -->
+        <section id="frameworks" class="py-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-orange-600 uppercase tracking-widest">ENTERPRISE SECURITY</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">Architected for Statutory Privacy &amp; SOC 2 Standards</h2>
+                    <p class="text-slate-600 text-sm">TheyAssist meets the highest institutional compliance mandates for workforce data isolation and privacy.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card-orange rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">FERPA, MODPA &amp; Zero-PII</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Our proprietary client-side pre-inference engine tokenizes and scrubs employee PII before processing, ensuring total data privacy compliance across academic and state channels.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-orange rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Single-Tenant Database Isolation</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Enterprise accounts operate on air-gapped, isolated database schemas with AES-256 field encryption and TLS 1.3 in-transit protections.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-orange rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Audit-Ready Task Ledgers</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Generate verifiable task completion logs matching corporate L&amp;D standards and federal workforce frameworks (WIOA / DoD 8140).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRE-LOGIN FOOTER (EXACT SYNTAX FROM MENTORSHIP.HTML) -->
+        <footer class="bg-slate-100 border-t border-slate-200 py-10 px-6 text-slate-600 text-xs font-sans">
+            <div class="max-w-7xl mx-auto space-y-8">
+                <!-- Top Footer Brand & Headline -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-200/80 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-7 h-7 rounded-full border border-slate-300" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="text-slate-950 font-bold heading-font text-base tracking-tight">TheyAssist</span>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium">
+                         Workforce Development Support Technology
+                    </p>
+                </div>
+
+                <!-- Multi-Column Link Directories -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-[11px] leading-relaxed">
+                </div>
+
+                <!-- Bottom Copyright & Legal Links Bar -->
+                <div class="pt-6 border-t border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                    <div class="flex items-center space-x-2">
+                        <img src="theyassist_logo.png" alt="TheyAssist Icon" class="w-4 h-4 rounded-full opacity-80" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="font-semibold text-slate-700">TheyAssist Corporation &copy; 2026</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+
+    <!-- MODALS & SCRIPT LOGIC -->
+    <div id="paywallModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border-2 border-orange-600 rounded-2xl p-6 max-w-md w-full shadow-2xl relative text-center space-y-4">
+            <button onclick="closePaywallModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+                <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-950" id="paywallTitle">Deploy Decision Support</h3>
+            <p class="text-xs text-slate-600" id="paywallDesc">
+                Power your junior team with TheyAssist's turn-key decision support infrastructure.
+            </p>
+            <button onclick="window.location.href='https://www.theyassist.io/pricing';" class="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs rounded-xl shadow-md transition">
+                Explore Program Plans
+            </button>
+        </div>
+    </div>
+
+    <div id="redeemModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border-2 border-amber-500 rounded-2xl p-6 max-w-md w-full shadow-2xl relative space-y-4">
+            <button onclick="closeRedeemModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="text-[10px] font-bold text-amber-600 uppercase">PROGRAM ACCESS</span>
+                <h3 class="text-lg font-bold text-slate-950">Enter Your Organization Access Code</h3>
+                <p class="text-xs text-slate-600">If your company or supervisor provided a code (like DECISION-2026), type it below!</p>
+            </div>
+            <input type="text" id="accessCode" placeholder="e.g. DECISION-2026" class="w-full p-3 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase font-bold text-sm text-slate-900 focus:outline-none">
+            <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-md transition">
+                Redeem &amp; Join Decision Support Platform
+            </button>
+        </div>
+    </div>
+
+    <div id="inquiryModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-lg w-full relative max-h-[90vh] overflow-y-auto space-y-4">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-1">
+                <h3 class="text-lg font-bold text-slate-950">Schedule a Decision Support Platform Demo</h3>
+                <p class="text-xs text-slate-600">See how quickly TheyAssist empowers junior staff and reduces supervisor handholding.</p>
+            </div>
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-slate-500 font-bold block mb-1">First Name</label>
+                        <input type="text" id="inqFirstName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="text-slate-500 font-bold block mb-1">Last Name</label>
+                        <input type="text" id="inqLastName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-500 font-bold block mb-1">Work / Institutional Email</label>
+                    <input type="email" id="inqWorkEmail" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                </div>
+                <div>
+                    <label class="text-slate-500 font-bold block mb-1">Company, Agency, or Institution Name</label>
+                    <input type="text" id="inqOrgName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl transition">
+                    Request Demo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
+        <i class="fa-solid fa-circle-check text-orange-400 text-sm"></i>
+        <span id="toastText">Notification message</span>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function navigateToPage(pageId) {
+            scrollToSection('hero');
+        }
+
+        function navigateAndScroll(pageId, sectionId) {
+            scrollToSection(sectionId);
+        }
+
+        function navigateAndScrollMobile(pageId, sectionId) {
+            toggleMobileMenu();
+            scrollToSection(sectionId);
+        }
+
+        function triggerPaywallModal(featureTitle) {
+            document.getElementById('paywallTitle').textContent = `Deploy ${featureTitle}`;
+            const modal = document.getElementById('paywallModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePaywallModal() {
+            const modal = document.getElementById('paywallModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function openRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleCodeRedeem() {
+            const code = document.getElementById('accessCode').value.trim().toUpperCase();
+            if (code) {
+                closeRedeemModal();
+                showToast(`Code verified! Access unlocked for ${code}.`);
+                triggerConfetti();
+            } else {
+                showToast("Please enter a valid organization code.");
+            }
+        }
+
+        function openInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('inqFirstName').value.trim();
+            closeInquiryModal();
+            showToast(`Thank you ${firstName}! We received your demo request and will reach out shortly.`);
+            triggerConfetti();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        function triggerConfetti() {
+            try {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.8 },
+                    colors: ['#ea580c', '#10b981', '#f59e0b']
+                });
+            } catch (e) {
+                console.warn("Confetti skipped.");
+            }
+        }
+    </script>
+</body>
+</html>

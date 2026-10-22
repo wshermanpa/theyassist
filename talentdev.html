@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheyAssist | Enterprise Talent Development &amp; Internal Mobility Support Platform</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Plus Jakarta Sans, Space Grotesk) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                            950: '#1e1b4b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfdfe;
+            color: #0f172a;
+        }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Ticker Animation */
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-ticker {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker 35s linear infinite;
+        }
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* Ambient Glow & Indigo Card Styles */
+        .ambient-glow-indigo {
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(255,255,255,0) 70%);
+        }
+        .glass-card-indigo {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            transition: all 0.3s ease;
+        }
+        .glass-card-indigo:hover {
+            border-color: #818cf8;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
+
+        .toggle-bg { transition: background-color 0.2s ease; }
+        .toggle-dot { transition: transform 0.2s ease; }
+    </style>
+</head>
+<body class="overflow-x-hidden antialiased">
+
+    <!-- LIVE WORKFORCE IMPACT TICKER -->
+    <div class="bg-slate-900 text-slate-200 py-2.5 px-4 text-xs relative z-50 overflow-hidden border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex items-center">
+            <div class="flex items-center space-x-2 shrink-0 bg-slate-900 pr-4 z-10 border-r border-slate-800">
+                <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
+                <span class="font-bold text-indigo-400 text-[11px] uppercase tracking-wider">TALENT DEVELOPMENT INFRASTRUCTURE IN ACTION</span>
+            </div>
+            <div class="overflow-hidden w-full relative">
+                <div class="animate-ticker text-[11px] font-medium tracking-tight space-x-8">
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Internal Mobility Engine:</span><span class="text-indigo-400 font-bold">Deploy Upskilling Pathways in Days</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Air-Gapped Calendar Proxy:</span><span class="text-emerald-400 font-bold">Zero Executive Bandwidth Burnout</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Promotional Readiness:</span><span class="text-amber-300 font-bold">Verified OKR &amp; Skill Sign-Offs</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Enterprise Compliance:</span><span class="text-indigo-400 font-bold">FERPA, MODPA &amp; SOC 2 Ready</span></span>
+                    <span class="text-slate-700">|</span>
+                    <!-- Duplicate for infinite scroll -->
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Internal Mobility Engine:</span><span class="text-indigo-400 font-bold">Deploy Upskilling Pathways in Days</span></span>
+                    <span class="text-slate-700">|</span>
+                    <span class="inline-flex items-center space-x-1.5"><span class="text-slate-400">Air-Gapped Calendar Proxy:</span><span class="text-emerald-400 font-bold">Zero Executive Bandwidth Burnout</span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 py-4 px-6 z-40">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="relative flex items-center justify-center">
+                    <div class="absolute inset-0 bg-indigo-600/10 rounded-full blur-md"></div>
+                    <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-9 h-9 rounded-full shadow-md relative z-10 border border-slate-100" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                </div>
+                <span class="text-xl font-bold heading-font tracking-tight text-slate-950">TheyAssist <span class="text-indigo-600 font-normal text-sm hidden sm:inline-block">| Talent Development Operations</span></span>
+            </a>
+            
+            <!-- Mid Menu (Desktop) -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+                <button onclick="navigateAndScroll('home', 'human-stories')" class="hover:text-indigo-600 transition">Employee Stories</button>
+                <button onclick="navigateAndScroll('home', 'capabilities')" class="hover:text-indigo-600 transition">L&amp;D Suite</button>
+                <button onclick="navigateAndScroll('home', 'mobility-matrix')" class="hover:text-indigo-600 transition text-slate-950 font-bold">Mobility Operations</button>
+                <a href="https://www.theyassist.io/pricing" class="hover:text-indigo-600 hover:underline transition text-left">Pricing &amp; Tiers</a>
+                <a href="about_us.html" class="hover:text-slate-950 transition nav-link" id="nav-about">About Us</a>
+                <button onclick="openRedeemModal()" class="text-indigo-600 hover:text-indigo-700 transition font-bold">
+                    Redeem Code
+                </button>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openInquiryModal()" class="text-xs font-bold text-slate-600 hover:text-slate-950 transition hidden sm:inline-block">Connect with Program Development</button>
+                <a href="https://theyassist.io" class="bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 inline-block">
+                    Login
+                </a>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 hover:text-slate-950 focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg" id="mobileMenuIcon"></i>
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-slate-200/60 flex flex-col space-y-3.5 text-sm font-semibold text-slate-500">
+            <button onclick="navigateAndScrollMobile('home', 'human-stories')" class="text-left py-2 hover:text-indigo-600 transition">Employee Stories</button>
+            <button onclick="navigateAndScrollMobile('home', 'capabilities')" class="text-left py-2 hover:text-indigo-600 transition">L&amp;D Suite</button>
+            <button onclick="navigateAndScrollMobile('home', 'mobility-matrix')" class="text-left py-2 hover:text-indigo-600 transition">Mobility Operations</button>
+            <a href="https://www.theyassist.io/pricing" class="hover:text-indigo-600 hover:underline transition text-left py-2">Pricing &amp; Tiers</a>
+            <a href="about_us.html" class="text-left py-2 hover:text-slate-950 transition">About Us</a>
+            <button onclick="openRedeemModal(); toggleMobileMenu();" class="text-left py-2 text-indigo-600 font-bold">
+                Redeem Code
+            </button>
+            <button onclick="openInquiryModal(); toggleMobileMenu();" class="text-left py-2 text-slate-950 font-bold border-t border-slate-100 pt-2">Connect with Development</button>
+        </div>
+    </nav>
+
+    <!-- MAIN HOME VIEW -->
+    <div id="view-home" class="block">
+
+        <!-- HERO SECTION: ENTERPRISE TALENT DEVELOPMENT & MOBILITY FOCUS -->
+        <header id="hero" class="relative pt-12 pb-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="absolute top-0 left-0 w-full h-[600px] ambient-glow-indigo pointer-events-none"></div>
+            
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <!-- Hero Text Block -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <div class="inline-flex items-center space-x-2 bg-indigo-50 border border-indigo-200/80 px-4 py-1.5 rounded-full text-xs text-indigo-900 font-bold shadow-xs">
+                        <i class="fa-solid fa-diagram-next text-indigo-600"></i>
+                        <span>Enterprise Talent Development Support Technology</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl font-extrabold heading-font tracking-tight text-slate-950 leading-tight">
+                        Guiding Employee Growth &amp; <span class="text-indigo-600">Internal Mobility.</span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
+                        TheyAssist is the enterprise workforce support platform engineered for Learning &amp; Development leaders, HR executives, and department managers. We give organizations the turnkey technology to <strong>launch, manage, and scale internal mobility pathways, cross-departmental shadowing, and peer coaching programs in days</strong>—retaining top talent and closing internal skill gaps.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 max-w-lg">
+                        <button onclick="openInquiryModal()" class="w-full sm:w-auto px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/20 active:scale-95 text-center text-sm">
+                            Launch Your Talent Program
+                        </button>
+                        <button onclick="scrollToSection('human-stories')" class="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-800 font-bold rounded-xl hover:bg-slate-50 transition-all text-center text-sm">
+                            See How Employees Grow
+                        </button>
+                    </div>
+
+                    <!-- Social Proof Avatar Bar -->
+                    <div class="pt-6 border-t border-slate-200/80 max-w-2xl flex items-center space-x-4">
+                        <div class="flex -space-x-3 overflow-hidden">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Executive Mentor">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Emerging Leader">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="L&D Specialist">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Department Lead">
+                        </div>
+                        <div class="text-xs text-slate-600 font-medium">
+                            <strong class="text-slate-900 font-bold">Empowering enterprise teams &amp; mid-career staff</strong> with structured career roadmaps, OKR tracking, and guided internal shadowing.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Image Card: People Interacting -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative bg-white border border-slate-200 rounded-[32px] p-4 shadow-xl">
+                        <div class="relative rounded-2xl overflow-hidden shadow-sm">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Enterprise Team Collaborating on Talent Strategy" class="w-full h-80 object-cover">
+                            
+                            <!-- Floating Overlay Card -->
+                            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-slate-100 shadow-lg flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold shrink-0">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-slate-900">Structured Internal Pathways</p>
+                                    <p class="text-[11px] text-slate-500">Step-by-step OKRs, peer coaching syncs, and promotional readiness sign-offs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SECTION: REAL PEOPLE & TALENT DEVELOPMENT STORIES -->
+        <section id="human-stories" class="py-20 px-6 border-b border-slate-200/80 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest block">INTUITIVE HUMAN GROWTH</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">How Teams Thrive with TheyAssist</h2>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Supporting career growth shouldn't mean adding administrative overhead. See how our platform builds confidence and mobility across every enterprise tier.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Person Card 1: L&D Director -->
+                    <div class="glass-card-indigo rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="HR Director Reviewing Talent Dashboard" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-full uppercase">For HR &amp; L&amp;D Directors</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"Full visibility into our internal talent pipeline."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "Instead of losing high performers to external offers, TheyAssist gave us an automated portal to match employees with cross-departmental projects and internal mentors."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Rachel V., VP of People &amp; Talent
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Person Card 2: Senior Manager / Mentor -->
+                    <div class="glass-card-indigo rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80" alt="Senior Manager Coaching Junior Staff" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full uppercase">For Executive Leads &amp; Peer Coaches</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"High-impact mentoring that respects my bandwidth."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "The platform ensures mentees complete a Pre-Flight agenda before every call. Our sessions are focused, productive, and air-gapped so my personal calendar stays clean."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Marcus T., Senior Director of Engineering
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Person Card 3: Mid-Career Employee -->
+                    <div class="glass-card-indigo rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Employee in Upskilling Planning Session" class="w-full h-52 object-cover">
+                        <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-full uppercase">For Employees &amp; Emerging Talent</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-2">"Clear, step-by-step promotion criteria."</h3>
+                                <p class="text-xs text-slate-600 leading-relaxed mt-2">
+                                    "I mapped out my career goals with an internal mentor, shadowed our product team, and tracked my OKRs line-by-line until I secured my internal promotion."
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-slate-100 text-xs font-bold text-slate-800">
+                                — Alex J., Senior Operations Analyst
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: L&D PLATFORM SUITE CAPABILITIES -->
+        <section id="capabilities" class="py-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="max-w-2xl space-y-3">
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest block">ENTERPRISE SUITE CAPABILITIES</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">A Turnkey Infrastructure for Internal Mobility</h2>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Stop relying on ad-hoc spreadsheets or disconnected HR forms. TheyAssist provides a unified platform to power skill growth, internal shadowing, and peer mentorship.
+                        </p>
+                    </div>
+                    <button onclick="openInquiryModal()" class="px-6 py-3 bg-slate-950 text-white font-bold text-xs rounded-xl hover:bg-slate-900 transition shrink-0">
+                        Request Enterprise Term Sheet
+                    </button>
+                </div>
+
+                <!-- 4 Grid Capabilities INCLUDING AIR-GAPPED CALENDAR PROXY CARD WITH EXPLICIT ICON -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-card-indigo p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">Step-by-Step OKR Checklists</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Guide employees through structured personal OKR creation, aligning team projects with core enterprise growth benchmarks.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-indigo p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">Cross-Departmental Shadowing</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Allow employees to explore adjacent internal roles using guided meeting briefs that respect executive and managerial bandwidth.
+                        </p>
+                    </div>
+
+                    <!-- DEDICATED AIR-GAPPED CALENDAR PROXY CARD WITH EXPLICIT ICON -->
+                    <div class="glass-card-indigo p-6 rounded-2xl space-y-3 border-2 border-indigo-200 bg-indigo-50/30">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-lg font-bold shadow-md">
+                            <i class="fa-solid fa-calendar-xmark"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-base font-bold heading-font text-slate-950">Air-Gapped Calendar Proxy</h3>
+                            <span class="text-[9px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">Zero Exposure</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Senior leaders and executive mentors maintain 100% calendar privacy. Coaching sessions execute via air-gapped proxy relays without exposing personal phone numbers or direct email addresses.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-indigo p-6 rounded-2xl space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <h3 class="text-base font-bold heading-font text-slate-950">L&amp;D Analytics Dashboards</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Provide HR teams with real-time dashboard visibility into skill adoption rates, peer coaching activity, and internal mobility pipeline health.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: INTERNAL MOBILITY OPERATIONS MATRIX -->
+        <section id="mobility-matrix" class="py-20 px-6 border-t border-slate-200/60 bg-slate-50/60">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">INTERNAL MOBILITY LIFECYCLE</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold heading-font text-slate-950">How TheyAssist Powers Career Growth in 3 Steps</h2>
+                    <p class="text-slate-600 text-sm">A structured operational pathway connecting talent ambition to verified organizational outcomes.</p>
+                </div>
+
+                <!-- 3 Horizontal Step Cards with Photos -->
+                <div class="space-y-6">
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=200&q=80" alt="Career Path Mapping Session" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-indigo-600 uppercase">STEP 1 • PATHWAY MAPPING</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Define Competencies &amp; Internal Tracks</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    L&amp;D admins configure role requirements, upskilling milestones, and peer mentor pairings inside your custom organizational workspace.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-indigo-700 bg-indigo-100 px-3 py-1 rounded-full border border-indigo-200 shrink-0">Setup Phase</span>
+                    </div>
+
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=200&q=80" alt="1:1 Coaching Sync" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-indigo-600 uppercase">STEP 2 • GUIDED EXECUTION</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Pre-Flight Readiness &amp; Peer Coaching</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    Employees pass automated Pre-Flight readiness checks before booking 1:1 coaching syncs, ensuring focused, agenda-driven career conversations.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-indigo-700 bg-indigo-100 px-3 py-1 rounded-full border border-indigo-200 shrink-0">Active Growth Phase</span>
+                    </div>
+
+                    <div class="p-6 bg-white border border-slate-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=200&q=80" alt="Internal Promotion Recognition" class="w-20 h-20 rounded-xl object-cover shrink-0">
+                            <div>
+                                <span class="text-[10px] font-bold text-indigo-600 uppercase">STEP 3 • PROMOTIONAL READINESS</span>
+                                <h3 class="font-bold text-slate-950 text-base mt-0.5">Skill Verification &amp; Internal Promotion</h3>
+                                <p class="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                                    Upon completing OKR goals and skill evaluations, managers digitally sign off on competency records, unlocking internal transfer and promotion opportunities.
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-indigo-700 bg-indigo-100 px-3 py-1 rounded-full border border-indigo-200 shrink-0">Mobility Phase</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: COMPLIANCE & SECURITY -->
+        <section id="frameworks" class="py-20 px-6 border-b border-slate-200/80 bg-white">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">ENTERPRISE-GRADE SECURITY</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold heading-font text-slate-950">Architected for Data Privacy &amp; SOC 2 Standards</h2>
+                    <p class="text-slate-600 text-sm">TheyAssist meets the highest institutional compliance mandates for employee data isolation and privacy.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card-indigo rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">FERPA, MODPA &amp; Zero-PII</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Our proprietary client-side pre-inference engine tokenizes and scrubs employee PII before processing, ensuring total data privacy compliance.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-indigo rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Single-Tenant Database Isolation</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Enterprise accounts operate on air-gapped, isolated database schemas with AES-256 field encryption and TLS 1.3 in-transit protections.
+                        </p>
+                    </div>
+
+                    <div class="glass-card-indigo rounded-2xl p-6 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <h3 class="text-lg font-bold heading-font text-slate-950">Audit-Ready HR Ledgers</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Generate verifiable competency progression reports matching corporate L&amp;D standards and federal workforce frameworks (WIOA / DoD 8140).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRE-LOGIN FOOTER (EXACT SYNTAX FROM MENTORSHIP.HTML) -->
+        <footer class="bg-slate-100 border-t border-slate-200 py-10 px-6 text-slate-600 text-xs font-sans">
+            <div class="max-w-7xl mx-auto space-y-8">
+                <!-- Top Footer Brand & Headline -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-200/80 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="theyassist_logo.png" alt="TheyAssist Logo" class="w-7 h-7 rounded-full border border-slate-300" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="text-slate-950 font-bold heading-font text-base tracking-tight">TheyAssist</span>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium">
+                         Workforce Development Support Technology
+                    </p>
+                </div>
+
+                <!-- Multi-Column Link Directories -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-[11px] leading-relaxed">
+                </div>
+
+                <!-- Bottom Copyright & Legal Links Bar -->
+                <div class="pt-6 border-t border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+                    <div class="flex items-center space-x-2">
+                        <img src="theyassist_logo.png" alt="TheyAssist Icon" class="w-4 h-4 rounded-full opacity-80" onerror="this.src='https://res.cloudinary.com/dh3vwqmfa/image/upload/v1754760510/theyassist_logo_iisckb.png'">
+                        <span class="font-semibold text-slate-700">TheyAssist Corporation &copy; 2026</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+    </div>
+
+    <!-- MODALS & SCRIPT LOGIC -->
+    <div id="paywallModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border-2 border-indigo-600 rounded-2xl p-6 max-w-md w-full shadow-2xl relative text-center space-y-4">
+            <button onclick="closePaywallModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+                <i class="fa-solid fa-diagram-next"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-950" id="paywallTitle">Deploy Your Program</h3>
+            <p class="text-xs text-slate-600" id="paywallDesc">
+                Power your talent development program with TheyAssist's turn-key workforce development infrastructure.
+            </p>
+            <button onclick="window.location.href='https://www.theyassist.io/pricing';" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow-md transition">
+                Explore Program Plans
+            </button>
+        </div>
+    </div>
+
+    <div id="redeemModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border-2 border-amber-500 rounded-2xl p-6 max-w-md w-full shadow-2xl relative space-y-4">
+            <button onclick="closeRedeemModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-2">
+                <span class="text-[10px] font-bold text-amber-600 uppercase">PROGRAM ACCESS</span>
+                <h3 class="text-lg font-bold text-slate-950">Enter Your Organization Access Code</h3>
+                <p class="text-xs text-slate-600">If your company or HR department provided a code (like ENTERPRISE-2026), type it below!</p>
+            </div>
+            <input type="text" id="accessCode" placeholder="e.g. ENTERPRISE-2026" class="w-full p-3 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-xl text-center uppercase font-bold text-sm text-slate-900 focus:outline-none">
+            <button onclick="handleCodeRedeem()" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-md transition">
+                Redeem &amp; Join Program
+            </button>
+        </div>
+    </div>
+
+    <div id="inquiryModal" class="fixed inset-0 bg-slate-950/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 max-w-lg w-full relative max-h-[90vh] overflow-y-auto space-y-4">
+            <button onclick="closeInquiryModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="text-center space-y-1">
+                <h3 class="text-lg font-bold text-slate-950">Schedule a Talent Development Software Demo</h3>
+                <p class="text-xs text-slate-600">See how quickly TheyAssist can launch and manage your internal mobility program.</p>
+            </div>
+            <form onsubmit="handleInquirySubmit(event)" class="space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-slate-500 font-bold block mb-1">First Name</label>
+                        <input type="text" id="inqFirstName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="text-slate-500 font-bold block mb-1">Last Name</label>
+                        <input type="text" id="inqLastName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-500 font-bold block mb-1">Work / Institutional Email</label>
+                    <input type="email" id="inqWorkEmail" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                </div>
+                <div>
+                    <label class="text-slate-500 font-bold block mb-1">Company or Enterprise Name</label>
+                    <input type="text" id="inqOrgName" required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition">
+                    Request Platform Demo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-950 text-white text-xs px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-[110]">
+        <i class="fa-solid fa-circle-check text-indigo-400 text-sm"></i>
+        <span id="toastText">Notification message</span>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function navigateToPage(pageId) {
+            scrollToSection('hero');
+        }
+
+        function navigateAndScroll(pageId, sectionId) {
+            scrollToSection(sectionId);
+        }
+
+        function navigateAndScrollMobile(pageId, sectionId) {
+            toggleMobileMenu();
+            scrollToSection(sectionId);
+        }
+
+        function triggerPaywallModal(featureTitle) {
+            document.getElementById('paywallTitle').textContent = `Deploy ${featureTitle}`;
+            const modal = document.getElementById('paywallModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePaywallModal() {
+            const modal = document.getElementById('paywallModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function openRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRedeemModal() {
+            const modal = document.getElementById('redeemModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleCodeRedeem() {
+            const code = document.getElementById('accessCode').value.trim().toUpperCase();
+            if (code) {
+                closeRedeemModal();
+                showToast(`Code verified! Access unlocked for ${code}.`);
+                triggerConfetti();
+            } else {
+                showToast("Please enter a valid organization code.");
+            }
+        }
+
+        function openInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInquiryModal() {
+            const modal = document.getElementById('inquiryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            const firstName = document.getElementById('inqFirstName').value.trim();
+            closeInquiryModal();
+            showToast(`Thank you ${firstName}! We received your demo request and will reach out shortly.`);
+            triggerConfetti();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        function triggerConfetti() {
+            try {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.8 },
+                    colors: ['#4f46e5', '#10b981', '#f59e0b']
+                });
+            } catch (e) {
+                console.warn("Confetti skipped.");
+            }
+        }
+    </script>
+</body>
+</html>
